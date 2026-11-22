@@ -34,6 +34,7 @@ export function mountDive(ctx) {
     document.body.classList.add('diving');
     ctx.onLeave(() => document.body.classList.remove('diving'));
     scene.setDepth(0, true); scene.setDiverX(.5, true); scene.setTag(''); scene.clearLines();
+    scene.setFocus(.36, true); scene.showLabels(innerWidth >= 1100); document.body.classList.remove('home', 'sky');
 
     app.innerHTML = `
       <div class="dive">
@@ -47,10 +48,10 @@ export function mountDive(ctx) {
           <div class="dock-msg" id="msg"></div>
           <form class="dock-row" id="form" autocomplete="off">
             <div class="ring" id="ring"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="track"/><circle cx="22" cy="22" r="19" class="bar" id="ringBar"/></svg><span id="ringNum"></span></div>
-            <input type="text" id="guess" maxlength="80" placeholder="type one answer…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="go">
+            <input type="text" id="guess" maxlength="80" placeholder="Type one answer" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="go">
             <button class="btn primary" id="diveBtn" type="submit">Dive</button>
           </form>
-          <button class="link-btn" id="giveUp" type="button">pass</button>
+          <button class="link-btn" id="giveUp" type="button">Skip this one</button>
         </div>
       </div>`;
     const $ = s => app.querySelector(s);
@@ -70,17 +71,17 @@ export function mountDive(ctx) {
       scene.setDiverX(.16); scene.setTag(''); scene.clearLines();
       stage.innerHTML = `
         <div class="prompt-card rise">
-          <span class="eyebrow">prompt ${p.i + 1} of ${p.total} · ${mode === 'daily' ? 'daily dive' : 'free dive'}</span>
+          <span class="eyebrow">Prompt ${p.i + 1} of ${p.total}${mode === 'daily' ? '' : ', free dive'}</span>
           <h2 class="prompt">${esc(p.text)}</h2>
           <span class="sub">${p.hint ? esc(p.hint) : '▼ rarer answers sink deeper ▼'}</span>
         </div>`;
       dock.hidden = false; input.value = ''; input.disabled = true; $('#diveBtn').disabled = true;
       setRing(1, p.seconds);
       let n = p.countdown || 3;
-      msg.className = 'dock-msg'; msg.textContent = `descending · the clock starts in ${n}`;
+      msg.className = 'dock-msg'; msg.textContent = `Descending. The clock starts in ${n}`;
       const tick = setInterval(() => {
         n--;
-        if (n > 0) { msg.textContent = `descending · the clock starts in ${n}`; sfx.tick(); return; }
+        if (n > 0) { msg.textContent = `Descending. The clock starts in ${n}`; sfx.tick(); return; }
         clearInterval(tick); msg.textContent = '';
         input.disabled = false; $('#diveBtn').disabled = false; input.focus();
         startClock(p.seconds);
@@ -121,7 +122,7 @@ export function mountDive(ctx) {
       if (r.error) { toast(esc(r.error), 'bad'); return go('/'); }
       if (r.retry) {
         sfx.bad();
-        msg.className = 'dock-msg bad'; msg.innerHTML = `“${esc(r.guess)}” · no echo. try again`;
+        msg.className = 'dock-msg bad'; msg.innerHTML = `“${esc(r.guess)}” isn’t on the list. Try another.`;
         $('#form').classList.remove('shake'); void $('#form').offsetWidth; $('#form').classList.add('shake');
         input.select();
         return;
@@ -141,8 +142,8 @@ export function mountDive(ctx) {
 
     async function sink(r) {
       const res = r.result, from = scene.depth;
-      scene.setDiverX(.5);
-      scene.setLines(TIERS.map(t => ({ m: from + t.points * 10, label: `${t.name.toUpperCase()} · ${t.points}`, color: TIER_COLOR[t.id] })));
+      scene.setDiverX(.5); scene.showLabels(true);
+      scene.setLines(TIERS.map(t => ({ m: from + t.points * 10, label: `${t.name} ${t.points}`, color: TIER_COLOR[t.id] })));
       if (!res.ok) {
         scene.setTag(res.guess || 'no answer', TIER_COLOR[0]);
         scene.flash('#ff6b5e'); sfx.bad();
@@ -160,14 +161,14 @@ export function mountDive(ctx) {
       const res = r.result, rv = r.reveal, t = res.ok ? res.tier : 0;
       tiers.push(t); score += res.points;
       pips(tiers.length, startRes.prompt.total);
-      scene.clearLines(); scene.setTag(''); scene.setDiverX(.14);
+      scene.clearLines(); scene.setTag(''); scene.setDiverX(.14); scene.showLabels(innerWidth >= 1100);
       const tierName = res.ok ? res.tierName : (res.guess ? 'No echo' : 'Out of air');
       stage.innerHTML = `
         <div class="result-card rise">
           <div class="creature-wrap">${creatureSvg(t, t === 6 ? 7 : 7)}</div>
           <h3 class="tier-title tier-${t}">${esc(tierName)}</h3>
           <div class="result-answer">${res.ok ? `“${esc(res.answer)}”` : res.guess ? `“${esc(res.guess)}”` : '—'}</div>
-          <div class="result-pts"><b class="tier-${t}">+${res.points} pts</b> · sink ${res.points * 10} m</div>
+          <div class="result-pts"><b class="tier-${t}">+${res.points} pts</b>, sinks you ${res.points * 10} m</div>
           <p class="flavour">${esc(res.flavour || '')}</p>
           ${res.fact ? `<p class="fact">${esc(res.fact)}</p>` : ''}
           ${mode === 'daily' && res.ok ? `<p class="muted small">${res.friendsSaid ? `${res.friendsSaid} other ${res.friendsSaid === 1 ? 'diver' : 'divers'} said this` : 'Nobody else in your group has said this yet'}</p>` : ''}
@@ -175,7 +176,7 @@ export function mountDive(ctx) {
             <div class="reveal">
               ${rv.gem ? `<div class="line"><span class="muted">Leviathan</span><b class="tier-6">${esc(rv.gem)}</b></div>` : ''}
               ${rv.examples.slice().reverse().map(e => `<div class="line"><span class="muted">${TIERS[e.tier - 1].name}</span><b class="tier-${e.tier}">${esc(e.name)}</b></div>`).join('')}
-              <div class="line"><span class="muted">valid answers</span><b class="mono">${rv.totalAnswers}</b></div>
+              <div class="line"><span class="muted">Valid answers</span><b class="num">${rv.totalAnswers}</b></div>
             </div>
           </details>
           <button class="btn descend" id="next">${r.final ? 'Surface ▲' : 'Descend ▼'}</button>
@@ -200,7 +201,7 @@ export function mountDive(ctx) {
   // ---------- end of dive ----------
   function shareText(f) {
     const line = f.picks.map(p => EMOJI[p.ok ? p.tier : 0]).join('');
-    return `abyss. ${f.mode === 'daily' ? f.date : 'free dive'}\n${line}\n${f.score} pts · ${f.depth.toLocaleString()} m down\n${location.origin}`;
+    return `abyss. ${f.mode === 'daily' ? f.date : 'free dive'}\n${line}\n${f.score} pts, ${f.depth.toLocaleString()} m down\n${location.origin}`;
   }
 
   function band(score) { return BANDS.find(b => score >= b[0] && score <= b[1]) || BANDS[0]; }
@@ -216,12 +217,12 @@ export function mountDive(ctx) {
     const myD = dens[Math.round(Math.min(MAX, mine) / MAX * 120)];
     const ticks = [0, 140, 280, 420, 560, 700, 840].map(v => `<text x="${px(v)}" y="${H - 4}" text-anchor="middle">${v}</text>`).join('');
     return `<svg viewBox="0 0 ${W} ${H}" class="curve" role="img" aria-label="How your score compares">
-      <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ee6ff" stop-opacity=".55"/><stop offset="1" stop-color="#5ee6ff" stop-opacity="0"/></linearGradient></defs>
+      <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cf3ff" stop-opacity=".55"/><stop offset="1" stop-color="#7cf3ff" stop-opacity="0"/></linearGradient></defs>
       <path d="${path} L${px(MAX)},${H - 22} L${px(0)},${H - 22} Z" fill="url(#cg)"/>
-      <path d="${path}" fill="none" stroke="#5ee6ff" stroke-width="2"/>
+      <path d="${path}" fill="none" stroke="#7cf3ff" stroke-width="2"/>
       <line x1="10" x2="${W - 10}" y1="${H - 22}" y2="${H - 22}" stroke="rgba(160,220,235,.25)"/>
-      <line x1="${mx}" x2="${mx}" y1="${py(myD)}" y2="${H - 22}" stroke="#e8ff6b" stroke-width="2"/>
-      <circle cx="${mx}" cy="${py(myD)}" r="5" fill="#e8ff6b"/>
+      <line x1="${mx}" x2="${mx}" y1="${py(myD)}" y2="${H - 22}" stroke="#ffb547" stroke-width="2"/>
+      <circle cx="${mx}" cy="${py(myD)}" r="5" fill="#ffb547"/>
       <text x="${mx}" y="${py(myD) - 12}" text-anchor="middle" class="you">YOU</text>
       ${ticks}
     </svg>`;
@@ -241,7 +242,9 @@ export function mountDive(ctx) {
   }
 
   async function results(f, already = false) {
-    document.body.classList.remove('diving');
+    document.body.classList.remove('diving'); document.body.classList.add('sky');
+    ctx.onLeave(() => document.body.classList.remove('sky'));
+    scene.setFocus(.1, true); scene.showLabels(false);
     scene.setDepth(0, true); scene.setDiverX(.82, true); scene.setTag(''); scene.clearLines();
     const name = myName();
     const [lb, me] = await Promise.all([
@@ -250,26 +253,27 @@ export function mountDive(ctx) {
     ]);
     const scores = lb ? lb.daily.map(r => r.score) : [];
     const others = scores.length - 1;
-    const beat = others > 0 ? Math.round(scores.filter(s => s < f.score).length / others * 100) : null;
+    const ties = scores.filter(s => s === f.score).length - 1; // everyone else on the same score counts half
+    const beat = others > 0 ? Math.round((scores.filter(s => s < f.score).length + ties / 2) / others * 100) : null;
     const b = band(f.score);
 
     app.innerHTML = `
       <div class="stack end">
-        <div class="row spread"><span class="mono small muted">${already ? 'you already dived today' : f.mode === 'daily' ? `daily dive · ${f.date} · complete` : 'free dive complete'}</span></div>
-        <div class="end-score"><span class="big">${f.score}</span><span class="mono depth">−${f.depth.toLocaleString()} m</span></div>
+        <div class="row spread"><span class="small muted">${already ? 'You’ve already done today’s dive' : f.mode === 'daily' ? `Daily dive for ${new Date(f.date + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}` : 'Free dive'}</span></div>
+        <div class="end-score"><span class="big">${f.score}</span><span class="depth">${f.depth.toLocaleString()} m down</span></div>
 
         ${f.mode === 'daily' ? `<section class="panel">
           ${scores.length >= 2 ? curveSvg(scores, f.score) : ''}
-          <p class="mono small" style="color:var(--cyan);margin:8px 0 0">${beat === null ? 'You’re the first diver in your group today. Send it round.' : `DEEPER THAN ${beat}% OF TODAY’S DIVERS · ${scores.length} DIVED`}</p>
+          <p class="beat">${beat === null ? 'You’re the first to dive today. Send it round.' : `Deeper than ${beat}% of the ${scores.length} people who dived today.`}</p>
         </section>` : ''}
 
         <section class="panel">
-          <div class="row spread"><h3 class="mono small">DIVE LOG</h3><span class="mono small muted">deeper = rarer</span></div>
+          <div class="row spread"><h3>Your dive</h3><span class="small muted">Lower means rarer</span></div>
           ${logSvg(f.picks)}
         </section>
 
         <section class="panel bands">
-          ${BANDS.map(x => `<div class="band ${x === b ? 'me' : ''}"><span class="mono">${x[0]}${x[1] > 2000 ? '+' : '–' + x[1]}</span><b>${x[2]}</b><span class="muted">${x[3]}</span></div>`).join('')}
+          ${BANDS.map(x => `<div class="band ${x === b ? 'me' : ''}"><span class="num">${x[0]}${x[1] > 2000 ? '+' : '–' + x[1]}</span><b>${x[2]}</b><span class="muted">${x[3]}</span></div>`).join('')}
         </section>
 
         <div class="share-box">${esc(shareText(f))}</div>
@@ -280,21 +284,21 @@ export function mountDive(ctx) {
           <button class="btn" data-nav="home">Home</button>
         </div>
 
-        ${me && !me.error ? `<section class="panel logbook mono small">
-          <span>LOGBOOK</span><span>STREAK ${me.streak} · PLAYED ${me.played} · AVG ${me.avg} · BEST ${me.best}</span>
+        ${me && !me.error ? `<section class="panel logbook">
+          <div><b class="num">${me.streak}</b><span>day streak</span></div><div><b class="num">${me.played}</b><span>dives</span></div><div><b class="num">${me.avg}</b><span>average</span></div><div><b class="num">${me.best}</b><span>best</span></div>
           <span id="nextDive"></span>
         </section>` : ''}
 
         <section class="panel">
-          <div class="row spread"><h3 class="mono small">THE CATCH</h3><span class="mono small muted">tap a round to see every answer</span></div>
+          <div class="row spread"><h3>Every answer</h3><span class="small muted">Open a prompt to see what else counted</span></div>
           <div class="catch">
             ${f.picks.map((p, i) => `
               <div class="round" data-i="${i}">
                 <button class="round-head" data-pid="${esc(p.promptId)}">
-                  <span class="mono muted">${i + 1}</span>
+                  <span class="num muted">${i + 1}</span>
                   <span class="q">${esc(p.prompt)}</span>
                   <span class="a ${p.ok ? 'tier-' + p.tier : 'tier-0'}">${p.ok ? esc(p.answer) : (p.guess ? esc(p.guess) + ' ✗' : 'no answer')}</span>
-                  <b class="mono tier-${p.ok ? p.tier : 0}">${p.points}</b>
+                  <b class="num tier-${p.ok ? p.tier : 0}">${p.points}</b>
                   <span class="chev">+</span>
                 </button>
                 <div class="round-body" hidden></div>
@@ -313,7 +317,7 @@ export function mountDive(ctx) {
     if (me?.nextDiveAt && $('#nextDive')) {
       const tick = () => {
         const s = Math.max(0, Math.floor((me.nextDiveAt - Date.now()) / 1000));
-        $('#nextDive') && ($('#nextDive').textContent = `NEXT DIVE IN ${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`);
+        $('#nextDive') && ($('#nextDive').textContent = `Next dive in ${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`);
       };
       tick(); const iv = setInterval(tick, 1000); ctx.onLeave(() => clearInterval(iv));
     }
@@ -347,8 +351,8 @@ export function mountDive(ctx) {
         <div class="ans">
           <span class="dot tier-${a.tier}">●</span>
           <span class="nm">${esc(a.name)}${a.tier === 6 && r.fact ? `<small class="muted">${esc(r.fact)}</small>` : ''}</span>
-          <span class="mono small muted">${a.n ? `${a.n} said` : ''}</span>
-          <b class="mono tier-${a.tier}">+${TIERS[a.tier - 1].points}</b>
+          <span class="small muted">${a.n ? `${a.n} said it` : ''}</span>
+          <b class="num tier-${a.tier}">+${TIERS[a.tier - 1].points}</b>
         </div>`).join('') + (rows.length > 300 ? `<p class="muted small">+${rows.length - 300} more, search to narrow it down</p>` : '') || '<p class="muted small">Nothing matches.</p>';
     };
     body.querySelectorAll('.chip-btn').forEach(c => c.onclick = () => {

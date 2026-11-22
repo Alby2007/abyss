@@ -2,6 +2,7 @@
 import { createScene } from './scene.js';
 import { mountDive } from './dive.js';
 import { mountAccount } from './account.js';
+import { creatureSvg } from './creatures.js';
 const $ = (s, el = document) => el.querySelector(s);
 const app = $('#app');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -21,7 +22,11 @@ async function api(path, body) {
 // ---------- ambience: the ocean behind everything ----------
 const scene = createScene(document.getElementById('ocean'));
 // Park the bathysphere somewhere pleasant for non-dive pages
-function ambient(m = 0, x = .82) { scene.setDiverX(x); scene.setTag(''); scene.clearLines(); scene.sink(m, { duration: 1400 }); }
+function ambient(m = 0, x = .82) {
+  document.body.classList.remove('home');
+  scene.setFocus(.36); scene.showLabels(innerWidth >= 1100); scene.showRuler(true);
+  scene.setDiverX(x); scene.setTag(''); scene.clearLines(); scene.sink(m, { duration: 1400 });
+}
 
 // iOS Safari doesn't shrink the layout viewport for the keyboard, so fixed
 // bottom UI (the dive dock) ends up underneath it. Track the visible gap in
@@ -77,6 +82,7 @@ document.addEventListener('click', (e) => {
 });
 
 function route() {
+  if (!document.body.classList.contains('diving')) scrollTo(0, 0);
   cleanup.forEach(f => f()); cleanup = [];
   const p = location.pathname;
   let m;
@@ -94,69 +100,121 @@ const needAccount = (reason) => account.requireAccount(reason);
 
 // ---------- home ----------
 async function viewHome() {
-  ambient(0);
+  document.body.classList.add('home');
+  scene.setTag(''); scene.clearLines(); scene.showLabels(false);
   const name = myName();
+  const STATIONS = [
+    { id: 'daily', m: 40 }, { id: 'free', m: 260, zone: 'Twilight zone' }, { id: 'party', m: 640 },
+    { id: 'crews', m: 1020, zone: 'Midnight zone' }, { id: 'board', m: 1400 }, { id: 'scoring', m: 1800 },
+  ];
   app.innerHTML = `
     <section class="hero">
-      <span class="eyebrow">rare-answer trivia · for you and your mates</span>
-      <h1>The obvious answer<br>is <em>shallow.</em></h1>
-      <p>Everyone says Paris. Name the one nobody else would think of and sink deeper.</p>
-      <div class="hook-stats"><span><b>7</b> prompts</span><span><b>25s</b> each</span><span><b>1</b> go a day</span></div>
+      <h1>The obvious answer is shallow.</h1>
+      <p>Everyone says Paris. Name the one nobody else thinks of and you sink deeper. Seven prompts, 25 seconds each, a new set every day.</p>
+      <button class="btn primary big-cta" id="heroDive">Start today’s dive</button>
     </section>
-    <div class="stack">
-      <div class="modes">
-        <button class="mode big" id="daily">
-          <span class="tag" id="dailyTag">daily dive · ${META ? META.today : ''}</span>
-          <h3>Today's dive</h3>
-          <p>Same seven prompts for everyone. One go. Compare depths on the board.</p>
-        </button>
-        <button class="mode" id="unlimited">
-          <span class="tag">practice</span>
-          <h3>Free dive</h3>
-          <p>Random prompts, as many runs as you like. Doesn't count for the board.</p>
-        </button>
-        <div class="mode" id="partyCard" style="cursor:default">
-          <span class="tag">2 to 16 players</span>
-          <h3>Mine Party</h3>
-          <p>Hold the mine, name a valid answer to pass it on. Hidden fuse. Don't be holding it when it goes.</p>
-          <div class="row" style="margin-top:8px">
-            <button class="btn primary" id="create">Create room</button>
-            <input type="text" id="code" maxlength="4" placeholder="CODE" style="width:110px;text-transform:uppercase;font-family:var(--mono)">
+    <div class="cable" id="cable">
+      <section class="station" data-st="daily">
+        <div class="marker"><span class="m">40 m</span></div>
+        <div class="plate">
+          <h2>Today’s dive</h2>
+          <p id="dailyLine">Same seven prompts for everyone, and you only get one go. See how deep you get, then compare with your friends.</p>
+          <div class="row"><button class="btn primary" id="daily">Start today’s dive</button></div>
+        </div>
+      </section>
+      <section class="station" data-st="free">
+        <div class="marker"><span class="m">260 m</span><span class="z">Twilight zone</span></div>
+        <div class="plate">
+          <h2>Free dive</h2>
+          <p>Random prompts, as many runs as you like. Good for practice; it doesn’t count towards the leaderboard.</p>
+          <div class="row">
+            <select id="pack" aria-label="Prompt pack"><option value="">All packs</option></select>
+            <button class="btn" id="goFree">Free dive</button>
+          </div>
+        </div>
+      </section>
+      <section class="station" data-st="party">
+        <div class="marker"><span class="m">640 m</span></div>
+        <div class="plate">
+          <h2>Mine Party</h2>
+          <p>Live, 2 to 16 players. Whoever holds the mine names an answer to pass it on. The fuse is hidden, so don’t be holding it when it goes off.</p>
+          <div class="row">
+            <button class="btn" id="create">Create a room</button>
+            <span class="or">or</span>
+            <input type="text" id="code" maxlength="4" placeholder="Code" class="code-input" aria-label="Room code" autocomplete="off" autocorrect="off" autocapitalize="characters">
             <button class="btn" id="join">Join</button>
           </div>
         </div>
-        <div class="mode" id="crewCard" style="cursor:default">
-          <span class="tag">private boards</span>
-          <h3>Crews</h3>
-          <p>Start a private leaderboard and invite your friends with a code. Accounts only.</p>
-          <div class="row" style="margin-top:8px">
-            <input type="text" id="crewName" maxlength="20" placeholder="Crew name" autocomplete="off" autocorrect="off" style="flex:1;min-width:0">
-            <button class="btn primary" id="crewCreate">Create crew</button>
+      </section>
+      <section class="station" data-st="crews">
+        <div class="marker"><span class="m">1,020 m</span><span class="z">Midnight zone</span></div>
+        <div class="plate">
+          <h2>Crews</h2>
+          <p>A private leaderboard for your group. Start one and share the code. You’ll need an account.</p>
+          <div class="crew-list" id="crewList"></div>
+          <div class="row">
+            <input type="text" id="crewName" maxlength="20" placeholder="Crew name" aria-label="Crew name" autocomplete="off" autocorrect="off" style="flex:1;min-width:140px">
+            <button class="btn" id="crewCreate">Start a crew</button>
           </div>
           <div class="row">
-            <input type="text" id="crewCode" maxlength="5" placeholder="CODE" autocomplete="off" autocorrect="off" autocapitalize="characters" style="width:110px;text-transform:uppercase;font-family:var(--mono)">
-            <button class="btn" id="crewJoin">Join crew</button>
+            <input type="text" id="crewCode" maxlength="5" placeholder="Code" class="code-input" aria-label="Crew code" autocomplete="off" autocorrect="off" autocapitalize="characters">
+            <button class="btn" id="crewJoin">Join a crew</button>
           </div>
-          <div class="crew-list" id="crewList"></div>
         </div>
-        <button class="mode" data-nav="/board">
-          <span class="tag">everyone</span>
-          <h3>Leaderboard</h3>
-          <p>Today's depths and the all-time table.</p>
-        </button>
-      </div>
-      <div class="panel small muted" id="unlimitedOpts" hidden>
-        <div class="row">
-          <label class="field" style="flex:1">Pack
-            <select id="pack"><option value="">Everything</option></select>
-          </label>
-          <button class="btn primary" id="goFree" style="align-self:end">Dive</button>
+      </section>
+      <section class="station" data-st="board">
+        <div class="marker"><span class="m">1,400 m</span></div>
+        <div class="plate">
+          <h2>Leaderboard</h2>
+          <ol class="mini-board" id="miniBoard"><li class="muted">Nobody has dived yet today.</li></ol>
+          <div class="row"><button class="btn" data-nav="/board">See the full leaderboard</button></div>
         </div>
-      </div>
-      <div class="legend muted" id="legend"></div>
+      </section>
+      <section class="station" data-st="scoring">
+        <div class="marker"><span class="m">1,800 m</span></div>
+        <div class="plate">
+          <h2>How deep each answer takes you</h2>
+          <div class="tiers" id="tiers"></div>
+        </div>
+      </section>
     </div>`;
-  $('#daily').onclick = async () => { if (await needPlayer('Pick a name or log in to start today\u2019s dive.')) dive.start('daily'); };
-  $('#unlimited').onclick = () => { $('#unlimitedOpts').hidden = !$('#unlimitedOpts').hidden; };
+
+  // ----- scroll-linked descent: the page scroll *is* the camera -----
+  const cable = $('#cable');
+  const layout = () => {
+    if (!cable.isConnected) return;
+    const H = scene.height, ppm = scene.ppm, focus = H < 700 ? .66 : .62;
+    scene.setFocus(focus, true);
+    const heroBottom = $('.hero').getBoundingClientRect().bottom + scrollY;
+    // keep the waterline below the hero copy
+    const water = Math.max(H * focus, heroBottom + 40);
+    scene.setFocus(water / H, true);
+    const top = cable.getBoundingClientRect().top + scrollY;
+    let last = 0;
+    for (const st of STATIONS) {
+      const el = cable.querySelector(`[data-st="${st.id}"]`);
+      const y = water + st.m * ppm - top;
+      el.style.top = Math.max(y, last) + 'px';
+      last = Math.max(y, last) + el.offsetHeight + 24;
+    }
+    cable.style.height = (last + H * .5) + 'px';
+    const rail = cable.getBoundingClientRect().left + 14;
+    scene.setDiverX(rail / innerWidth, true);
+    follow();
+  };
+  const follow = () => scene.follow(scrollY / scene.ppm);
+  let raf = 0;
+  const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(follow); };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', layout);
+  cleanup.push(() => { removeEventListener('scroll', onScroll); removeEventListener('resize', layout); scene.setFocus(.36); });
+  requestAnimationFrame(layout);
+  document.fonts?.ready.then(layout);
+
+  // ----- actions -----
+  const startDaily = async () => { if (await needPlayer('Pick a name or log in to start today’s dive.')) dive.start('daily'); };
+  $('#daily').onclick = startDaily;
+  $('#heroDive').onclick = startDaily;
   $('#goFree').onclick = async () => { if (await needPlayer()) dive.start('unlimited', $('#pack').value); };
   $('#create').onclick = async () => { if (await needPlayer()) go('/room/new'); };
   const join = async () => { const c = $('#code').value.trim().toUpperCase(); if (c.length !== 4) return toast('Room codes are 4 letters', 'bad'); if (await needPlayer()) go('/room/' + c); };
@@ -166,7 +224,8 @@ async function viewHome() {
   const drawCrews = async () => {
     if (!account.me || account.me.guest) { $('#crewList').innerHTML = ''; return; }
     const r = await api('/api/crews').catch(() => ({}));
-    $('#crewList').innerHTML = (r.crews || []).map(c => `<button class="crew-chip" data-nav="/crew/${c.code}"><b>${esc(c.name)}</b><span class="mono muted">${c.code} · ${c.members}</span></button>`).join('');
+    $('#crewList').innerHTML = (r.crews || []).map(c => `<button class="crew-chip" data-nav="/crew/${c.code}"><b>${esc(c.name)}</b><span class="muted">${c.members} diver${c.members === 1 ? '' : 's'}</span></button>`).join('');
+    layout();
   };
   $('#crewCreate').onclick = async () => {
     if (!(await needAccount('Log in or create an account to start a crew.'))) return;
@@ -184,23 +243,31 @@ async function viewHome() {
   drawCrews();
 
   META ||= await api('/api/meta');
-  $('#dailyTag').textContent = `daily dive · ${META.today}`;
-  $('#pack').innerHTML += META.packs.map(p => `<option value="${esc(p.id)}">${esc(p.name)} (${p.count})</option>`).join('');
-  $('#legend').innerHTML = `<div class="legend-title">the deeper the answer, the more it's worth</div><div class="legend-row">`
-    + META.tiers.map(t => `<span class="tier-${t.id}"><i></i><b>${t.name}</b><em>${t.points}</em></span>`).join('') + `</div>`;
-  if (name) {
-    const lb = await api('/api/leaderboard');
-    const mine = lb.daily.find(r => r.me);
+  $('#pack').innerHTML += META.packs.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+  $('#tiers').innerHTML = META.tiers.slice().reverse().map(t => `
+    <div class="tier-row tier-${t.id}">
+      <span class="tier-art">${creatureSvg(t.id, 3)}</span>
+      <b>${t.name}</b>
+      <span class="tier-desc muted">${t.id === 6 ? 'The one hidden answer per prompt' : ['', 'The answer everyone gives', 'A bit less obvious', 'Getting rarer', 'Properly obscure', 'Almost nobody says it'][t.id]}</span>
+      <span class="num">${t.points} pts, ${(t.points * 10).toLocaleString()} m</span>
+    </div>`).join('');
+
+  const lb = await api('/api/leaderboard').catch(() => null);
+  if (lb?.daily?.length) {
+    $('#miniBoard').innerHTML = lb.daily.slice(0, 5).map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="num">${i + 1}</span><span class="nm">${esc(r.name)}${r.guest ? ' <span class="muted">(guest)</span>' : ''}</span><span class="num">${(r.score * 10).toLocaleString()} m</span></li>`).join('');
+    const mine = name && lb.daily.find(r => r.me);
     if (mine) {
-      $('#daily').classList.add('done');
-      $('#dailyTag').textContent = `done today · ${(mine.score * 10).toLocaleString()} m`;
+      $('#dailyLine').textContent = `You’ve done today’s dive: ${(mine.score * 10).toLocaleString()} m. A new set of prompts arrives at midnight.`;
+      $('#daily').textContent = 'See your results';
+      $('#heroDive').textContent = 'See today’s results';
     }
   }
+  layout();
 }
 
 // ---------- leaderboard ----------
 async function viewBoard() {
-  ambient(260);
+  ambient(320);
   META ||= await api('/api/meta');
   let date = META.today, tab = 'daily';
   const me = myName().toLowerCase();
@@ -215,7 +282,7 @@ async function viewBoard() {
           <h2 style="font-size:34px">Leaderboard</h2>
           <div class="tabs"><button data-tab="daily" class="${tab === 'daily' ? 'on' : ''}">Daily</button><button data-tab="all" class="${tab === 'all' ? 'on' : ''}">All time</button></div>
         </div>
-        ${tab === 'daily' ? `<div class="row"><button class="btn small" id="prev">←</button><span class="mono">${date}</span><button class="btn small" id="nextDay" ${date >= META.today ? 'disabled' : ''}>→</button></div>` : ''}
+        ${tab === 'daily' ? `<div class="row"><button class="btn small" id="prev">←</button><span class="num">${new Date(date + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span><button class="btn small" id="nextDay" ${date >= META.today ? 'disabled' : ''}>→</button></div>` : ''}
         <div class="panel">
           <table class="board">
             <thead>${tab === 'daily' ? '<tr><th></th><th>Diver</th><th>Dive</th><th style="text-align:right">Depth</th></tr>' : '<tr><th></th><th>Diver</th><th style="text-align:right">Dives</th><th style="text-align:right">Best</th><th style="text-align:right">Total</th></tr>'}</thead>
@@ -234,7 +301,7 @@ async function viewBoard() {
 
 // ---------- crews: private leaderboards ----------
 async function viewCrew(code) {
-  ambient(260);
+  ambient(320);
   META ||= await api('/api/meta');
   if (!(await needAccount('Log in or create an account to open this crew.'))) {
     app.innerHTML = `<div class="panel stack"><h2>Crew ${esc(code)}</h2><p class="muted">Crews are for accounts only.</p><div class="row"><button class="btn primary" id="again">Log in</button><button class="btn" data-nav="home">Home</button></div></div>`;
@@ -265,7 +332,7 @@ async function viewCrew(code) {
     app.innerHTML = `
       <div class="stack">
         <div class="row spread">
-          <div><span class="tag crew-tag">private crew · ${lb.crew.members} diver${lb.crew.members === 1 ? '' : 's'}</span><h2 style="font-size:34px">${esc(lb.crew.name)}</h2></div>
+          <div><span class="small muted">Private crew, ${lb.crew.members} diver${lb.crew.members === 1 ? '' : 's'}</span><h2 style="font-size:34px">${esc(lb.crew.name)}</h2></div>
           <div class="tabs"><button data-tab="daily" class="${tab === 'daily' ? 'on' : ''}">Daily</button><button data-tab="all" class="${tab === 'all' ? 'on' : ''}">All time</button></div>
         </div>
         <div class="panel crew-invite">
@@ -273,7 +340,7 @@ async function viewCrew(code) {
           <div class="crew-code">${esc(lb.crew.code)}</div>
           <div class="row"><button class="btn small" id="copyCode">Copy code</button><button class="btn small" id="copyLink">Copy invite link</button></div>
         </div>
-        ${tab === 'daily' ? `<div class="row"><button class="btn small" id="prev">←</button><span class="mono">${date}</span><button class="btn small" id="nextDay" ${date >= META.today ? 'disabled' : ''}>→</button></div>` : ''}
+        ${tab === 'daily' ? `<div class="row"><button class="btn small" id="prev">←</button><span class="num">${new Date(date + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span><button class="btn small" id="nextDay" ${date >= META.today ? 'disabled' : ''}>→</button></div>` : ''}
         <div class="panel">
           <table class="board">
             <thead>${tab === 'daily' ? '<tr><th></th><th>Diver</th><th>Dive</th><th style="text-align:right">Depth</th></tr>' : '<tr><th></th><th>Diver</th><th style="text-align:right">Dives</th><th style="text-align:right">Best</th><th style="text-align:right">Total</th></tr>'}</thead>
@@ -300,17 +367,17 @@ async function viewCrew(code) {
 // ---------- mine party ----------
 function mineSvg() {
   return `<svg class="mine" viewBox="0 0 100 100" aria-hidden="true">
-    <g stroke="#e8ff6b" stroke-width="6" stroke-linecap="round">
+    <g stroke="#ffb547" stroke-width="6" stroke-linecap="round">
       <path d="M50 8v14M50 78v14M8 50h14M78 50h14M20 20l10 10M70 70l10 10M80 20L70 30M30 70L20 80"/>
     </g>
-    <circle cx="50" cy="50" r="27" fill="#e8ff6b"/>
+    <circle cx="50" cy="50" r="27" fill="#ffb547"/>
     <circle cx="42" cy="43" r="6" fill="#04121c" opacity=".85"/>
     <circle cx="40" cy="41" r="2" fill="#fff"/>
   </svg>`;
 }
 
 function viewRoom(code) {
-  ambient(140);
+  ambient(320);
   if (!myName()) {
     app.innerHTML = `<div class="panel stack"><h2>Joining room ${esc(code === 'NEW' ? '' : code)}</h2><p class="muted">Pick a name or log in first.</p><button class="btn primary" id="ok">Pick a name</button></div>`;
     const ask = async () => { if (await needPlayer('Pick a name or log in to join the room.')) route(); };
@@ -357,7 +424,7 @@ function viewRoom(code) {
       case 'typing': { const el = $('#typing'); if (el && m.id !== you) el.textContent = m.text || ''; return; }
       case 'pass':
         sfx.pass();
-        toast(`<b>${esc(m.from)}</b> passed with <b class="tier-${m.tier}">${esc(m.answer)}</b> · ${esc(m.tierName)}`, 'good');
+        toast(`<b>${esc(m.from)}</b> passed with <b class="tier-${m.tier}">${esc(m.answer)}</b> (${esc(m.tierName)})`, 'good');
         return;
       case 'reject': {
         sfx.bad();
@@ -398,7 +465,7 @@ function viewRoom(code) {
       app.innerHTML = `
         <div class="stack">
           <div class="row spread">
-            <div><span class="muted small mono">room code</span><div class="room-code">${room.code}</div></div>
+            <div><span class="muted small">Room code</span><div class="room-code">${room.code}</div></div>
             <button class="btn" id="copyLink">Copy invite link</button>
           </div>
           <div class="players" id="players">${playersHtml()}</div>
@@ -447,7 +514,7 @@ function viewRoom(code) {
           </form>
           <div id="accept"></div>
           <div class="players" id="players"></div>
-          <div><div class="muted small mono" style="margin-bottom:8px">taken this round</div><div class="used" id="used"></div></div>
+          <div><div class="muted small" style="margin-bottom:8px">Already said this round</div><div class="used" id="used"></div></div>
         </div>`;
       const input = $('#pguess');
       let lastSent = 0, pending = null;
@@ -473,8 +540,8 @@ function viewRoom(code) {
       const winner = room.players.find(p => p.id === room.winnerId);
       app.innerHTML = `
         <div class="stack">
-          <span class="muted mono small">game over · ${room.round} rounds</span>
-          <h2 style="font-size:clamp(40px,9vw,64px)">${winner ? `${esc(winner.name)} <span style="color:var(--lume)">survives.</span>` : 'Nobody survived.'}</h2>
+          <span class="muted small">Game over after ${room.round} rounds</span>
+          <h2 class="winner">${winner ? `${esc(winner.name)} survives.` : 'Nobody survived.'}</h2>
           <div class="panel"><table class="board"><thead><tr><th></th><th>Diver</th><th style="text-align:right">Lives</th><th style="text-align:right">Points</th></tr></thead>
             <tbody>${ranked.map((p, i) => `<tr class="${p.id === you ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(p.name)}</td><td class="num">${p.lives}</td><td class="num">${p.points}</td></tr>`).join('')}</tbody></table></div>
           <div class="row">

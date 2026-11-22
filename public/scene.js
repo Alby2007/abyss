@@ -2,8 +2,8 @@
 // Everything else in the UI floats on top of this.
 
 const WATER = [
-  [0, [27, 122, 147]], [150, [15, 85, 113]], [500, [10, 53, 80]], [1000, [7, 31, 51]],
-  [3000, [4, 17, 31]], [6000, [2, 8, 18]], [9000, [1, 3, 7]],
+  [0, [38, 168, 170]], [120, [28, 128, 160]], [400, [27, 82, 140]], [1000, [27, 37, 94]],
+  [3000, [17, 15, 54]], [6000, [9, 7, 30]], [9000, [3, 2, 12]],
 ];
 const ZONES = [
   [200, 'THE TWILIGHT ZONE'], [1000, 'THE MIDNIGHT ZONE'], [4000, 'THE ABYSSAL ZONE'], [6000, 'THE HADAL ZONE'],
@@ -28,6 +28,8 @@ const FACTS = [
   [8400, 'the floor: a perfect dive ends here'],
 ];
 const FLOOR = 8400;
+const LAMP = '#ffb547';
+const FONT = 'Figtree, system-ui, sans-serif';
 
 function mix(a, b, t) { return a.map((v, i) => Math.round(v + (b[i] - v) * t)); }
 function waterAt(m) {
@@ -52,7 +54,8 @@ export function createScene(canvas) {
   const mobile = matchMedia('(pointer: coarse)').matches || innerWidth < 768;
   let W = 0, H = 0, dpr = 1, ppm = 1;
   let cam = 0;                 // metres at the "focus" line
-  const diver = { m: 0, x: .5, xTarget: .5, tag: '', tagColor: '#e8ff6b', visible: true };
+  const diver = { m: 0, x: .5, xTarget: .5, tag: '', tagColor: LAMP, visible: true };
+  let focusFrac = .36, focusTarget = .36, labels = true, ruler = true;
   let lines = [], flashColor = null, flashT = 0, anim = null, onDepth = null, lastT = 0;
   const chunks = new Map();
   let snow = [];
@@ -71,7 +74,7 @@ export function createScene(canvas) {
   addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(resize, 140); });
   resize();
 
-  const focusY = () => H * 0.36;
+  const focusY = () => H * focusFrac;
   const y = m => focusY() + (m - cam) * ppm;
 
   // scenery is generated per 250 m chunk so it's stable as you pass it
@@ -84,7 +87,7 @@ export function createScene(canvas) {
       if (m < 0) continue;
       if (m < 900) items.push({ kind: 'fish', m, x, s: .6 + r() * .9, v: (r() - .5) * 18, ph: r() * 6 });
       else if (m < 4200 && r() < .6) items.push({ kind: 'jelly', m, x, s: .6 + r() * .8, ph: r() * 6, hue: r() < .5 ? [120, 210, 255] : [210, 140, 255] });
-      if (m > 700) items.push({ kind: 'glow', m: base + r() * 250, x: r(), ph: r() * 6, c: r() < .5 ? [232, 255, 107] : [94, 230, 255] });
+      if (m > 700) items.push({ kind: 'glow', m: base + r() * 250, x: r(), ph: r() * 6, c: r() < .5 ? [255, 181, 71] : [124, 243, 255] });
     }
     chunks.set(k, items);
     return items;
@@ -93,14 +96,23 @@ export function createScene(canvas) {
   function drawSky(top) {
     if (top <= 0) return;
     const g = ctx.createLinearGradient(0, 0, 0, top);
-    g.addColorStop(0, '#0b2233'); g.addColorStop(1, '#2b7189');
+    g.addColorStop(0, '#8fd3ea'); g.addColorStop(.7, '#c6ecf2'); g.addColorStop(1, '#e8f8f4');
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, top);
-    // low moon
-    const mx = W * .78, my = top - H * .16;
-    const glow = ctx.createRadialGradient(mx, my, 0, mx, my, 90);
-    glow.addColorStop(0, 'rgba(232,255,180,.55)'); glow.addColorStop(1, 'rgba(232,255,180,0)');
-    ctx.fillStyle = glow; ctx.fillRect(mx - 90, my - 90, 180, 180);
-    ctx.fillStyle = '#eaf7d0'; ctx.beginPath(); ctx.arc(mx, my, 16, 0, 6.29); ctx.fill();
+    // sun, low over the water
+    const sx = W * .8, sy = top - Math.min(H * .2, top * .55);
+    const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, 160);
+    glow.addColorStop(0, 'rgba(255,236,170,.75)'); glow.addColorStop(1, 'rgba(255,236,170,0)');
+    ctx.fillStyle = glow; ctx.fillRect(sx - 160, sy - 160, 320, 320);
+    ctx.fillStyle = '#fff1c4'; ctx.beginPath(); ctx.arc(sx, sy, 30, 0, 6.29); ctx.fill();
+    // a couple of soft clouds that drift
+    const t = performance.now() / 1000;
+    ctx.fillStyle = 'rgba(255,255,255,.75)';
+    for (const [cx0, cy, s] of [[.18, .32, 1], [.55, .18, .7], [.92, .42, .8]]) {
+      const cx = ((cx0 * W + t * 6 * s) % (W + 200)) - 100, yy = top * cy;
+      ctx.beginPath();
+      ctx.ellipse(cx, yy, 60 * s, 16 * s, 0, 0, 6.29); ctx.ellipse(cx + 30 * s, yy - 10 * s, 34 * s, 16 * s, 0, 0, 6.29); ctx.ellipse(cx - 28 * s, yy - 6 * s, 26 * s, 12 * s, 0, 0, 6.29);
+      ctx.fill();
+    }
   }
 
   // the water gradient only depends on the visible depth band, so rebuild it
@@ -209,7 +221,8 @@ export function createScene(canvas) {
   }
 
   function drawLabels() {
-    ctx.font = '11px "JetBrains Mono", monospace';
+    if (!labels) return;
+    ctx.font = `500 12px ${FONT}`;
     ctx.textBaseline = 'middle';
     FACTS.forEach(([m, text], i) => {
       const yy = y(m); if (yy < -10 || yy > H + 10) return;
@@ -218,16 +231,16 @@ export function createScene(canvas) {
       if (i % 2) { ctx.textAlign = 'right'; ctx.fillText(text + '  —', W - 64, yy); }
       else { ctx.textAlign = 'left'; ctx.fillText('—  ' + text, 24, yy); }
     });
-    ctx.font = '600 12px "JetBrains Mono", monospace';
+    ctx.font = `700 13px ${FONT}`;
     ZONES.forEach(([m, name]) => {
       const yy = y(m); if (yy < -10 || yy > H + 10) return;
-      ctx.fillStyle = 'rgba(232,255,107,.22)'; ctx.fillRect(0, yy, W, 1);
-      ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(232,255,107,.55)'; ctx.fillText(name, 24, yy - 10);
+      ctx.fillStyle = 'rgba(234,248,245,.16)'; ctx.fillRect(0, yy, W, 1);
+      ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(234,248,245,.6)'; ctx.fillText(name, 24, yy - 10);
     });
   }
 
   function drawLines() {
-    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.font = `700 12px ${FONT}`;
     ctx.textBaseline = 'middle';
     for (const l of lines) {
       const yy = y(l.m); if (yy < -10 || yy > H + 10) continue;
@@ -250,7 +263,7 @@ export function createScene(canvas) {
     if (diver.m > 150) {
       ctx.save(); ctx.globalCompositeOperation = 'lighter';
       const g = ctx.createRadialGradient(x, yy + 10, 4, x, yy + 90, 120);
-      g.addColorStop(0, 'rgba(232,255,107,.22)'); g.addColorStop(1, 'rgba(232,255,107,0)');
+      g.addColorStop(0, 'rgba(255,181,71,.24)'); g.addColorStop(1, 'rgba(255,181,71,0)');
       ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x - 6, yy + 8); ctx.lineTo(x - 70, yy + 170); ctx.lineTo(x + 70, yy + 170); ctx.lineTo(x + 6, yy + 8); ctx.fill();
       ctx.restore();
     }
@@ -258,12 +271,12 @@ export function createScene(canvas) {
     ctx.fillStyle = '#1a3644'; ctx.strokeStyle = '#cfe9f1'; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.arc(x, yy, 15, 0, 6.29); ctx.fill(); ctx.stroke();
     for (let a = 0; a < 6.28; a += 1.05) { ctx.fillStyle = '#cfe9f1'; ctx.beginPath(); ctx.arc(x + Math.cos(a) * 12, yy + Math.sin(a) * 12, 1.2, 0, 6.29); ctx.fill(); }
-    ctx.fillStyle = '#e8ff6b'; ctx.shadowColor = '#e8ff6b'; ctx.shadowBlur = 14;
+    ctx.fillStyle = LAMP; ctx.shadowColor = LAMP; ctx.shadowBlur = 16;
     ctx.beginPath(); ctx.arc(x, yy, 6, 0, 6.29); ctx.fill(); ctx.shadowBlur = 0;
     ctx.fillStyle = '#cfe9f1'; ctx.fillRect(x - 3, yy - 20, 6, 5);
     // answer tag
     if (diver.tag) {
-      ctx.font = '700 15px "JetBrains Mono", monospace';
+      ctx.font = `800 16px ${FONT}`;
       const text = `“${diver.tag}”`, w = ctx.measureText(text).width + 24;
       const tx = x + 30, ty = yy - 15;
       ctx.fillStyle = 'rgba(4,14,22,.88)'; ctx.strokeStyle = diver.tagColor; ctx.lineWidth = 1.5;
@@ -273,10 +286,12 @@ export function createScene(canvas) {
   }
 
   function drawRuler() {
-    const x = W - 40;
-    ctx.fillStyle = 'rgba(0,0,0,.22)'; ctx.fillRect(x - 6, 0, 46, H);
+    if (!ruler) return;
+    const x = W - (W < 600 ? 30 : 40);
+    const waterTop = Math.max(0, y(0));
+    ctx.fillStyle = 'rgba(0,0,0,.18)'; ctx.fillRect(x - 6, waterTop, 46, H - waterTop);
     ctx.strokeStyle = 'rgba(160,210,225,.35)'; ctx.fillStyle = 'rgba(160,210,225,.6)';
-    ctx.font = '10px "JetBrains Mono", monospace'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.font = `600 10px ${FONT}`; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
     const top = cam - focusY() / ppm, bot = cam + (H - focusY()) / ppm;
     for (let m = Math.max(0, Math.floor(top / 25) * 25); m <= bot; m += 25) {
       const yy = y(m), big = m % 100 === 0;
@@ -284,7 +299,7 @@ export function createScene(canvas) {
       if (big) ctx.fillText(m >= 1000 ? (m / 1000).toFixed(1) + 'k' : String(m), x + 13, yy);
     }
     const yy = y(diver.m);
-    ctx.fillStyle = '#e8ff6b'; ctx.beginPath(); ctx.moveTo(x - 2, yy); ctx.lineTo(x - 9, yy - 5); ctx.lineTo(x - 9, yy + 5); ctx.fill();
+    ctx.fillStyle = LAMP; ctx.beginPath(); ctx.moveTo(x - 2, yy); ctx.lineTo(x - 9, yy - 5); ctx.lineTo(x - 9, yy + 5); ctx.fill();
   }
 
   function roundRect(x, yy, w, h, r) {
@@ -304,6 +319,7 @@ export function createScene(canvas) {
     }
     cam += (diver.m - cam) * Math.min(1, dt / 160);
     diver.x += (diver.xTarget - diver.x) * Math.min(1, dt / 220);
+    focusFrac += (focusTarget - focusFrac) * Math.min(1, dt / 260);
     const speed = (cam - lastCam) / (dt || 16) * 1000; lastCam = cam;
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -332,7 +348,16 @@ export function createScene(canvas) {
     setLines(ls) { lines = ls.map(l => ({ ...l, hit: false })); },
     clearLines() { lines = []; },
     setDiverX(f, instant = false) { diver.xTarget = f; if (instant) diver.x = f; },
-    setTag(text, color = '#e8ff6b') { diver.tag = text; diver.tagColor = color; },
+    // where the "camera line" sits on screen (0..1 of the height); the sky shows above it at the surface
+    setFocus(f, instant = false) { focusTarget = f; if (instant) focusFrac = f; },
+    showLabels(on) { labels = on; },
+    showRuler(on) { ruler = on; },
+    get ppm() { return ppm; },
+    get height() { return H; },
+    get focus() { return focusTarget; },
+    // lock the camera and diver to a depth this frame (used for scroll-linked pages)
+    follow(m) { anim = null; diver.m = m; cam = m; },
+    setTag(text, color = LAMP) { diver.tag = text; diver.tagColor = color; },
     flash(color) { flashColor = color; flashT = 1; },
     // animate the diver from its current depth to `to`
     sink(to, { duration, onLine } = {}) {

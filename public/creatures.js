@@ -88,7 +88,7 @@ const ART = {
   ],
 };
 
-export const TIER_COLOR = { 0: '#ff6b5e', 1: '#a9c9d2', 2: '#5ee6ff', 3: '#8f86ff', 4: '#d27bff', 5: '#ff74c5', 6: '#e8ff6b' };
+export const TIER_COLOR = { 0: '#ff8a7a', 1: '#d5f2ec', 2: '#7cf3ff', 3: '#9fb0ff', 4: '#c88cff', 5: '#ff7db8', 6: '#ffb547' };
 
 export function creatureSvg(tier, px = 6) {
   const rows = ART[tier] || ART[0];
