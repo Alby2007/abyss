@@ -67,3 +67,21 @@ hint: Overseas territories count
 1: Spain, Germany, Italy, Belgium, Switzerland
 2: Luxembourg, Monaco, Andorra
 4: Suriname, Netherlands / Holland
+
+## rivers | Name a river
+gem: Okavango
+fact: The Okavango never reaches the sea. It spills into an inland delta in Botswana and disappears into the Kalahari.
+1: Thames, Nile, Amazon, Mississippi
+2: Danube, Rhine, Seine, Yangtze / Chang Jiang, Ganges, Volga, Severn, Mersey, Tyne, Clyde, Tigris, Euphrates, Congo, Colorado, Hudson, Jordan, Mekong, Murray, Loire, Tiber, Rhone, Missouri, Orinoco, Zambezi, Niger, Indus
+3: Elbe, Oder, Vistula, Dnieper, Don, Ural, Ebro, Tagus, Douro, Po, Arno, Garonne, Dordogne, Shannon, Liffey, Trent, Avon, Wye, Tay, Tweed, Dee, Humber, Ouse, Cam, Limpopo, Orange, Brahmaputra, Irrawaddy, Salween, Amur, Lena, Yenisei, Ob, Yellow River / Huang He, Pearl River, Darling, Rio Grande, Yukon, Columbia, Ohio, St Lawrence / Saint Lawrence, Potomac, Delaware, Parana, Seine
+4: Neva, Vltava, Moselle, Meuse, Scheldt, Saone, Marne, Somme, Oise, Isere, Inn, Drava, Sava, Tisza, Prut, Dniester, Daugava, Neman / Nemunas, Kama, Oka, Irtysh, Syr Darya, Amu Darya, Helmand, Kabul, Chenab, Sutlej, Jhelum, Yamuna, Godavari, Krishna, Kaveri, Narmada, Chao Phraya, Red River, Han, Yalu, Songhua, Senegal, Gambia, Volta, Benue, Kasai, Ubangi, Blue Nile, White Nile, Atbara, Rufiji, Cunene, Waikato, Clutha, Yarra, Torrens, Snake, Platte, Arkansas, Susquehanna, Connecticut, Mackenzie, Fraser, Magdalena, Madeira, Xingu, Tapajos, Purus, Pilcomayo, Essequibo
+5: Pripyat, Mur, Isonzo / Soca, Aare, Reuss, Ticino, Tagliamento, Piave, Adige, Rubicon, Kolyma, Indigirka, Lempa, Usumacinta, Motagua
+
+## islands | Name an island
+gem: Socotra
+fact: Socotra, off Yemen, is home to the dragon's blood tree, which grows almost nowhere else on Earth.
+1: Ireland, Iceland, Hawaii, Cuba, Jamaica, Greenland, Madagascar, Sicily, Majorca / Mallorca
+2: Tenerife, Ibiza, Crete, Corsica, Sardinia, Cyprus, Malta, Bali, Java, Sumatra, Borneo, Tasmania, Puerto Rico, Barbados, Isle of Man, Anglesey, Skye, Jersey, Guernsey, Iona, Lanzarote, Fuerteventura, Gran Canaria, Menorca / Minorca, Rhodes, Corfu, Santorini, Mykonos, Sri Lanka, Zanzibar, Mauritius, Hokkaido, Honshu, Taiwan, Trinidad, Manhattan, Long Island, Newfoundland, Vancouver Island, Baffin Island, Great Britain, Tahiti, Fiji, Isle of Wight
+3: Lewis and Harris / Lewis, Orkney, Shetland, Mull, Islay, Arran, Jura, Lundy, Scilly / Isles of Scilly, Lindisfarne / Holy Island, Sark, Alderney, Capri, Elba, Ischia, Lampedusa, Kos, Zakynthos / Zante, Madeira, St Helena, Ascension Island, Falkland Islands / Falklands, Easter Island / Rapa Nui, Galapagos, Bora Bora, Samoa, Guam, Okinawa, Kyushu, Shikoku, Sakhalin, Hainan, Phuket, Langkawi, Sulawesi, Lombok, Komodo, Flores, Timor, New Guinea, Mindanao, Luzon, Cebu, Palawan, Reunion, Staten Island, Alcatraz, Ellis Island, Nantucket, Marthas Vineyard, Key West, Maui, Oahu, Kauai, Antigua, Aruba, Curacao, Tobago, Bermuda, Grenada
+4: Foula, Fair Isle, Eigg, Rum, Canna, Muck, Coll, Tiree, Barra, North Uist, South Uist, St Kilda, Rockall, Bardsey, Caldey, Brownsea, Hayling, Sheppey, Canvey, Mersea, Lambay, Achill, Aran Islands / Inishmore, Skellig Michael, Heligoland, Sylt, Rugen, Bornholm, Gotland, Oland, Aland, Saaremaa, Lofoten, Svalbard, Jan Mayen, Spitsbergen, Kerguelen, Bouvet, Tristan da Cunha, Pitcairn, Norfolk Island, Lord Howe Island, Rarotonga
+5: Bear Island, Sable Island, Anticosti, Wrangel Island, Kodiak, Chiloe, Tierra del Fuego, Isla Navarino, Niue, Tokelau, Nauru, Wake Island, Midway, Clipperton, Rodrigues, Amsterdam Island, Saint Paul Island, Heard Island, Macquarie Island, Campbell Island

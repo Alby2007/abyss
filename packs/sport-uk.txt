@@ -39,3 +39,47 @@ fact: Fry's Turkish Delight has been around since 1914.
 2: Twirl, Flake, Crunchie, Wispa, Double Decker, Boost, Picnic, Milky Way, Yorkie, Lion bar / Lion, Starbar, Fudge / Cadbury Fudge, Buttons / Chocolate Buttons, Smarties, M&Ms, Minstrels, Revels, Rolo, Freddo, Caramac, Topic, Time Out, Drifter, Ferrero Rocher, Kinder Bueno, Kinder, Milkybar, Skittles, Haribo, Starburst, Fruit Pastilles, Wine Gums, Jelly Babies, Percy Pig, Fruitella, Chewits
 3: Fry's Turkish Delight / Turkish Delight, Fry's Chocolate Cream, Moro, Curly Wurly, Chomp, Dime, Daim, Marathon, Wildlife, Penguin, Breakaway, Club, Blue Riband, Tunnock's Teacake / Teacake, Tunnock's Caramel Wafer, Toffee Crisp, Munchies, Celebrations, Quality Street, Roses, Heroes, Terry's Chocolate Orange / Chocolate Orange, After Eight, Mint Aero, Fox's Glacier Mints, Polo / Polos, Trebor, Fruit Salad, Black Jacks, Refreshers, Love Hearts, Parma Violets, Flying Saucers, Drumstick, Fizzers, Swizzels, Highland Toffee, Sherbet Fountain, Dib Dab, Jelly Tots, Tangfastics, Toffo, Murray Mints, Werther's Original, Rhubarb and Custard, Kola Cubes, Cola Bottles
 4: Spira, Fuse, Taz bar / Taz, Wham, Bitsa Wispa, Snowbites, Flyte, Cabana, Banjo, Texan, Secret, Nutty, Galaxy Ripple / Ripple, Galaxy Counters, Aztec, Mint Crisp, Fry's Peppermint Cream, Five Centres, Cadbury Tiffin, Animal Bar, Magic Stars, Mars Delight, Dream, Marble, Old Jamaica, Caramel Nibbles, Matchmakers, Tooty Frooties, Opal Fruits, Spangles, Treets, Pacers, Toffee Pops, Rowntree's Randoms, Midget Gems, Pear Drops, Rosy Apples, Pineapple Chunks, Bonbons, Edinburgh Rock, Soor Plooms, Sherbet Lemons, Aniseed Balls, Gobstopper, Space Dust, Irn Bru bars, Barratt Shrimps
+
+## uk-cities | Name a city in the UK
+gem: St Davids
+fact: St Davids in Pembrokeshire is the smallest city in the UK, with a population of under 2,000.
+1: London, Manchester, Birmingham, Liverpool, Edinburgh, Glasgow, Leeds, Bristol, Cardiff, Belfast
+2: Newcastle / Newcastle upon Tyne, Sheffield, Nottingham, Leicester, Southampton, Brighton / Brighton and Hove, Oxford, Cambridge, Bath, York, Aberdeen, Dundee, Swansea, Plymouth, Portsmouth, Norwich, Exeter, Canterbury, Coventry, Derby, Stoke-on-Trent / Stoke, Hull / Kingston upon Hull, Sunderland, Bradford, Wolverhampton, Inverness
+3: Salisbury, Winchester, Lincoln, Durham, Carlisle, Chester, Lancaster, Preston, Gloucester, Worcester, Hereford, Peterborough, Ely, Wells, Truro, Lichfield, Ripon, Wakefield, Salford, Chichester, St Albans, Perth, Stirling, Newport, Wrexham, Milton Keynes, Southend-on-Sea / Southend, Doncaster, Derry / Londonderry, Armagh, Chelmsford, Colchester
+4: Lisburn, Newry, Dunfermline, Bangor, St Asaph, Westminster
+5: St Davids
+
+## prime-ministers | Name a UK Prime Minister (past or present)
+gem: Spencer Perceval
+fact: Spencer Perceval is the only British prime minister to have been assassinated, shot in the lobby of the House of Commons in 1812.
+1: Boris Johnson / Johnson, Margaret Thatcher / Thatcher, Tony Blair / Blair, Winston Churchill / Churchill, David Cameron / Cameron, Theresa May, Rishi Sunak / Sunak, Keir Starmer / Starmer, Gordon Brown, John Major
+2: Liz Truss / Truss, Clement Attlee / Attlee, Harold Wilson, Edward Heath / Ted Heath / Heath, James Callaghan / Callaghan, Neville Chamberlain / Chamberlain, Anthony Eden / Eden, Harold Macmillan / Macmillan, Alec Douglas-Home / Douglas-Home, Stanley Baldwin / Baldwin, Ramsay MacDonald, David Lloyd George / Lloyd George, Herbert Asquith / Asquith, Robert Walpole / Walpole, William Pitt, Benjamin Disraeli / Disraeli, William Gladstone / Gladstone, Duke of Wellington / Wellington, Robert Peel, Lord Palmerston / Palmerston
+3: Andrew Bonar Law / Bonar Law, Lord Salisbury, Lord Liverpool, Lord Melbourne / Melbourne, Earl Grey, Lord North, Lord Rosebery / Rosebery, Arthur Balfour / Balfour, Henry Campbell-Bannerman / Campbell-Bannerman, John Russell / Lord John Russell, Earl of Derby / Lord Derby, George Canning / Canning, Lord Aberdeen / Earl of Aberdeen, William Pitt the Younger, William Pitt the Elder / Lord Chatham, Henry Addington / Addington, Duke of Portland, Lord Rockingham, Henry Pelham / Pelham
+4: Spencer Perceval / Perceval, George Grenville / Grenville, William Grenville, Lord Goderich / Goderich, Earl of Wilmington / Wilmington, Duke of Devonshire, Duke of Grafton / Grafton, Lord Bute / Bute, Lord Shelburne / Shelburne, Duke of Newcastle
+5: Henry Pelham-Clinton, Spencer Compton
+
+## uk-shops | Name a UK supermarket or high-street shop (past or present)
+gem: Woolworths
+fact: Woolworths closed its last UK high-street stores in 2008 and early 2009, after nearly a century on British high streets.
+1: Tesco, Sainsburys, Asda, Morrisons, Aldi, Lidl, Boots, Argos, Primark, Next, Marks and Spencer / M&S, Waitrose, Co-op / Co-operative, Iceland, Greggs, WHSmith / WH Smith, Currys, Superdrug, Poundland
+2: Waterstones, HMV, Wilko / Wilkinson, B&Q, Homebase, IKEA, John Lewis, Debenhams, House of Fraser, Topshop, River Island, New Look, H&M, Zara, TK Maxx, Sports Direct, JD Sports, Halfords, Holland and Barrett, Specsavers, Card Factory, The Range, B&M, Home Bargains, Ocado, Pets at Home, Game, Dunelm, Costa, Pret / Pret a Manger, Starbucks, Wetherspoons, Nandos, Poundstretcher
+3: Savers, Peacocks, Matalan, Burton, Dorothy Perkins, Miss Selfridge, Wallis, Evans, Monsoon, Accessorize, Oasis, Warehouse, Karen Millen, Fat Face, White Stuff, Joules, Seasalt, Hobbs, Jigsaw, Whistles, Reiss, Ted Baker, Moss Bros, Laura Ashley, Cath Kidston, Paperchase, Ryman, The Entertainer, Toys R Us, Hamleys, Early Learning Centre, Mothercare, Claires, Lush, The Body Shop, Space NK, Poundworld, Londis, Spar, Costcutter, Nisa, Booths, Budgens, Farmfoods, Heron, Robert Dyas, Maplin, Comet, PC World, Dixons, Tandy, Selfridges, Harvey Nichols, Liberty, Fortnum and Mason, Fenwick, Marks and Spencer Simply Food
+4: Woolworths / Woolies, BHS / British Home Stores, C&A, Our Price, Virgin Megastore, Zavvi, Blockbuster, Safeway, Somerfield, Kwik Save, Fine Fare, Gateway, Presto, Netto, Wickes, MFI, Texas Homecare, Great Mills, Courts, Allders, Littlewoods, Index, Rumbelows, Radio Rentals, Athena, Past Times, Jessops, Habitat, Beales
+5: Fads, Dolcis, Freeman Hardy Willis, Saxone, Tie Rack, Sock Shop, Etam, Chelsea Girl, Hornes, Woolco
+
+## f1-teams | Name a Formula 1 team (current or past)
+gem: Tyrrell
+fact: Tyrrell's six-wheeled P34 won the 1976 Swedish Grand Prix, the only six-wheeled car ever to win an F1 race.
+1: Ferrari, Mercedes, Red Bull / Red Bull Racing, McLaren, Williams
+2: Alpine, Aston Martin, Haas, Alfa Romeo, AlphaTauri, Toro Rosso, Renault, Lotus, Brabham, Benetton, Jordan, Sauber, Racing Point, Force India, Ligier, Honda, BMW Sauber, Toyota
+3: Stewart, Minardi, Arrows, Jaguar, Super Aguri, Caterham, Marussia, Manor, HRT / Hispania, Virgin Racing / Virgin, Spyker, Midland, Prost, Lola, Footwork, Simtek, Pacific, Forti, March, Surtees, Hesketh, Shadow, Wolf, Fittipaldi, Ensign, Penske, Maserati, Vanwall, BRM, Cooper, Matra, Lancia, Porsche, Talbot, Gordini, Connaught, Zakspeed, Osella, Dallara, Coloni, Eurobrun, Onyx, Rial, AGS, Larrousse, Leyton House, Life, Andrea Moda, Brawn / Brawn GP, Lotus Racing, Kick Sauber / Audi
+4: Tyrrell, Toleman, Spirit, ATS, Fondmetal, Modena, De Tomaso, Eagle, Scarab, Kurtis Kraft, Parnelli, Theodore, Merzario, Hill, Token, Amon, Boro, Kojima, Maki, Ligier Gitanes, Ecurie Ecosse, Cadillac
+5: HWM, Emeryson, Aston Butterworth, Kuzma, Lesovsky, Epperly, Stebro, Pacific Racing, Lec
+
+## county-cricket | Name an English or Welsh county cricket team (first-class or minor counties)
+gem: Durham
+fact: Durham was admitted to the County Championship only in 1992, making it the youngest of the 18 first-class counties.
+1: Yorkshire, Lancashire, Surrey, Essex, Kent, Middlesex, Sussex
+2: Warwickshire, Hampshire, Somerset, Nottinghamshire, Derbyshire, Gloucestershire, Glamorgan, Leicestershire, Northamptonshire, Worcestershire, Durham
+3: Devon, Cornwall, Norfolk, Suffolk, Cheshire, Staffordshire, Shropshire, Wiltshire, Dorset, Berkshire, Buckinghamshire, Bedfordshire, Hertfordshire, Cambridgeshire, Lincolnshire, Oxfordshire, Herefordshire, Cumberland, Northumberland, Cumbria
+4: Wales Minor Counties / Wales, Isle of Wight, Channel Islands
