@@ -98,8 +98,10 @@ async function viewHome() {
   const name = myName();
   app.innerHTML = `
     <section class="hero">
+      <span class="eyebrow">rare-answer trivia · for you and your mates</span>
       <h1>The obvious answer<br>is <em>shallow.</em></h1>
-      <p>Seven prompts. Twenty-five seconds each. Name something nobody else would think of and sink deeper.</p>
+      <p>Everyone says Paris. Name the one nobody else would think of and sink deeper.</p>
+      <div class="hook-stats"><span><b>7</b> prompts</span><span><b>25s</b> each</span><span><b>1</b> go a day</span></div>
     </section>
     <div class="stack">
       <div class="modes">
@@ -184,7 +186,8 @@ async function viewHome() {
   META ||= await api('/api/meta');
   $('#dailyTag').textContent = `daily dive · ${META.today}`;
   $('#pack').innerHTML += META.packs.map(p => `<option value="${esc(p.id)}">${esc(p.name)} (${p.count})</option>`).join('');
-  $('#legend').innerHTML = META.tiers.map(t => `<span class="tier-${t.id}">${t.name} ${t.points}</span>`).join('');
+  $('#legend').innerHTML = `<div class="legend-title">the deeper the answer, the more it's worth</div><div class="legend-row">`
+    + META.tiers.map(t => `<span class="tier-${t.id}"><i></i><b>${t.name}</b><em>${t.points}</em></span>`).join('') + `</div>`;
   if (name) {
     const lb = await api('/api/leaderboard');
     const mine = lb.daily.find(r => r.me);
