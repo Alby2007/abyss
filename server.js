@@ -290,6 +290,15 @@ const api = {
 };
 
 // ---------- http ----------
+// Behind a proxy (Tailscale Serve/Funnel, Cloudflare Tunnel) the Host header can be the local
+// address, so also accept X-Forwarded-Host and PUBLIC_URL when checking a POST's Origin.
+function sameSite(req) {
+  let origin; try { origin = new URL(req.headers.origin).host; } catch { return false; }
+  const ok = [req.headers.host, ...String(req.headers['x-forwarded-host'] || '').split(',').map(s => s.trim())];
+  if (process.env.PUBLIC_URL) try { ok.push(new URL(process.env.PUBLIC_URL).host); } catch {}
+  return ok.filter(Boolean).includes(origin);
+}
+
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.json': 'application/json', '.webmanifest': 'application/manifest+json' };
 
 const server = http.createServer(async (req, res) => {
@@ -297,7 +306,7 @@ const server = http.createServer(async (req, res) => {
   const handler = api[`${req.method} ${url.pathname}`];
   if (handler) {
     // cookies are SameSite=Lax; also refuse cross-site POSTs outright
-    if (req.method === 'POST' && req.headers.origin && new URL(req.headers.origin).host !== req.headers.host) {
+    if (req.method === 'POST' && req.headers.origin && !sameSite(req)) {
       res.writeHead(403, { 'content-type': 'application/json' }); return res.end('{"error":"Bad origin"}');
     }
     let body = {};
