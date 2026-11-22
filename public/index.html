@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#04121c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="abyss. — the obvious answer is shallow">
+  <meta property="og:description" content="A rare-answer trivia dive for you and your mates. Name something nobody else would think of and sink deeper.">
+  <meta property="og:image" content="https://alberts.tail1084e1.ts.net/og.png">
+  <meta property="og:url" content="https://alberts.tail1084e1.ts.net/">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Abyss</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <canvas id="ocean" aria-hidden="true"></canvas>
+
+  <header class="top">
+    <a href="/" class="brand" data-nav="home">abyss</a>
+    <div class="top-right"><div id="account" class="acct"></div>
+    <button class="icon-btn" id="muteBtn" title="Sound on/off" aria-label="Toggle sound">♪</button></div>
+  </header>
+
+  <main id="app"></main>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

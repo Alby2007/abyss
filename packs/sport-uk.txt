@@ -1,0 +1,41 @@
+# pack: Sport & UK
+
+## premier-league | Name a club that has played in the Premier League (since 1992)
+gem: Swindon Town
+fact: Swindon's only Premier League season, 1993-94, ended with 100 goals conceded.
+1: Manchester United / Man United / Man Utd, Liverpool, Arsenal, Chelsea, Manchester City / Man City, Tottenham Hotspur / Tottenham / Spurs
+2: Everton, Newcastle United / Newcastle, West Ham United / West Ham, Aston Villa / Villa, Leicester City / Leicester, Leeds United / Leeds, Southampton, Wolverhampton Wanderers / Wolves, Crystal Palace / Palace, Brighton and Hove Albion / Brighton, Fulham, Brentford, Nottingham Forest / Forest, Bournemouth / AFC Bournemouth
+3: Burnley, Sunderland, Middlesbrough / Boro, Blackburn Rovers / Blackburn, Bolton Wanderers / Bolton, Norwich City / Norwich, Watford, Stoke City / Stoke, West Bromwich Albion / West Brom / WBA, Sheffield United / Sheff Utd, Sheffield Wednesday / Sheff Wed, Wigan Athletic / Wigan, Hull City / Hull, Swansea City / Swansea, Cardiff City / Cardiff, Queens Park Rangers / QPR, Portsmouth / Pompey, Birmingham City / Birmingham, Ipswich Town / Ipswich, Coventry City / Coventry, Derby County / Derby, Charlton Athletic / Charlton, Luton Town / Luton, Huddersfield Town / Huddersfield, Reading, Wimbledon
+4: Oldham Athletic / Oldham, Swindon Town / Swindon, Barnsley, Bradford City / Bradford, Blackpool
+
+## olympic-sports | Name a sport at the Summer Olympics (past or present)
+gem: Tug of war
+fact: Tug of war was an Olympic sport from 1900 to 1920.
+1: Athletics / Track and field, Swimming, Gymnastics, Football / Soccer, Basketball, Tennis, Boxing, Cycling, Rowing
+2: Diving, Hockey / Field hockey, Volleyball, Beach volleyball, Fencing, Judo, Taekwondo, Wrestling, Weightlifting, Sailing, Archery, Shooting, Equestrian / Show jumping / Dressage, Triathlon, Golf, Rugby sevens / Rugby, Handball, Table tennis / Ping pong, Badminton, Canoeing / Kayaking / Canoe, Water polo, Marathon
+3: Skateboarding, Surfing, Sport climbing / Climbing, Breaking / Breakdancing, BMX, Mountain biking, Modern pentathlon, Synchronised swimming / Artistic swimming, Trampoline, Rhythmic gymnastics, Karate, Baseball, Softball, Heptathlon, Decathlon, Pole vault, Javelin, Discus, Hammer throw, Shot put, Long jump, High jump, Triple jump, Hurdles, Steeplechase, Race walking, Marathon swimming, Keirin, Omnium, Kitesurfing, Windsurfing, Greco-Roman wrestling
+4: Tug of war, Cricket, Polo, Lacrosse, Croquet, Rackets, Jeu de paume / Real tennis, Pelota / Basque pelota, Motorboating / Powerboating, Rope climbing, Art competitions, Live pigeon shooting, Roque
+
+## english-counties | Name a county of England (ceremonial or historic)
+gem: Rutland
+fact: Rutland is England's smallest historic county.
+1: Essex, Kent, Yorkshire, Devon, Cornwall, Surrey, Greater London / London
+2: Sussex / East Sussex / West Sussex, Norfolk, Suffolk, Hampshire, Lancashire, Cheshire, Cumbria, Somerset, Dorset, Oxfordshire, Berkshire, Hertfordshire, Cambridgeshire, Lincolnshire, Nottinghamshire, Derbyshire, Leicestershire, Staffordshire, Warwickshire, Northumberland, Durham / County Durham, Gloucestershire, Wiltshire, Greater Manchester, Merseyside, West Midlands, Buckinghamshire, Bedfordshire
+3: North Yorkshire, South Yorkshire, West Yorkshire, East Riding of Yorkshire, Tyne and Wear, Shropshire, Herefordshire, Worcestershire, Northamptonshire, Isle of Wight, Bristol, Middlesex
+4: Rutland, Huntingdonshire, Westmorland, Cumberland, City of London
+
+## tube-lines | Name a London Underground line, or another London rail line
+gem: Waterloo & City
+fact: The Waterloo & City line has just two stations.
+1: Central, Northern, Victoria, Jubilee, Piccadilly, District, Circle
+2: Bakerloo, Metropolitan, Hammersmith & City / Hammersmith and City, Elizabeth / Elizabeth line / Crossrail, DLR / Docklands Light Railway, Overground / London Overground
+3: Waterloo & City / Waterloo and City, Tram / Tramlink / London Trams, Thameslink, IFS Cloud Cable Car / Cable Car / Emirates Air Line
+4: Lioness, Mildmay, Windrush, Weaver, Suffragette, Liberty
+
+## uk-chocolate | Name a chocolate bar or sweet sold in the UK
+gem: Fry's Turkish Delight
+fact: Fry's Turkish Delight has been around since 1914.
+1: Mars / Mars bar, Snickers, Twix, KitKat / Kit Kat, Dairy Milk, Galaxy, Maltesers, Bounty, Aero, Toblerone
+2: Twirl, Flake, Crunchie, Wispa, Double Decker, Boost, Picnic, Milky Way, Yorkie, Lion bar / Lion, Starbar, Fudge / Cadbury Fudge, Buttons / Chocolate Buttons, Smarties, M&Ms, Minstrels, Revels, Rolo, Freddo, Caramac, Topic, Time Out, Drifter, Ferrero Rocher, Kinder Bueno, Kinder, Milkybar, Skittles, Haribo, Starburst, Fruit Pastilles, Wine Gums, Jelly Babies, Percy Pig, Fruitella, Chewits
+3: Fry's Turkish Delight / Turkish Delight, Fry's Chocolate Cream, Moro, Curly Wurly, Chomp, Dime, Daim, Marathon, Wildlife, Penguin, Breakaway, Club, Blue Riband, Tunnock's Teacake / Teacake, Tunnock's Caramel Wafer, Toffee Crisp, Munchies, Celebrations, Quality Street, Roses, Heroes, Terry's Chocolate Orange / Chocolate Orange, After Eight, Mint Aero, Fox's Glacier Mints, Polo / Polos, Trebor, Fruit Salad, Black Jacks, Refreshers, Love Hearts, Parma Violets, Flying Saucers, Drumstick, Fizzers, Swizzels, Highland Toffee, Sherbet Fountain, Dib Dab, Jelly Tots, Tangfastics, Toffo, Murray Mints, Werther's Original, Rhubarb and Custard, Kola Cubes, Cola Bottles
+4: Spira, Fuse, Taz bar / Taz, Wham, Bitsa Wispa, Snowbites, Flyte, Cabana, Banjo, Texan, Secret, Nutty, Galaxy Ripple / Ripple, Galaxy Counters, Aztec, Mint Crisp, Fry's Peppermint Cream, Five Centres, Cadbury Tiffin, Animal Bar, Magic Stars, Mars Delight, Dream, Marble, Old Jamaica, Caramel Nibbles, Matchmakers, Tooty Frooties, Opal Fruits, Spangles, Treets, Pacers, Toffee Pops, Rowntree's Randoms, Midget Gems, Pear Drops, Rosy Apples, Pineapple Chunks, Bonbons, Edinburgh Rock, Soor Plooms, Sherbet Lemons, Aniseed Balls, Gobstopper, Space Dust, Irn Bru bars, Barratt Shrimps
