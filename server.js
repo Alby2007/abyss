@@ -101,6 +101,16 @@ function needPlayer(ctx) {
   return ctx.player;
 }
 
+// crews need a real account, not a one-off guest name
+function needAccount(ctx) {
+  const p = needPlayer(ctx);
+  if (p.is_guest) { const e = new Error('Create an account to use crews'); e.status = 403; throw e; }
+  return p;
+}
+const MAX_OWNED_CREWS = 5, MAX_CREW_MEMBERS = 50;
+const CODE_LETTERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ'; // no I or O
+const crewCode = () => Array.from({ length: 5 }, () => CODE_LETTERS[crypto.randomInt(CODE_LETTERS.length)]).join('');
+
 // ---------- API ----------
 const api = {
   'GET /api/meta': () => ({
@@ -259,6 +269,57 @@ const api = {
       daily: daily.map(r => ({ name: r.name, guest: r.guest, me: r.playerId === ctx.player?.id, score: r.score, picks: r.picks.map(p => p.tier || 0) })),
       allTime,
     };
+  },
+
+  // ----- crews: private leaderboards, accounts only -----
+  'GET /api/crews': async (_b, _q, ctx) => {
+    const p = needAccount(ctx);
+    const list = await db.crewsOf(p.id);
+    return { crews: await Promise.all(list.map(async c => ({ code: c.code, name: c.name, mine: c.owner_id === p.id, members: await db.crewMemberCount(c.id) }))) };
+  },
+
+  'POST /api/crews': async (body, _q, ctx) => {
+    const p = needAccount(ctx);
+    const name = cleanName(body.name);
+    if (!name) return { error: 'Give your crew a name' };
+    if ((await db.crewsOf(p.id)).filter(c => c.owner_id === p.id).length >= MAX_OWNED_CREWS) return { error: `You can run up to ${MAX_OWNED_CREWS} crews` };
+    for (let i = 0; i < 8; i++) {
+      try { const c = await db.createCrew({ code: crewCode(), name, ownerId: p.id }); return { crew: { code: c.code, name: c.name } }; }
+      catch (e) { if (e.code !== '23505') throw e; }
+    }
+    return { error: 'Couldn’t make a code, try again' };
+  },
+
+  'POST /api/crews/join': async (body, _q, ctx) => {
+    const p = needAccount(ctx);
+    const c = await db.crewByCode(String(body.code || '').trim().toUpperCase());
+    if (!c) return { error: 'No crew with that code' };
+    if (await db.crewMemberCount(c.id) >= MAX_CREW_MEMBERS) return { error: 'That crew is full' };
+    await db.addCrewMember(c.id, p.id);
+    return { crew: { code: c.code, name: c.name } };
+  },
+
+  'GET /api/crews/board': async (_b, q, ctx) => {
+    const p = needAccount(ctx);
+    const c = await db.crewByCode(String(q.get('code') || '').trim().toUpperCase());
+    if (!c) return { error: 'No crew with that code' };
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(q.get('date') || '') ? q.get('date') : packs.todayKey();
+    const b = await db.crewBoards(c.id, date);
+    if (!b.members.some(m => m.id === p.id)) return { error: 'You’re not in this crew', notMember: true, name: c.name };
+    return {
+      date, crew: { code: c.code, name: c.name, mine: c.owner_id === p.id, members: b.members.length },
+      daily: b.daily.map(r => ({ name: r.name, guest: r.guest, me: r.playerId === p.id, score: r.score, picks: r.picks.map(x => x.tier || 0) })),
+      allTime: b.allTime.map(r => ({ name: r.name, guest: r.guest, me: r.playerId === p.id, dives: r.dives, best: r.best, total: r.total })),
+    };
+  },
+
+  'POST /api/crews/leave': async (body, _q, ctx) => {
+    const p = needAccount(ctx);
+    const c = await db.crewByCode(String(body.code || '').trim().toUpperCase());
+    if (!c) return { error: 'No crew with that code' };
+    if (c.owner_id === p.id) await db.deleteCrew(c.id); // the owner leaving closes the crew
+    else await db.removeCrewMember(c.id, p.id);
+    return { ok: true, closed: c.owner_id === p.id };
   },
 
   // ----- admin -----

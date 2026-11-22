@@ -81,6 +81,7 @@ function route() {
   const p = location.pathname;
   let m;
   if (p === '/board') return viewBoard();
+  if ((m = p.match(/^\/crew\/([A-Za-z]{5})$/))) return viewCrew(m[1].toUpperCase());
   if ((m = p.match(/^\/room\/([A-Za-z]{4}|new)$/))) return viewRoom(m[1].toUpperCase());
   if (p === '/admin') return viewAdmin();
   return viewHome();
@@ -89,6 +90,7 @@ function route() {
 const account = mountAccount({ api, esc, toast });
 function myName() { return account.me?.name || ''; }
 const needPlayer = (reason) => account.require(reason);
+const needAccount = (reason) => account.requireAccount(reason);
 
 // ---------- home ----------
 async function viewHome() {
@@ -121,8 +123,22 @@ async function viewHome() {
             <button class="btn" id="join">Join</button>
           </div>
         </div>
+        <div class="mode" id="crewCard" style="cursor:default">
+          <span class="tag">private boards</span>
+          <h3>Crews</h3>
+          <p>Start a private leaderboard and invite your friends with a code. Accounts only.</p>
+          <div class="row" style="margin-top:8px">
+            <input type="text" id="crewName" maxlength="20" placeholder="Crew name" autocomplete="off" autocorrect="off" style="flex:1;min-width:0">
+            <button class="btn primary" id="crewCreate">Create crew</button>
+          </div>
+          <div class="row">
+            <input type="text" id="crewCode" maxlength="5" placeholder="CODE" autocomplete="off" autocorrect="off" autocapitalize="characters" style="width:110px;text-transform:uppercase;font-family:var(--mono)">
+            <button class="btn" id="crewJoin">Join crew</button>
+          </div>
+          <div class="crew-list" id="crewList"></div>
+        </div>
         <button class="mode" data-nav="/board">
-          <span class="tag">friends</span>
+          <span class="tag">everyone</span>
           <h3>Leaderboard</h3>
           <p>Today's depths and the all-time table.</p>
         </button>
@@ -144,6 +160,26 @@ async function viewHome() {
   const join = async () => { const c = $('#code').value.trim().toUpperCase(); if (c.length !== 4) return toast('Room codes are 4 letters', 'bad'); if (await needPlayer()) go('/room/' + c); };
   $('#join').onclick = join;
   $('#code').onkeydown = (e) => { if (e.key === 'Enter') join(); };
+
+  const drawCrews = async () => {
+    if (!account.me || account.me.guest) { $('#crewList').innerHTML = ''; return; }
+    const r = await api('/api/crews').catch(() => ({}));
+    $('#crewList').innerHTML = (r.crews || []).map(c => `<button class="crew-chip" data-nav="/crew/${c.code}"><b>${esc(c.name)}</b><span class="mono muted">${c.code} · ${c.members}</span></button>`).join('');
+  };
+  $('#crewCreate').onclick = async () => {
+    if (!(await needAccount('Log in or create an account to start a crew.'))) return;
+    const r = await api('/api/crews', { name: $('#crewName').value });
+    if (r.error) return toast(esc(r.error), 'bad');
+    go('/crew/' + r.crew.code);
+  };
+  const joinCrew = async () => {
+    const c = $('#crewCode').value.trim().toUpperCase();
+    if (c.length !== 5) return toast('Crew codes are 5 letters', 'bad');
+    if (await needAccount('Log in or create an account to join a crew.')) go('/crew/' + c);
+  };
+  $('#crewJoin').onclick = joinCrew;
+  $('#crewCode').onkeydown = (e) => { if (e.key === 'Enter') joinCrew(); };
+  drawCrews();
 
   META ||= await api('/api/meta');
   $('#dailyTag').textContent = `daily dive · ${META.today}`;
@@ -185,6 +221,71 @@ async function viewBoard() {
         </div>
         <div class="row"><button class="btn" data-nav="home">Home</button></div>
       </div>`;
+    app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; draw(); });
+    const shift = (d) => { const t = new Date(date + 'T12:00:00Z'); t.setUTCDate(t.getUTCDate() + d); date = t.toISOString().slice(0, 10); draw(); };
+    $('#prev') && ($('#prev').onclick = () => shift(-1));
+    $('#nextDay') && ($('#nextDay').onclick = () => shift(1));
+  }
+  draw();
+}
+
+// ---------- crews: private leaderboards ----------
+async function viewCrew(code) {
+  ambient(260);
+  META ||= await api('/api/meta');
+  if (!(await needAccount('Log in or create an account to open this crew.'))) {
+    app.innerHTML = `<div class="panel stack"><h2>Crew ${esc(code)}</h2><p class="muted">Crews are for accounts only.</p><div class="row"><button class="btn primary" id="again">Log in</button><button class="btn" data-nav="home">Home</button></div></div>`;
+    $('#again').onclick = () => route();
+    return;
+  }
+  let date = META.today, tab = 'daily';
+  async function draw() {
+    const lb = await api(`/api/crews/board?code=${code}&date=${date}`);
+    if (lb.notMember) {
+      app.innerHTML = `<div class="panel stack"><h2>${esc(lb.name)}</h2><p class="muted">You’ve been invited to this private crew.</p><div class="row"><button class="btn primary" id="joinIt">Join crew</button><button class="btn" data-nav="home">Not now</button></div></div>`;
+      $('#joinIt').onclick = async () => {
+        const r = await api('/api/crews/join', { code });
+        if (r.error) return toast(esc(r.error), 'bad');
+        toast(`Joined ${esc(r.crew.name)}`, 'good'); draw();
+      };
+      return;
+    }
+    if (lb.error) {
+      app.innerHTML = `<div class="panel stack"><h2>Crew ${esc(code)}</h2><p class="muted">${esc(lb.error)}</p><button class="btn" data-nav="home">Home</button></div>`;
+      return;
+    }
+    const tag = (r) => r.guest ? ' <span class="muted small">guest</span>' : '';
+    const rows = tab === 'daily'
+      ? lb.daily.map((r, i) => `<tr class="${r.me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}${tag(r)}</td><td>${r.picks.map(t => EMOJI[t]).join('')}</td><td class="num">${(r.score * 10).toLocaleString()} m</td></tr>`).join('')
+      : lb.allTime.map((r, i) => `<tr class="${r.me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}${tag(r)}</td><td class="num">${r.dives}</td><td class="num">${(r.best * 10).toLocaleString()} m</td><td class="num">${(r.total * 10).toLocaleString()} m</td></tr>`).join('');
+    const link = `${location.origin}/crew/${lb.crew.code}`;
+    app.innerHTML = `
+      <div class="stack">
+        <div class="row spread">
+          <div><span class="tag crew-tag">private crew · ${lb.crew.members} diver${lb.crew.members === 1 ? '' : 's'}</span><h2 style="font-size:34px">${esc(lb.crew.name)}</h2></div>
+          <div class="tabs"><button data-tab="daily" class="${tab === 'daily' ? 'on' : ''}">Daily</button><button data-tab="all" class="${tab === 'all' ? 'on' : ''}">All time</button></div>
+        </div>
+        <div class="panel crew-invite">
+          <span class="muted small">Invite code</span>
+          <div class="crew-code">${esc(lb.crew.code)}</div>
+          <div class="row"><button class="btn small" id="copyCode">Copy code</button><button class="btn small" id="copyLink">Copy invite link</button></div>
+        </div>
+        ${tab === 'daily' ? `<div class="row"><button class="btn small" id="prev">←</button><span class="mono">${date}</span><button class="btn small" id="nextDay" ${date >= META.today ? 'disabled' : ''}>→</button></div>` : ''}
+        <div class="panel">
+          <table class="board">
+            <thead>${tab === 'daily' ? '<tr><th></th><th>Diver</th><th>Dive</th><th style="text-align:right">Depth</th></tr>' : '<tr><th></th><th>Diver</th><th style="text-align:right">Dives</th><th style="text-align:right">Best</th><th style="text-align:right">Total</th></tr>'}</thead>
+            <tbody>${rows || `<tr><td colspan="5" class="muted">Nobody in the crew has dived on this day.</td></tr>`}</tbody>
+          </table>
+        </div>
+        <div class="row"><button class="btn" data-nav="home">Home</button><button class="btn small" id="leave">${lb.crew.mine ? 'Close crew' : 'Leave crew'}</button></div>
+      </div>`;
+    const copy = async (t, msg) => { try { await navigator.clipboard.writeText(t); toast(msg, 'good'); } catch { toast(esc(t)); } };
+    $('#copyCode').onclick = () => copy(lb.crew.code, 'Code copied');
+    $('#copyLink').onclick = () => copy(link, 'Invite link copied');
+    $('#leave').onclick = async () => {
+      if (!confirm(lb.crew.mine ? 'Close this crew for everyone?' : 'Leave this crew?')) return;
+      await api('/api/crews/leave', { code }); go('/');
+    };
     app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; draw(); });
     const shift = (d) => { const t = new Date(date + 'T12:00:00Z'); t.setUTCDate(t.getUTCDate() + d); date = t.toISOString().slice(0, 10); draw(); };
     $('#prev') && ($('#prev').onclick = () => shift(-1));

@@ -118,11 +118,18 @@ export function mountAccount({ api, esc, toast }) {
     return new Promise(res => { open('guest', reason); pending = res; });
   }
 
+  // Like require, but guests don't count: resolves true only for a real account.
+  async function requireAccount(reason) {
+    if (me && !me.guest) return true;
+    await new Promise(res => { open(me ? 'register' : 'login', reason); pending = res; });
+    return !!me && !me.guest;
+  }
+
   async function init() {
     const r = await api('/api/auth/me').catch(() => ({}));
     set(r.player || null);
     return me;
   }
 
-  return { init, open, require, get me() { return me; }, onChange(f) { listeners.push(f); } };
+  return { init, open, require, requireAccount, get me() { return me; }, onChange(f) { listeners.push(f); } };
 }

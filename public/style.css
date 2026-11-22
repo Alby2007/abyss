@@ -98,6 +98,14 @@ input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgb
 .mode .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--lume); }
 .mode.big { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(232,255,107,.10), rgba(94,230,255,.05)); }
 .mode.done .tag { color: var(--muted); }
+.crew-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.crew-list:empty { display: none; }
+.crew-chip { font: inherit; color: var(--ink); background: rgba(255,255,255,.06); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; display: inline-flex; gap: 8px; align-items: baseline; }
+.crew-chip:hover { border-color: rgba(232, 255, 107, .45); }
+.crew-chip .mono { font-size: 12px; }
+.crew-tag { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--lume); }
+.crew-invite { display: grid; gap: 6px; justify-items: start; }
+.crew-code { font-family: var(--mono); font-size: 40px; letter-spacing: .3em; color: var(--lume); line-height: 1; }
 
 /* ---------- dive ---------- */
 .dive-head { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 13px; color: var(--muted); }
