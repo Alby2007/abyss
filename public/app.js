@@ -23,6 +23,16 @@ const scene = createScene(document.getElementById('ocean'));
 // Park the bathysphere somewhere pleasant for non-dive pages
 function ambient(m = 0, x = .82) { scene.setDiverX(x); scene.setTag(''); scene.clearLines(); scene.sink(m, { duration: 1400 }); }
 
+// iOS Safari doesn't shrink the layout viewport for the keyboard, so fixed
+// bottom UI (the dive dock) ends up underneath it. Track the visible gap in
+// --kb and let CSS lift bottom-anchored elements above the keys.
+const vv = window.visualViewport;
+function updKb() {
+  const kb = vv ? Math.max(0, innerHeight - vv.height - vv.offsetTop) : 0;
+  document.documentElement.style.setProperty('--kb', Math.round(kb) + 'px');
+}
+if (vv) { vv.addEventListener('resize', updKb); vv.addEventListener('scroll', updKb); updKb(); }
+
 // tiny synth so there are no audio files to ship
 const sfx = (() => {
   let ctx = null, muted = store.get('muted', false);
@@ -328,7 +338,7 @@ function viewRoom(code) {
           <div class="holder-line" id="holderLine"></div>
           <div class="live-typing" id="typing"></div>
           <form class="answer-row" id="pform" autocomplete="off">
-            <input type="text" id="pguess" maxlength="80" placeholder="Name one to pass it on" autocapitalize="off" spellcheck="false" enterkeyhint="send">
+            <input type="text" id="pguess" maxlength="80" placeholder="Name one to pass it on" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="send">
             <button class="btn primary" type="submit">Pass</button>
           </form>
           <div id="accept"></div>

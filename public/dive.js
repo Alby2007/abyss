@@ -47,7 +47,7 @@ export function mountDive(ctx) {
           <div class="dock-msg" id="msg"></div>
           <form class="dock-row" id="form" autocomplete="off">
             <div class="ring" id="ring"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="track"/><circle cx="22" cy="22" r="19" class="bar" id="ringBar"/></svg><span id="ringNum"></span></div>
-            <input type="text" id="guess" maxlength="80" placeholder="type one answer…" autocapitalize="off" spellcheck="false" enterkeyhint="go">
+            <input type="text" id="guess" maxlength="80" placeholder="type one answer…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="go">
             <button class="btn primary" id="diveBtn" type="submit">Dive</button>
           </form>
           <button class="link-btn" id="giveUp" type="button">pass</button>

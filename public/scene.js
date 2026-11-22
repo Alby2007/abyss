@@ -49,6 +49,7 @@ const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 export function createScene(canvas) {
   const ctx = canvas.getContext('2d');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile = matchMedia('(pointer: coarse)').matches || innerWidth < 768;
   let W = 0, H = 0, dpr = 1, ppm = 1;
   let cam = 0;                 // metres at the "focus" line
   const diver = { m: 0, x: .5, xTarget: .5, tag: '', tagColor: '#e8ff6b', visible: true };
@@ -57,14 +58,18 @@ export function createScene(canvas) {
   let snow = [];
 
   function resize() {
-    dpr = Math.min(2, window.devicePixelRatio || 1);
+    // capped dpr: full-res canvas is the biggest mobile GPU cost
+    dpr = Math.min(mobile ? 1.5 : 2, window.devicePixelRatio || 1);
     W = innerWidth; H = innerHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
     ppm = H / 650;
-    snow = Array.from({ length: Math.round(W / 8) }, () => ({ x: Math.random() * W, m: Math.random() * (H / ppm), r: Math.random() * 1.5 + .3, d: Math.random() * 6.28 }));
+    snow = Array.from({ length: Math.round(W / (mobile ? 12 : 8)) }, () => ({ x: Math.random() * W, m: Math.random() * (H / ppm), r: Math.random() * 1.5 + .3, d: Math.random() * 6.28 }));
   }
-  addEventListener('resize', resize); resize();
+  // the on-screen keyboard fires resize bursts on mobile; don't thrash the canvas per keypress
+  let resizeT = 0;
+  addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(resize, 140); });
+  resize();
 
   const focusY = () => H * 0.36;
   const y = m => focusY() + (m - cam) * ppm;
@@ -98,23 +103,32 @@ export function createScene(canvas) {
     ctx.fillStyle = '#eaf7d0'; ctx.beginPath(); ctx.arc(mx, my, 16, 0, 6.29); ctx.fill();
   }
 
+  // the water gradient only depends on the visible depth band, so rebuild it
+  // only when the camera has actually moved — allocating it every frame is the
+  // biggest draw cost on weak GPUs
+  let wg = { m0: NaN, top: NaN, g: null };
   function drawWater(top) {
     const m0 = Math.max(0, cam - focusY() / ppm), m1 = cam + (H - focusY()) / ppm;
-    const g = ctx.createLinearGradient(0, Math.max(0, top), 0, H);
-    const span = m1 - m0 || 1;
-    g.addColorStop(0, rgb(waterAt(m0)));
-    for (const [m, c] of WATER) if (m > m0 && m < m1) g.addColorStop((m - m0) / span, rgb(c));
-    g.addColorStop(1, rgb(waterAt(m1)));
-    ctx.fillStyle = g; ctx.fillRect(0, Math.max(0, top), W, H);
+    const t = Math.max(0, top);
+    if (!wg.g || Math.abs(wg.m0 - m0) > .5 || wg.top !== t) {
+      const g = ctx.createLinearGradient(0, t, 0, H);
+      const span = m1 - m0 || 1;
+      g.addColorStop(0, rgb(waterAt(m0)));
+      for (const [m, c] of WATER) if (m > m0 && m < m1) g.addColorStop((m - m0) / span, rgb(c));
+      g.addColorStop(1, rgb(waterAt(m1)));
+      wg = { m0, top: t, g };
+    }
+    ctx.fillStyle = wg.g; ctx.fillRect(0, t, W, H);
   }
 
   function drawSurface(top, t) {
     if (top < -20 || top > H + 20) return;
     // light rays
+    const rays = mobile ? 4 : 6;
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
-    for (let i = 0; i < 6; i++) {
-      const x = (W / 6) * i + Math.sin(t / 2400 + i) * 30;
+    for (let i = 0; i < rays; i++) {
+      const x = (W / rays) * i + Math.sin(t / 2400 + i) * 30;
       const g = ctx.createLinearGradient(0, top, 0, top + H * .7);
       g.addColorStop(0, 'rgba(180,240,255,.10)'); g.addColorStop(1, 'rgba(180,240,255,0)');
       ctx.fillStyle = g;
