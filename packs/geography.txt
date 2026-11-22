@@ -1,0 +1,69 @@
+# pack: Geography
+
+## countries | Name a country
+hint: Any UN member, plus Taiwan, Kosovo, Palestine and Vatican City
+gem: Tuvalu
+fact: Tuvalu makes a big share of its income from licensing its .tv web domain.
+1: United States / USA / US / America / United States of America, United Kingdom / UK / Britain / Great Britain, France, Germany, China, Japan, Canada, Australia, Italy, Spain, Brazil, Russia, India, Mexico
+2: Ireland / Eire, Netherlands / Holland, Belgium, Switzerland, Sweden, Norway, Denmark, Finland, Portugal, Greece, Poland, Austria, Egypt, South Africa, Argentina, New Zealand, South Korea / Korea, North Korea, Turkey / Turkiye, Iceland, Nigeria, Kenya, Thailand, Vietnam, Pakistan, Israel, Iran, Iraq, Saudi Arabia, Afghanistan, Cuba, Jamaica, Chile, Peru, Colombia, Ukraine, Indonesia, Philippines, Morocco, Ethiopia
+3: Czech Republic / Czechia, Hungary, Romania, Bulgaria, Croatia, Serbia, Slovakia, Slovenia, Estonia, Latvia, Lithuania, Belarus, Luxembourg, Monaco, Malta, Cyprus, Albania, Bosnia and Herzegovina / Bosnia, Montenegro, North Macedonia / Macedonia, Scotland / Wales / England / Northern Ireland, Venezuela, Ecuador, Bolivia, Paraguay, Uruguay, Costa Rica, Panama, Honduras, Guatemala, El Salvador, Nicaragua, Dominican Republic, Haiti, Bahamas, Barbados, Trinidad and Tobago, Ghana, Algeria, Tunisia, Libya, Sudan, Somalia, Uganda, Tanzania, Rwanda, Zimbabwe, Zambia, Senegal, Cameroon, Ivory Coast / Cote d'Ivoire, Congo / Democratic Republic of the Congo / DRC / DR Congo, Madagascar, Angola, Mozambique, Namibia, Botswana, Syria, Lebanon, Jordan, Kuwait, Qatar, United Arab Emirates / UAE, Oman, Yemen, Bahrain, Nepal, Bangladesh, Sri Lanka, Myanmar / Burma, Cambodia, Laos, Malaysia, Singapore, Mongolia, Taiwan, Kazakhstan, Uzbekistan, Georgia, Armenia, Azerbaijan, Fiji
+4: Moldova, Andorra, Liechtenstein, San Marino, Kosovo, Vatican City / Vatican / Holy See, Belize, Guyana, Suriname, Grenada, Saint Lucia / St Lucia, Antigua and Barbuda / Antigua, Dominica, Mali, Niger, Chad, Mauritania, Burkina Faso, Benin, Togo, Liberia, Sierra Leone, Guinea, Gambia / The Gambia, Gabon, Republic of the Congo / Congo-Brazzaville, Central African Republic / CAR, South Sudan, Eritrea, Djibouti, Malawi, Lesotho, Eswatini / Swaziland, Mauritius, Seychelles, Cape Verde / Cabo Verde, Burundi, Palestine, Kyrgyzstan, Tajikistan, Turkmenistan, Bhutan, Maldives, Brunei, East Timor / Timor-Leste, Papua New Guinea, Samoa, Tonga
+5: Nauru, Palau, Kiribati, Marshall Islands, Micronesia / Federated States of Micronesia, Vanuatu, Solomon Islands, Comoros, Sao Tome and Principe / Sao Tome, Equatorial Guinea, Guinea-Bissau, Saint Kitts and Nevis / St Kitts and Nevis, Saint Vincent and the Grenadines / St Vincent
+
+## eu-members | Name a current EU member state
+gem: Malta
+fact: Malta is the EU's smallest member state by both area and population.
+1: France, Germany, Italy, Spain
+2: Netherlands / Holland, Belgium, Ireland, Portugal, Greece, Poland, Sweden, Austria, Denmark
+3: Finland, Czech Republic / Czechia, Hungary, Romania, Luxembourg, Croatia
+4: Bulgaria, Slovakia, Slovenia, Estonia, Latvia, Lithuania, Cyprus
+
+## us-states | Name a US state
+gem: Delaware
+fact: Delaware was the first state to ratify the US Constitution, in 1787.
+1: California, Texas, Florida, New York, Hawaii, Alaska
+2: Washington, Nevada, Arizona, Illinois, Ohio, Georgia, Colorado, Michigan, Massachusetts, New Jersey, Louisiana, Tennessee, Pennsylvania, Virginia, Oregon
+3: North Carolina, South Carolina, Kentucky, Alabama, Mississippi, Utah, Montana, Minnesota, Wisconsin, Missouri, Oklahoma, Kansas, Indiana, Maryland, Connecticut, Maine, Vermont, Arkansas, New Mexico, Iowa, Idaho
+4: West Virginia, North Dakota, South Dakota, Nebraska, Wyoming, New Hampshire, Rhode Island
+
+## euro-capitals | Name the capital city of a European country
+gem: Vaduz
+fact: Vaduz is home to only around 5,000 people.
+1: London, Paris, Berlin, Rome, Madrid
+2: Dublin, Amsterdam, Brussels, Lisbon, Athens, Vienna, Moscow, Stockholm, Oslo, Copenhagen, Prague, Warsaw, Budapest, Edinburgh, Cardiff, Belfast
+3: Helsinki, Bern, Reykjavik, Kyiv / Kiev, Bucharest, Sofia, Belgrade, Zagreb, Luxembourg, Monaco, Bratislava, Ljubljana, Tallinn, Riga, Vilnius, Minsk
+4: Valletta, Nicosia, Tirana, Sarajevo, Podgorica, Skopje, Chisinau, Andorra la Vella, San Marino, Vatican City, Pristina
+5: Vaduz
+
+## world-capitals | Name a capital city outside Europe
+gem: Ouagadougou
+fact: Ouagadougou hosts FESPACO, Africa's biggest film festival.
+1: Washington DC / Washington, Tokyo, Beijing, Ottawa, Canberra, New Delhi / Delhi, Cairo
+2: Mexico City, Buenos Aires, Brasilia, Seoul, Bangkok, Wellington, Lima, Santiago, Havana, Nairobi, Tehran, Baghdad, Kabul, Islamabad, Jerusalem, Riyadh, Ankara, Jakarta, Manila, Hanoi, Kingston
+3: Bogota, Caracas, Quito, Montevideo, Kuala Lumpur, Singapore, Doha, Abu Dhabi, Muscat, Kuwait City, Damascus, Beirut, Amman, Kathmandu, Dhaka, Colombo, Taipei, Pyongyang, Ulaanbaatar, Phnom Penh, Addis Ababa, Pretoria, Cape Town, Abuja, Accra, Rabat, Algiers, Tunis, Tripoli, Khartoum, Kampala, Kigali, Harare, Lusaka, Dakar
+4: Astana / Nur-Sultan, Tashkent, Tbilisi, Yerevan, Baku, Bishkek, Dushanbe, Ashgabat, Thimphu, Male, Vientiane, Naypyidaw, Sanaa, Manama, La Paz, Sucre, Asuncion, Panama City, San Jose, Tegucigalpa, Managua, Guatemala City, San Salvador, Santo Domingo, Port-au-Prince, Nassau, Bridgetown, Port of Spain, Georgetown, Paramaribo, Belmopan, Dodoma, Maputo, Luanda, Windhoek, Gaborone, Antananarivo, Kinshasa, Yaounde, Mogadishu, Asmara, Djibouti, Bamako, Niamey, N'Djamena, Nouakchott, Conakry, Freetown, Monrovia, Abidjan, Yamoussoukro, Lome, Porto-Novo, Libreville, Brazzaville, Bangui, Juba, Lilongwe, Maseru, Mbabane, Port Louis, Victoria, Suva, Port Moresby
+5: Ouagadougou, Bujumbura, Gitega, Praia, Banjul, Bissau, Malabo, Moroni, Sao Tome, Apia, Nuku'alofa, Funafuti, Tarawa, Majuro, Palikir, Ngerulmud, Honiara, Port Vila, Dili, Bandar Seri Begawan, Basseterre, Castries, Kingstown, Roseau, St George's, St John's
+
+## landlocked | Name a landlocked country
+gem: Liechtenstein
+fact: Liechtenstein is doubly landlocked: every country around it is landlocked too.
+1: Switzerland, Austria, Afghanistan, Mongolia, Nepal
+2: Hungary, Czech Republic / Czechia, Slovakia, Luxembourg, Bolivia, Paraguay, Ethiopia, Uganda, Rwanda, Zimbabwe, Zambia, Kazakhstan, Belarus
+3: Serbia, North Macedonia / Macedonia, Kosovo, Moldova, Andorra, San Marino, Vatican City / Vatican, Botswana, Malawi, Mali, Niger, Chad, Burkina Faso, Laos, Bhutan, Uzbekistan, Kyrgyzstan, Tajikistan, Turkmenistan, Armenia, Azerbaijan, South Sudan, Burundi, Central African Republic
+4: Lesotho, Eswatini / Swaziland
+
+## seas | Name an ocean or sea
+gem: Sargasso Sea
+fact: The Sargasso Sea is the only sea with no coastline at all.
+1: Atlantic Ocean / Atlantic, Pacific Ocean / Pacific, Indian Ocean, Arctic Ocean / Arctic, Mediterranean Sea / Mediterranean, North Sea, Red Sea, Dead Sea
+2: Southern Ocean / Antarctic Ocean, Caribbean Sea / Caribbean, Black Sea, Baltic Sea, Irish Sea, Caspian Sea, Arabian Sea, South China Sea
+3: Adriatic Sea, Aegean Sea, Tyrrhenian Sea, Ionian Sea, Celtic Sea, Norwegian Sea, Barents Sea, Bering Sea, Sea of Japan / East Sea, Yellow Sea, East China Sea, Coral Sea, Tasman Sea, Philippine Sea, Sea of Okhotsk, Arafura Sea, Timor Sea, Andaman Sea, Ligurian Sea, Sea of Marmara, Sea of Azov, Aral Sea, White Sea, Labrador Sea, Greenland Sea
+4: Kara Sea, Laptev Sea, East Siberian Sea, Chukchi Sea, Beaufort Sea, Weddell Sea, Ross Sea, Amundsen Sea, Bellingshausen Sea, Scotia Sea, Sulu Sea, Celebes Sea, Java Sea, Banda Sea, Molucca Sea, Flores Sea, Bismarck Sea, Solomon Sea, Balearic Sea, Alboran Sea, Wadden Sea, Sea of the Hebrides, Salish Sea, Salton Sea, Sargasso Sea, Lakshadweep Sea, Levantine Sea, Libyan Sea, Sea of Crete, Thracian Sea, Inland Sea / Seto Inland Sea
+
+## bordering-france | Name a country that shares a land border with France
+gem: Brazil
+fact: France's longest land border is with Brazil, via French Guiana.
+hint: Overseas territories count
+1: Spain, Germany, Italy, Belgium, Switzerland
+2: Luxembourg, Monaco, Andorra
+4: Suriname, Netherlands / Holland

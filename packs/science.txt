@@ -1,0 +1,71 @@
+# pack: Science & Tech
+
+## elements | Name a chemical element
+gem: Bismuth
+fact: Bismuth crystals grow in stepped, rainbow-coloured 'hopper' shapes.
+1: Oxygen, Hydrogen, Carbon, Gold, Iron, Silver, Helium, Nitrogen
+2: Copper, Sodium, Calcium, Lead, Zinc, Aluminium / Aluminum, Uranium, Neon, Chlorine, Potassium, Mercury, Platinum, Lithium, Magnesium, Sulfur / Sulphur, Plutonium, Tin, Silicon, Iodine, Phosphorus, Titanium, Nickel, Fluorine
+3: Argon, Cobalt, Chromium, Tungsten, Radium, Radon, Krypton, Xenon, Boron, Beryllium, Manganese, Arsenic, Barium, Bromine, Cadmium, Caesium / Cesium, Palladium, Strontium, Polonium, Selenium, Vanadium, Thorium, Francium, Gallium, Germanium, Osmium, Iridium, Rubidium, Antimony, Molybdenum, Einsteinium, Americium, Nobelium, Curium, Fermium
+4: Scandium, Yttrium, Zirconium, Niobium, Technetium, Ruthenium, Rhodium, Indium, Tellurium, Lanthanum, Cerium, Neodymium, Europium, Gadolinium, Hafnium, Tantalum, Rhenium, Thallium, Astatine, Actinium, Protactinium, Neptunium, Berkelium, Californium, Mendelevium, Lawrencium, Rutherfordium, Seaborgium, Bohrium, Copernicium, Flerovium, Oganesson, Tennessine
+5: Praseodymium, Promethium, Samarium, Terbium, Dysprosium, Holmium, Erbium, Thulium, Ytterbium, Lutetium, Dubnium, Hassium, Meitnerium, Darmstadtium, Roentgenium, Nihonium, Moscovium, Livermorium
+
+## planets-moons | Name a planet, dwarf planet or moon in our solar system
+gem: Miranda
+fact: Miranda has Verona Rupes, possibly the tallest cliff in the solar system.
+1: Earth, Mars, Jupiter, Saturn, Venus, Mercury, Neptune, Uranus, The Moon / Moon / Luna
+2: Pluto, Titan, Europa, Io, Ganymede, Callisto, Phobos, Deimos
+3: Ceres, Eris, Enceladus, Triton, Charon, Makemake, Haumea, Mimas, Iapetus, Rhea, Dione, Tethys, Oberon, Titania
+4: Hyperion, Phoebe, Miranda, Ariel, Umbriel, Nereid, Amalthea, Proteus, Sedna, Quaoar, Gonggong, Orcus, Pandora, Prometheus, Janus, Epimetheus
+5: Thebe, Metis, Adrastea, Himalia, Elara, Pasiphae, Sinope, Carme, Ananke, Leda, Atlas, Pan, Daphnis, Helene, Telesto, Calypso, Puck, Cordelia, Ophelia, Bianca, Cressida, Desdemona, Juliet, Portia, Rosalind, Belinda, Perdita, Mab, Cupid, Caliban, Sycorax, Naiad, Thalassa, Despina, Galatea, Larissa, Hippocamp, Halimede, Psamathe, Neso, Nix, Hydra, Kerberos, Styx, Dysnomia, Varda, Salacia, Ixion, Varuna, Vanth, Weywot, Hi'iaka, Namaka, MK2, Xiangliu
+
+## programming-languages | Name a programming language
+gem: Malbolge
+fact: Malbolge was designed to be near impossible to program in. The first working program took about two years to appear.
+1: Python, JavaScript / JS, Java, C++ / cpp, C, HTML
+2: C# / C sharp / csharp, TypeScript / TS, PHP, Ruby, Swift, Go / Golang, Rust, Kotlin, SQL, Scratch, CSS, R
+3: Perl, Lua, Dart, Scala, Haskell, MATLAB, Visual Basic / VB / VB.NET, Objective-C, Assembly / asm, Bash / Shell, PowerShell, BASIC, Pascal, Delphi, Julia, Elixir, Clojure, Groovy, Fortran, COBOL, Lisp, Erlang, Solidity, Zig
+4: F# / F sharp, OCaml, Prolog, Scheme, Racket, Ada, Smalltalk, Elm, Crystal, Nim, Haxe, ActionScript, CoffeeScript, Tcl, Forth, APL, Logo, Simula, ALGOL, Common Lisp, Mojo, Gleam, V, D, Carbon, Hack, Vala, Awk, Sed, ABAP, RPG, PL/I, Verilog, VHDL, GDScript, Apex
+5: Brainfuck, Malbolge, Whitespace, LOLCODE, Befunge, Piet, Chef, Shakespeare, INTERCAL, J, K, Q, Idris, Agda, Coq, Lean, Eiffel, Modula-2, Oberon, Self, Io, Factor, Red, Rebol, Miranda, SNOBOL, Icon, Pony, Raku, Hy, Wren, Odin, Janet, Unison, Roc
+
+## web-browsers | Name a web browser
+gem: Lynx
+fact: Lynx is a text-only browser from 1992 that is still maintained.
+1: Google Chrome / Chrome, Safari, Firefox / Mozilla Firefox, Microsoft Edge / Edge
+2: Internet Explorer / IE, Opera, Brave, Opera GX
+3: DuckDuckGo, Vivaldi, Tor / Tor Browser, Samsung Internet, Arc, Chromium, Netscape / Netscape Navigator, UC Browser, Yandex Browser, Silk / Amazon Silk
+4: Mosaic / NCSA Mosaic, Konqueror, Epiphany / GNOME Web, Waterfox, Pale Moon, SeaMonkey, Maxthon, Midori, Falkon, LibreWolf, Zen / Zen Browser, Orion, Puffin, Dolphin, Kiwi, Ecosia, Sleipnir, Floorp, Mullvad Browser, Ladybird, Qutebrowser, Min, Sidekick, Comet, Dia
+5: Lynx, WorldWideWeb / Nexus, w3m, Links, ELinks, Dillo, NetSurf, Camino, Flock, Galeon, OmniWeb, iCab, Line Mode Browser, Cello, Viola / ViolaWWW, HotJava, Amaya, K-Meleon, Shiira
+
+## bones | Name a bone in the human body
+gem: Hyoid
+fact: The hyoid is the only bone in the body that doesn't touch another bone.
+1: Skull, Femur, Rib / Ribs, Spine, Pelvis, Jaw / Jawbone
+2: Tibia, Fibula, Humerus, Radius, Ulna, Clavicle / Collarbone, Sternum / Breastbone, Patella / Kneecap, Scapula / Shoulder blade, Vertebra / Vertebrae, Mandible, Coccyx / Tailbone, Cranium
+3: Sacrum, Ilium, Ischium, Pubis, Maxilla, Phalanges / Phalanx, Metacarpal / Metacarpals, Metatarsal / Metatarsals, Carpals / Carpal, Tarsals / Tarsal, Calcaneus / Heel bone, Talus, Stapes / Stirrup, Incus / Anvil, Malleus / Hammer, Zygomatic / Cheekbone, Atlas, Axis, Occipital, Parietal, Frontal, Temporal, Nasal
+4: Hyoid, Sphenoid, Ethmoid, Vomer, Lacrimal, Palatine, Scaphoid, Lunate, Triquetrum, Pisiform, Trapezium, Trapezoid, Capitate, Hamate, Cuboid, Navicular, Cuneiform, Sesamoid, Inferior nasal concha / Turbinate
+
+## dinosaurs | Name a dinosaur (or famous prehistoric reptile)
+gem: Pachycephalosaurus
+fact: Pachycephalosaurus had a domed skull up to about 25 cm thick.
+1: Tyrannosaurus Rex / T Rex / Tyrannosaurus, Triceratops, Velociraptor / Raptor, Stegosaurus, Brachiosaurus, Diplodocus
+2: Pterodactyl / Pteranodon, Spinosaurus, Ankylosaurus, Brontosaurus, Allosaurus, Iguanodon, Parasaurolophus, Megalosaurus
+3: Apatosaurus, Giganotosaurus, Carnotaurus, Dilophosaurus, Gallimimus, Compsognathus, Archaeopteryx, Plesiosaur / Plesiosaurus, Mosasaurus, Ichthyosaur, Pachycephalosaurus, Deinonychus, Utahraptor, Argentinosaurus, Baryonyx, Oviraptor, Protoceratops, Therizinosaurus, Indominus Rex
+4: Edmontosaurus, Maiasaura, Corythosaurus, Styracosaurus, Centrosaurus, Pachyrhinosaurus, Microraptor, Troodon, Coelophysis, Herrerasaurus, Eoraptor, Plateosaurus, Camarasaurus, Mamenchisaurus, Dreadnoughtus, Patagotitan, Ceratosaurus, Acrocanthosaurus, Carcharodontosaurus, Albertosaurus, Daspletosaurus, Tarbosaurus, Yutyrannus, Sinosauropteryx, Kentrosaurus, Euoplocephalus, Nodosaurus, Hadrosaurus, Lambeosaurus, Ouranosaurus, Suchomimus, Dimetrodon, Quetzalcoatlus
+5: Nigersaurus, Amargasaurus, Stygimoloch, Dracorex, Nothronychus, Masiakasaurus, Majungasaurus, Irritator, Concavenator, Mononykus, Shuvuuia, Citipati, Pegomastax, Heterodontosaurus, Psittacosaurus, Leaellynasaura, Minmi, Muttaburrasaurus, Australovenator, Amargatitanis, Zuul, Borealopelta, Halszkaraptor, Kosmoceratops, Regaliceratops, Sinornithosaurus, Anchiornis, Scelidosaurus, Scutellosaurus, Baryonyx walkeri, Neovenator, Eotyrannus, Hypsilophodon
+
+## constellations | Name a constellation
+gem: Camelopardalis
+fact: Camelopardalis is the giraffe, from the old word 'camelopard'.
+1: Orion, Ursa Major / Great Bear / Big Dipper / Plough
+2: Ursa Minor / Little Bear / Little Dipper, Cassiopeia, Scorpius / Scorpio, Leo, Taurus, Gemini, Cancer, Virgo, Libra, Sagittarius, Capricornus / Capricorn, Aquarius, Pisces, Aries, Pegasus, Andromeda, Draco, Southern Cross / Crux
+3: Cygnus, Perseus, Hercules, Lyra, Aquila, Canis Major, Canis Minor, Centaurus, Cepheus, Bootes, Ophiuchus, Hydra, Lepus, Corona Borealis, Auriga, Phoenix
+4: Monoceros, Eridanus, Cetus, Carina, Vela, Puppis, Columba, Corvus, Crater, Delphinus, Lupus, Lynx, Sagitta, Serpens, Triangulum, Vulpecula, Corona Australis, Ara, Pavo, Grus, Tucana, Indus, Dorado, Musca, Apus, Chamaeleon, Volans, Hydrus, Piscis Austrinus, Sculptor, Fornax, Leo Minor, Lacerta, Scutum, Equuleus, Canes Venatici, Coma Berenices
+5: Camelopardalis, Antlia, Caelum, Circinus, Horologium, Mensa, Microscopium, Norma, Octans, Pictor, Pyxis, Reticulum, Sextans, Telescopium, Triangulum Australe
+
+## sharks | Name a species or type of shark
+gem: Goblin shark
+fact: Goblin sharks can fire their jaws forward to snatch prey.
+1: Great white / Great white shark / White shark, Hammerhead / Hammerhead shark, Tiger shark, Whale shark
+2: Bull shark, Basking shark, Mako / Mako shark / Shortfin mako, Nurse shark, Megalodon, Blue shark, Lemon shark, Reef shark / Blacktip reef shark / Whitetip reef shark
+3: Thresher shark, Greenland shark, Goblin shark, Wobbegong, Angel shark, Oceanic whitetip, Blacktip shark, Sand tiger / Sand tiger shark / Grey nurse shark, Leopard shark, Cookiecutter shark, Dogfish / Spiny dogfish, Megamouth shark / Megamouth, Porbeagle, Zebra shark, Silky shark, Bamboo shark, Epaulette shark, Frilled shark, Sixgill shark / Bluntnose sixgill, Port Jackson shark, Horn shark, Catshark / Swell shark, Lantern shark
+4: Sevengill shark / Broadnose sevengill, Sleeper shark / Pacific sleeper shark, Salmon shark, Dusky shark, Sandbar shark, Spinner shark, Galapagos shark, Copper shark / Bronze whaler, Gummy shark, Tope / School shark, Bonnethead, Smooth hound, Sawshark, Kitefin shark, Pygmy shark, Crocodile shark, Ganges shark, Pondicherry shark, Carpet shark, Velvet belly lanternshark, Ninja lanternshark, Bramble shark, Prickly shark, Dwarf lanternshark, Viper dogfish, Shortnose sawshark, Tasselled wobbegong

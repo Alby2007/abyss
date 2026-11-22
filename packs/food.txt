@@ -1,0 +1,49 @@
+# pack: Food & Drink
+
+## fruits | Name a fruit
+gem: Durian
+fact: Durian is banned on Singapore's public transport because of the smell.
+1: Apple, Banana, Orange, Strawberry, Grape / Grapes, Pear, Watermelon, Mango, Pineapple, Lemon
+2: Cherry, Peach, Plum, Kiwi / Kiwi fruit, Raspberry, Blueberry, Lime, Melon, Coconut, Grapefruit, Apricot, Nectarine, Pomegranate, Blackberry, Tomato, Avocado, Papaya, Fig, Clementine, Satsuma, Tangerine, Mandarin, Cantaloupe, Honeydew
+3: Passion fruit, Lychee, Dragon fruit / Pitaya, Guava, Starfruit / Carambola, Cranberry, Gooseberry, Blackcurrant, Redcurrant, Date, Persimmon / Sharon fruit, Quince, Rhubarb, Kumquat, Damson, Greengage, Mulberry, Elderberry, Olive, Plantain, Jackfruit, Durian, Physalis / Cape gooseberry, Boysenberry, Loganberry, Tayberry, Cloudberry, Lingonberry, Huckleberry, Yuzu, Blood orange, Ugli fruit, Pomelo, Tamarind, Prickly pear, Feijoa
+4: Rambutan, Mangosteen, Longan, Loquat, Salak / Snake fruit, Soursop / Graviola, Cherimoya / Custard apple, Sapodilla, Medlar, Pawpaw, Ackee, Breadfruit, Jabuticaba, Acai, Acerola, Miracle fruit, Kiwano / Horned melon, Buddha's hand, Bergamot, Calamansi, Finger lime, Marula, Monstera deliciosa, Noni, Pitanga / Surinam cherry, Rose apple, Santol, Tamarillo, Ugni, Wood apple, Yangmei, Lucuma, Cupuacu, Langsat, Duku, Bilberry, Sloe, Rowan, Aronia / Chokeberry, Serviceberry, Haskap, Marionberry, Dewberry, Salmonberry, Thimbleberry, Wineberry, Sea buckthorn, Goji / Goji berry / Wolfberry, Mamey, Atemoya, Pulasan, Abiu, Ilama, Sugar apple, Black sapote, White sapote, Canistel, Jujube, Kei apple, Bael, Carissa
+
+## pasta | Name a type of pasta
+gem: Strozzapreti
+fact: Strozzapreti translates as 'priest stranglers'.
+1: Spaghetti, Penne, Lasagne / Lasagna, Macaroni, Fusilli, Ravioli, Tagliatelle
+2: Linguine, Farfalle / Bow ties, Rigatoni, Tortellini, Fettuccine, Cannelloni, Conchiglie / Shells, Gnocchi, Orzo, Pappardelle, Vermicelli
+3: Orecchiette, Ziti, Bucatini, Capellini / Angel hair, Tortelloni, Ditalini, Cavatappi, Gemelli, Rotini, Radiatori, Campanelle, Paccheri, Casarecce, Mafaldine, Agnolotti, Cappelletti, Manicotti, Stelline, Anelli, Lumache, Trofie, Strozzapreti, Tagliolini, Spaghettini, Mezzi rigatoni, Fregola / Fregula, Pici, Cavatelli, Garganelli, Malloreddus, Bigoli, Tortiglioni, Calamarata, Alfabeto / Alphabet pasta, Lanterne
+4: Anellini, Bavette, Busiate, Corzetti, Culurgiones, Fileja, Lorighittas, Mezzelune, Pansotti, Pizzoccheri, Sagnarelli, Scialatielli, Stringozzi, Testaroli, Tortelli, Trenette, Umbricelli, Zitoni, Ruote / Rotelle, Gigli, Gramigna, Fusilli lunghi, Reginette, Candele, Maltagliati, Passatelli, Sorpresine, Quadretti, Orecchie di elefante, Lagane, Cencioni, Mezze maniche, Tubetti, Pastina, Acini di pepe, Grattini, Spätzle / Spaetzle, Kluski
+
+## cheese | Name a type of cheese
+gem: Stinking Bishop
+fact: Stinking Bishop is named after the pear variety used to make the perry it's washed in.
+1: Cheddar, Mozzarella, Brie, Parmesan / Parmigiano Reggiano, Feta, Camembert, Stilton, Gouda, Edam
+2: Halloumi, Cream cheese, Cottage cheese, Swiss / Emmental / Emmenthal, Red Leicester, Wensleydale, Roquefort, Gorgonzola, Ricotta, Mascarpone, Blue cheese, Goat's cheese / Goats cheese / Chevre, Monterey Jack, Paneer, Gruyere, Manchego, Double Gloucester, Lancashire, Cheshire, Caerphilly, Pecorino
+3: Burrata, Provolone, Jarlsberg, Leerdammer, Comte, Raclette, Reblochon, Taleggio, Fontina, Asiago, Havarti, Port Salut, Boursin, Dolcelatte, Danish blue, Colby, Pepper Jack, Babybel, Dairylea, Monterey, Queso fresco, Cotija, Labneh, Quark, Fromage frais, Gloucester, Shropshire Blue, Stinking Bishop, Cornish Yarg / Yarg, Applewood, Bocconcini, Stracciatella, Scamorza, Grana Padano, Munster, Limburger, Tilsit, Saint Agur, Cambozola, Pont-l'Eveque, Epoisses, Morbier, Beaufort, Cantal, Neufchatel, Banon, Valencay, Crottin, Brillat-Savarin
+4: Caciocavallo, Castelmagno, Robiola, Stracchino, Montasio, Bitto, Puzzone di Moena, Casu marzu, Ossau-Iraty, Tomme de Savoie / Tomme, Abondance, Mimolette, Langres, Livarot, Maroilles, Mont d'Or / Vacherin, Saint-Nectaire, Salers, Fourme d'Ambert, Bleu d'Auvergne, Chaource, Coulommiers, Selles-sur-Cher, Sainte-Maure, Pouligny-Saint-Pierre, Cabrales, Idiazabal, Mahon, Tetilla, Torta del Casar, Zamorano, Roncal, Queso de Valdeon, Serra da Estrela, Graviera, Kasseri, Kefalotyri, Mizithra, Anthotyros, Manouri, Kashkaval, Oscypek, Bryndza, Liptauer, Brunost / Gjetost, Gamalost, Vasterbottensost, Herrgard, Danbo, Esrom, Appenzeller, Tete de Moine, Sbrinz, Vacherin Fribourgeois, Tilsiter, Bergkase, Allgauer, Cashel Blue, Gubbeen, Durrus, Ardrahan, Coolea, Dunlop, Bonchester, Lanark Blue, Caboc, Crowdie, Hereford Hop, Sage Derby, Beenleigh Blue, Stichelton, Tunworth, Baron Bigod, Oxford Isis, Perl Las, Y Fenni, Teifi, Hafod, Kirkham's Lancashire, Swaledale, Coverdale, Blue Vinny, Dorset Blue Vinny, Ilchester, Cornish Blue, Lincolnshire Poacher, Berkswell, Ogleshield
+
+## cocktails | Name a cocktail
+gem: Corpse Reviver
+1: Mojito, Margarita, Pina Colada, Cosmopolitan / Cosmo, Martini, Sex on the Beach, Long Island Iced Tea / Long Island
+2: Daiquiri, Old Fashioned, Bloody Mary, Espresso Martini, Pornstar Martini / Passion Fruit Martini, Manhattan, Negroni, Aperol Spritz / Spritz, Gin and Tonic / G&T, Tequila Sunrise, Mai Tai, Moscow Mule, Caipirinha, Woo Woo, Blue Lagoon, Screwdriver, White Russian, Black Russian, Cuba Libre / Rum and Coke
+3: Whiskey Sour / Whisky Sour, Amaretto Sour, Pisco Sour, Sidecar, Mint Julep, Tom Collins, Singapore Sling, Zombie, Hurricane, Bellini, Mimosa, Kir Royale, Kir, Sazerac, French 75, Gimlet, Dark and Stormy / Dark n Stormy, Paloma, Bramble, Hugo / Hugo Spritz, Sea Breeze, Bay Breeze, Fuzzy Navel, Harvey Wallbanger, Grasshopper, Mudslide, Painkiller, Aviation, Americano, Boulevardier, Sangria, Buck's Fizz, Snowball, Irish Coffee, Rob Roy, Godfather, Rusty Nail, Brandy Alexander, Alabama Slammer, Lynchburg Lemonade, Appletini, Lemon Drop, Kamikaze, B-52, Jager Bomb / Jagerbomb
+4: Corpse Reviver, Last Word, Clover Club, Ramos Gin Fizz, Bee's Knees, Hanky Panky, Martinez, Vieux Carre, Penicillin, Paper Plane, Jungle Bird, Naked and Famous, Tuxedo, Bijou, Vesper, El Diablo, Mary Pickford, Hemingway Daiquiri, Bronx, Monkey Gland, Blood and Sand, Pink Lady, White Lady, Stinger, Sherry Cobbler, Gin Rickey, Charlie Chaplin, Jack Rose, Scorpion, Fog Cutter, Navy Grog, Planter's Punch, Bahama Mama, Blue Hawaiian, Missionary's Downfall, Queen's Park Swizzle, Trinidad Sour, Remember the Maine, Toronto, Brooklyn, Red Hook, Greenpoint, Black Manhattan, Oaxaca Old Fashioned, Tommy's Margarita, Garibaldi, Southside, Gin Basil Smash, Breakfast Martini, Treacle, Russian Spring Punch, Death in the Afternoon, Adonis, Bamboo
+
+## herbs-spices | Name a herb or spice
+gem: Asafoetida
+fact: Asafoetida smells so strong it has been nicknamed 'devil's dung'.
+1: Salt, Pepper / Black pepper, Basil, Oregano, Cinnamon, Garlic, Ginger, Mint, Chilli / Chili, Parsley, Rosemary, Thyme, Paprika
+2: Cumin, Turmeric, Coriander / Cilantro, Nutmeg, Sage, Bay leaf / Bay, Cloves / Clove, Chives, Dill, Curry powder, Cayenne / Cayenne pepper, Saffron, Vanilla, Chilli flakes, Mustard / Mustard seed, Garam masala, Allspice, Cardamom
+3: Tarragon, Fennel / Fennel seed, Star anise, Anise / Aniseed, Caraway, Marjoram, Lemongrass, Fenugreek, Sumac, Za'atar, Five spice / Chinese five spice, Mace, Juniper / Juniper berries, Lavender, Chervil, Sorrel, Lovage, Celery seed, Smoked paprika, Ras el hanout, Herbes de Provence, Sichuan pepper / Szechuan pepper, Kaffir lime leaves / Lime leaves, Curry leaves, Nigella / Black seed / Kalonji, Poppy seed, Sesame / Sesame seeds, White pepper, Pink peppercorns, Horseradish, Wasabi, Galangal, Tamarind, Ajwain / Carom, Borage, Savory, Lemon balm, Chamomile, Tajin, Old Bay, Cajun spice, Jerk seasoning, Harissa, Berbere, Dukkah, Baharat, Shichimi
+4: Asafoetida / Hing, Mahlab, Grains of paradise, Long pepper, Cubeb, Amchur / Mango powder, Annatto / Achiote, Epazote, Hyssop, Rue, Angelica, Costmary, Woodruff, Mugwort, Perilla / Shiso, Culantro, Vietnamese coriander / Rau ram, Thai basil, Holy basil / Tulsi, Pandan, Kokum, Black cardamom, Black lime / Loomi, Sansho, Sassafras / File, Wattleseed, Lemon myrtle, Pepperberry, Saltbush, Golpar, Barberry, Sweet cicely, Spikenard, Orris root, Zedoary, Tonka bean, Kencur, Calamus
+
+## sandwich-fillings | Name something you'd put in a sandwich
+daily: no
+gem: Coronation chicken
+fact: Coronation chicken was created for Elizabeth II's coronation banquet in 1953.
+1: Ham, Cheese, Chicken, Tuna, Egg, Bacon, Lettuce, Tomato, Butter, Peanut butter, Jam
+2: Turkey, Salami, Cucumber, Mayonnaise / Mayo, Crisps, Avocado, Prawns / Prawn, Beef / Roast beef, Pickle / Branston, Hummus, Sausage, Onion, Nutella, Chips / Chip butty, Egg mayo, BLT, Cheese and onion, Pastrami, Brie
+3: Coronation chicken, Marmite, Fish fingers, Coleslaw, Rocket, Spinach, Jalapenos, Mustard, Ketchup, Brown sauce, Pesto, Mozzarella, Falafel, Halloumi, Chorizo, Pepperoni, Smoked salmon, Cream cheese, Corned beef, Sardines, Banana, Honey, Sun-dried tomatoes, Gherkins, Beetroot, Sweetcorn, Pulled pork, Meatballs, Stuffing, Cranberry sauce, Mushrooms, Peppers, Olives, Watercress, Cress, Sprouts / Alfalfa
+4: Fluff / Marshmallow fluff, Spam, Haggis, Black pudding, Bubble and squeak, Pate, Liver, Tongue, Brawn, Anchovies, Kimchi, Sauerkraut, Piccalilli, Chutney, Mango chutney, Salad cream, Beans / Baked beans, Spaghetti hoops, Crispy duck, Katsu, Tofu, Tempeh, Seitan, Jackfruit, Pineapple, Strawberries, Apple, Dates, Lemon curd, Golden syrup, Condensed milk, Sugar, Hundreds and thousands, Fairy bread, Mars bar, Bovril, Vegemite, Dripping, Lard

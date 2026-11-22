@@ -1,0 +1,52 @@
+# pack: Culture & Words
+
+## shakespeare | Name a play by Shakespeare
+gem: Timon of Athens
+fact: Timon of Athens is thought to have been co-written with Thomas Middleton.
+1: Romeo and Juliet / Romeo & Juliet, Hamlet, Macbeth
+2: Othello, King Lear, A Midsummer Night's Dream / Midsummer Night's Dream, Julius Caesar, The Tempest / Tempest, Twelfth Night, Much Ado About Nothing, The Merchant of Venice / Merchant of Venice
+3: The Taming of the Shrew / Taming of the Shrew, As You Like It, Richard III, Henry V, Antony and Cleopatra, The Winter's Tale / Winters Tale, The Comedy of Errors / Comedy of Errors, Love's Labour's Lost, The Merry Wives of Windsor / Merry Wives of Windsor, Measure for Measure, Coriolanus, Titus Andronicus, Henry IV / Henry IV Part 1 / Henry IV Part 2, Richard II, Henry VIII
+4: Troilus and Cressida, All's Well That Ends Well, Cymbeline, Pericles / Pericles Prince of Tyre, The Two Gentlemen of Verona / Two Gentlemen of Verona, King John, Henry VI / Henry VI Part 1 / Henry VI Part 2 / Henry VI Part 3, The Two Noble Kinsmen / Two Noble Kinsmen, Edward III
+
+## greek-gods | Name a god, goddess or titan from Greek mythology
+gem: Hecate
+1: Zeus, Poseidon, Hades, Aphrodite, Athena / Athene, Apollo
+2: Hera, Ares, Hermes, Artemis, Dionysus, Hephaestus, Demeter, Kronos / Cronus / Cronos, Eros, Nike, Gaia / Gaea, Atlas, Prometheus, Persephone, Hestia
+3: Uranus / Ouranos, Rhea, Pan, Nyx, Chaos, Helios, Selene, Eos, Hypnos, Thanatos, Nemesis, Hecate, Iris, Morpheus, Tyche, Hebe, Asclepius, Oceanus, Hyperion, Themis, Mnemosyne, Tartarus, Erebus, Epimetheus, Triton, Aeolus, Boreas, Zephyrus, Pandora
+4: Coeus, Crius, Iapetus, Theia, Phoebe, Tethys, Metis, Leto, Dione, Eris, Harmonia, Deimos, Phobos, Ananke, Chronos, Pontus, Nereus, Proteus, Thalassa, Hemera, Aether, Eileithyia, Enyo, Momus, Plutus, Priapus, Hymenaeus, Ganymede, Asteria, Astraeus, Pallas, Perses, Notus, Eurus, Charon, Moros, Geras, Oizys, Apate, Dolos, Achlys, Kratos, Bia, Zelus, Styx
+5: Palaemon, Leucothea, Melinoe, Makaria, Hesperus, Phosphorus, Ourea, Physis, Phanes, Eurynome, Ophion, Brizo, Peitho, Comus, Alala, Adikia, Dike, Eirene, Eunomia, Hedone, Pheme, Ponos, Lethe, Mania, Hybris, Kairos
+
+## instruments | Name a musical instrument
+gem: Theremin
+fact: The theremin is played without being touched.
+1: Guitar, Piano, Drums / Drum, Violin, Trumpet, Flute, Saxophone / Sax
+2: Bass / Bass guitar, Cello, Clarinet, Trombone, Harp, Keyboard, Recorder, Ukulele, Harmonica, Tuba, Banjo, Xylophone, Tambourine, Triangle, Accordion, Bagpipes, Organ, Viola, Double bass
+3: Oboe, Bassoon, French horn / Horn, Piccolo, Cymbal / Cymbals, Glockenspiel, Marimba, Synthesizer / Synth, Mandolin, Sitar, Bongos, Congas, Timpani, Kazoo, Harpsichord, Didgeridoo, Steel drum / Steelpan, Maracas, Cornet, Euphonium, Lute, Lyre, Pan flute / Panpipes, Castanets, Ocarina, Bugle, Cowbell, Melodica, Tabla, Djembe
+4: Theremin, Sousaphone, Cor anglais / English horn, Celesta, Vibraphone, Contrabassoon, Flugelhorn, Zither, Dulcimer, Hurdy-gurdy, Balalaika, Bouzouki, Shamisen, Koto, Erhu, Kalimba / Mbira, Cajon, Handpan, Glass harmonica, Washboard, Jaw harp / Jew's harp, Concertina, Bandoneon, Clavichord, Spinet, Tin whistle / Penny whistle, Bodhran, Uilleann pipes, Shakuhachi, Oud, Duduk, Gong, Washtub bass, Sackbut, Crumhorn, Shawm, Ondes Martenot, Mellotron, Stylophone, Keytar, Otamatone
+5: Serpent, Ophicleide, Nyckelharpa, Kora, Sarangi, Santoor, Guzheng, Pipa, Hang drum, Waterphone, Daxophone, Rebab, Gusli, Kantele, Langeleik, Tromba marina, Octobass, Heckelphone, Sarrusophone, Rackett, Cimbalom, Charango, Cuatro, Berimbau, Guiro, Qanun, Bansuri, Shehnai, Mridangam, Veena, Tanpura, Morin khuur, Bullroarer
+
+## colours | Name a colour (one word)
+gem: Wenge
+fact: Wenge takes its name from a dark African hardwood.
+1: Red, Blue, Green, Yellow, Black, White, Orange, Purple, Pink, Brown, Grey / Gray
+2: Turquoise, Gold, Silver, Navy, Violet, Indigo, Beige, Cream, Maroon, Teal, Lilac, Magenta, Cyan, Lime, Peach, Crimson, Scarlet, Lavender
+3: Burgundy, Mauve, Khaki, Olive, Coral, Amber, Aqua, Ivory, Bronze, Copper, Tan, Ochre, Azure, Cobalt, Emerald, Jade, Ruby, Sapphire, Mint, Salmon, Plum, Charcoal, Fuchsia, Cerise, Rust, Mustard, Taupe, Sepia, Sienna, Umber, Vermilion, Cerulean, Periwinkle, Chartreuse, Aquamarine, Mahogany, Champagne, Rose, Blush
+4: Puce, Heliotrope, Celadon, Viridian, Gamboge, Carmine, Cinnabar, Madder, Saffron, Xanthic, Zaffre, Glaucous, Eburnean, Mikado, Falu, Feldgrau, Fulvous, Gainsboro, Smaragdine, Wenge, Isabelline, Coquelicot, Caput mortuum, Bistre, Cordovan, Eggplant, Aubergine, Byzantium, Amaranth, Razzmatazz, Skobeloff, Verdigris, Wisteria, Thistle, Liver, Russet, Auburn, Sable, Ecru, Fawn, Chamoisee, Lapis, Ultramarine, Prussian blue, Alabaster, Onyx, Pewter, Gunmetal, Slate, Mulberry, Raspberry, Claret, Oxblood, Cyclamen
+5: Arylide, Drab, Grullo, Liseran, Nadeshiko, Phlox, Sinopia, Tawny, Xanadu, Zomp, Vantablack, Bole, Citrine, Jasper, Celeste
+
+## board-games | Name a board game
+gem: Go
+fact: Go has more legal board positions than there are atoms in the observable universe.
+1: Monopoly, Chess, Scrabble, Cluedo / Clue, Snakes and Ladders / Chutes and Ladders, Checkers / Draughts
+2: Risk, Trivial Pursuit, Backgammon, Connect Four / Connect 4, Battleship / Battleships, Ludo, Game of Life / The Game of Life / Life, Operation, Guess Who, Catan / Settlers of Catan, Pictionary, Jenga, Mouse Trap, Hungry Hippos / Hungry Hungry Hippos, Kerplunk
+3: Ticket to Ride, Carcassonne, Pandemic, Mahjong, Othello / Reversi, Stratego, Mancala, Go, Chinese Checkers, Dominoes, Cranium, Boggle, Articulate, Taboo, Codenames, Dungeons and Dragons / DnD, Mastermind, Sorry!, Frustration / Trouble, Twister, Ouija, Axis and Allies, Diplomacy, Labyrinth, Rummikub, Azul, Splendor, Monopoly Deal, Exploding Kittens, Hotel / Hotels, Game of Thrones
+4: Agricola, Terraforming Mars, Wingspan, Gloomhaven, Twilight Imperium, Puerto Rico, Power Grid, Scythe, Dominion, Small World, Dixit, Mysterium, King of Tokyo, Betrayal at House on the Hill, Arkham Horror, Eldritch Horror, Root, Brass / Brass Birmingham, Spirit Island, Everdell, Cascadia, Patchwork, Kingdomino, Sushi Go, Blokus, Quoridor, Hive, Santorini, Shogi, Xiangqi, Pachisi, Parcheesi, Halma, Nine Men's Morris, Hex, Tak, Heroquest, Warhammer, Talisman, Cosmic Encounter, Tigris and Euphrates, El Grande, Caylus, Le Havre, Through the Ages
+5: Senet, Royal Game of Ur / Game of Ur, Hnefatafl / Tafl, Fanorona, Alquerque, Mehen, Patolli, Konane, Oware, Bao, Morabaraba, Surakarta, Pente, Gomoku, Arimaa, Twixt, Abalone, Kahuna, Tzaar, Gipf, Yinsh, Onitama, Hanamikoji, Tichu
+
+## card-games | Name a card game
+gem: Bezique
+1: Poker, Blackjack / 21 / Pontoon, Snap, Solitaire / Patience, Uno
+2: Rummy / Gin Rummy, Bridge, Go Fish, Cheat / Bullshit / I Doubt It, Old Maid, Crazy Eights / Switch, Hearts, Spades, Baccarat, Texas Hold'em, War, Speed, Spoons, Top Trumps, Pokemon / Pokemon TCG, Magic the Gathering / Magic / MTG, Yu-Gi-Oh, Happy Families
+3: Whist, Cribbage, Canasta, Euchre, Gin, President / Scum / Arsehole, Kings / Ring of Fire, Shithead / Palace, Beggar My Neighbour, Pairs / Memory / Concentration, Klondike, Spider Solitaire, FreeCell, Pyramid, Omaha, Seven Card Stud, Chase the Ace, Newmarket, Sevens / Fan Tan, Black Maria, Nomination Whist, Hanabi, Cards Against Humanity, Exploding Kittens, Skip-Bo, Phase 10, Hearthstone, Gwent, Mau Mau, Durak
+4: Bezique, Piquet, Pinochle, Skat, Belote, Tarot, Sheepshead, Ecarte, Faro, Cassino, Scopa, Briscola, Tressette, Hanafuda, Oh Hell, Pitch, Pedro, Bourre, Mus, Tute, Truco, Jass, Schafkopf, Doppelkopf, Klaverjas, Kaiser, Hand and Foot, Kemps, Egyptian Ratscrew / Egyptian Rat Screw, Slapjack, Snip Snap Snorum, Spit, Nertz, Rook, Pope Joan, Loo, Brag / Three card brag, Napoleon / Nap, Twenty-nine, Teen Patti, Sueca
+5: Ombre, Primero, Basset, Quadrille, Tarocchi, Gaigel, Marjolet, Bauernschnapsen, Schnapsen, Sixty-six, Kalooki, Zheng Shangyou, Big Two, Tien Len, Daifugo, Hwatu, Karuta, Koi-Koi, Bisca, Ruff and honours, Gleek
