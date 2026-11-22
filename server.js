@@ -1,10 +1,12 @@
-// Abyss: a rare-answer trivia game for you and your friends.
+// abyss: a rare-answer trivia game for you and your friends.
+require('./lib/env'); // loads .env if there is one
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const packs = require('./lib/packs');
-const store = require('./lib/store');
+const db = require('./lib/db');
+const auth = require('./lib/auth');
 const { matchDetail } = require('./lib/match');
 const party = require('./lib/party');
 
@@ -15,13 +17,48 @@ const GRACE_MS = 3000;
 const COUNTDOWN = 3; // seconds of countdown the client shows before the clock starts
 const PUBLIC = path.join(__dirname, 'public');
 
-packs.load();
+// ---------- helpers ----------
+function cleanName(n) {
+  return String(n || '').replace(/[^\p{L}\p{N} _-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 20);
+}
+function publicPlayer(p) {
+  return p ? { id: p.id, name: p.display_name, username: p.username || null, guest: !!p.is_guest } : null;
+}
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+// ms timestamp of the next daily rollover in TZ_DAILY
+function nextMidnight() {
+  const tz = process.env.TZ_DAILY || 'Europe/London';
+  const today = packs.todayKey(tz);
+  const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' });
+  for (let t = Date.now(); t < Date.now() + 26 * 3600e3; t += 60e3) if (fmt.format(new Date(t)) !== today) return t - (t % 60e3);
+  return Date.now() + 86400e3;
+}
+
+// Short-lived cache of session token -> player so every request isn't a DB round trip
+const playerCache = new Map();
+async function currentPlayer(req) {
+  const token = auth.tokenFrom(req);
+  if (!token) return null;
+  const hash = auth.tokenHash(token);
+  const hit = playerCache.get(hash);
+  if (hit && hit.t > Date.now() - 60e3) return hit.p;
+  const p = await db.sessionPlayer(hash);
+  playerCache.set(hash, { p, t: Date.now() });
+  if (p) db.touch(p.id).catch(() => {});
+  return p;
+}
+async function startSession(req, res, player) {
+  const token = auth.newToken();
+  await db.createSession(player.id, auth.tokenHash(token), Date.now() + auth.SESSION_DAYS * 86400e3);
+  res.setHeader('Set-Cookie', auth.sessionCookie(req, token));
+}
 
 // ---------- dive sessions (daily + unlimited) ----------
-const sessions = new Map();
+const dives = new Map();
 setInterval(() => {
   const cutoff = Date.now() - 2 * 3600e3;
-  for (const [id, s] of sessions) if (s.createdAt < cutoff) sessions.delete(id);
+  for (const [id, s] of dives) if (s.createdAt < cutoff) dives.delete(id);
 }, 600e3).unref();
 
 function publicPrompt(s) {
@@ -38,7 +75,7 @@ function reveal(p) {
     if (list?.length) examples.push({ tier: t, name: list[Math.floor(Math.random() * list.length)] });
   }
   const gem = p.answers.find(a => a.tier === 6)?.name || null;
-  const friends = store.topAnswers(p.id, 3).map(([name, n]) => ({ name, n }));
+  const friends = db.topAnswers(p.id, 3).map(([name, n]) => ({ name, n }));
   return { gem, examples, friends, totalAnswers: p.answers.length };
 }
 
@@ -58,24 +95,84 @@ const FLAVOUR = {
   5: ['Hardly anyone goes this deep.', 'Absurdly obscure. Respect.'],
   6: ['The Leviathan. That was the one we were hiding.', 'You found the monster.'],
 };
-const pick = a => a[Math.floor(Math.random() * a.length)];
 
+function needPlayer(ctx) {
+  if (!ctx.player) { const e = new Error('Log in or pick a guest name first'); e.status = 401; throw e; }
+  return ctx.player;
+}
+
+// ---------- API ----------
 const api = {
   'GET /api/meta': () => ({
     today: packs.todayKey(),
     tiers: packs.TIERS.filter(Boolean),
     packs: packs.listPacks(),
     answerSeconds: ANSWER_SECONDS,
+    storage: db.kind,
   }),
 
-  'POST /api/dive/start': (body) => {
+  // ----- accounts -----
+  'GET /api/auth/me': (_b, _q, ctx) => ({ player: publicPlayer(ctx.player) }),
+
+  'POST /api/auth/guest': async (body, _q, ctx) => {
     const name = cleanName(body.name);
-    if (!name) return { error: 'Pick a name first' };
+    if (!name) return { error: 'Pick a name to play under' };
+    if (auth.USERNAME_RE.test(name) && await db.playerByUsername(name)) return { error: 'That name belongs to an account. Log in, or pick another name.' };
+    const p = await db.createPlayer({ displayName: name, isGuest: true });
+    await startSession(ctx.req, ctx.res, p);
+    return { player: publicPlayer(p) };
+  },
+
+  'POST /api/auth/register': async (body, _q, ctx) => {
+    const username = String(body.username || '').trim(), password = String(body.password || '');
+    if (!auth.USERNAME_RE.test(username)) return { error: 'Usernames are 3 to 20 letters, numbers or underscores' };
+    if (password.length < 6) return { error: 'Use at least 6 characters for your password' };
+    if (password.length > 200) return { error: 'That password is too long' };
+    const ip = auth.clientIp(ctx.req);
+    if (auth.limited('reg:' + ip)) return { error: 'Too many attempts. Try again in a few minutes.' };
+    auth.fail('reg:' + ip); // counts every registration from this IP against the limit
+    const hash = auth.hashPassword(password);
+    let p;
+    try {
+      // a guest who signs up keeps their stats
+      p = ctx.player?.is_guest ? await db.upgradeGuest(ctx.player.id, username, hash)
+                               : await db.createPlayer({ username, displayName: username, passwordHash: hash });
+    } catch (e) {
+      if (e.code === '23505') return { error: 'That username is taken' };
+      throw e;
+    }
+    playerCache.clear();
+    await startSession(ctx.req, ctx.res, p);
+    return { player: publicPlayer(p) };
+  },
+
+  'POST /api/auth/login': async (body, _q, ctx) => {
+    const username = String(body.username || '').trim(), password = String(body.password || '');
+    const ip = auth.clientIp(ctx.req), uk = 'login:' + username.toLowerCase();
+    if (auth.limited('ip:' + ip) || auth.limited(uk)) return { error: 'Too many attempts. Try again in a few minutes.' };
+    const p = auth.USERNAME_RE.test(username) ? await db.playerByUsername(username) : null;
+    const ok = auth.verifyPassword(password, p?.password_hash || auth.DUMMY_HASH) && p && !p.is_guest;
+    if (!ok) { auth.fail('ip:' + ip); auth.fail(uk); return { error: 'Wrong username or password' }; }
+    auth.clearFails(uk);
+    await startSession(ctx.req, ctx.res, p);
+    return { player: publicPlayer(p) };
+  },
+
+  'POST /api/auth/logout': async (_b, _q, ctx) => {
+    const token = auth.tokenFrom(ctx.req);
+    if (token) { const h = auth.tokenHash(token); playerCache.delete(h); await db.deleteSession(h); }
+    ctx.res.setHeader('Set-Cookie', auth.clearCookie(ctx.req));
+    return { ok: true };
+  },
+
+  // ----- dives -----
+  'POST /api/dive/start': async (body, _q, ctx) => {
+    const player = needPlayer(ctx);
     const mode = body.mode === 'daily' ? 'daily' : 'unlimited';
     const date = packs.todayKey();
     let list;
     if (mode === 'daily') {
-      const done = store.getResult(date, name);
+      const done = await db.dailyResult(player.id, date);
       if (done) return { already: done, date };
       list = packs.dailyPrompts(date);
     } else {
@@ -83,14 +180,14 @@ const api = {
     }
     if (!list.length) return { error: 'No prompts loaded' };
     const id = crypto.randomUUID();
-    const s = { id, name, mode, date, prompts: list.map(p => p.id), i: 0, picks: [], createdAt: Date.now(), askedAt: Date.now() };
-    sessions.set(id, s);
+    const s = { id, playerId: player.id, mode, date, prompts: list.map(p => p.id), i: 0, picks: [], createdAt: Date.now(), askedAt: Date.now() };
+    dives.set(id, s);
     return { sessionId: id, mode, date, prompt: publicPrompt(s) };
   },
 
-  'POST /api/dive/answer': (body) => {
-    const s = sessions.get(body.sessionId);
-    if (!s) return { error: 'Session expired' };
+  'POST /api/dive/answer': async (body, _q, ctx) => {
+    const s = dives.get(body.sessionId);
+    if (!s || s.playerId !== ctx.player?.id) return { error: 'Session expired' };
     if (s.i >= s.prompts.length) return { error: 'Dive already finished' };
     const p = packs.getPrompt(s.prompts[s.i]);
     const late = Date.now() - s.askedAt > (ANSWER_SECONDS + COUNTDOWN) * 1000 + GRACE_MS;
@@ -100,16 +197,18 @@ const api = {
     if (!giveUp) {
       // still on the clock: misses and typo-corrections don't end the prompt
       if (!result.ok) {
-        if (guess) store.logRejected(p.id, guess, s.name);
+        if (guess) db.logRejected(p.id, guess, s.playerId).catch(e => console.error(e.message));
         return { retry: true, guess };
       }
       if (!result.exact) return { confirm: { from: guess, to: result.answer } };
     } else if (!result.ok) {
-      result = { ok: false, guess, points: 0 }; // time ran out
+      result = { ok: false, guess, points: 0 };
     }
     result.flavour = pick(FLAVOUR[result.ok ? result.tier : 0]);
-    if (result.ok) result.friendsSaid = store.answerCount(p.id, result.answer);
-    if (result.ok && s.mode === 'daily') store.countAnswer(p.id, result.answer);
+    if (result.ok) {
+      result.friendsSaid = db.answerCount(p.id, result.answer);
+      if (s.mode === 'daily') db.bump(p.id, result.answer).catch(e => console.error(e.message));
+    }
     s.picks.push({ prompt: p.text, promptId: p.id, ...result });
     s.i++;
     const out = { result, reveal: reveal(p) };
@@ -119,85 +218,76 @@ const api = {
     } else {
       const score = s.picks.reduce((t, x) => t + x.points, 0);
       out.final = { score, depth: score * 10, picks: s.picks, mode: s.mode, date: s.date };
-      s.finished = true;
-      if (s.mode === 'daily') store.putResult(s.date, s.name, { score, picks: s.picks });
+      await db.saveDive({ playerId: s.playerId, mode: s.mode, date: s.date, score, picks: s.picks });
+      dives.delete(s.id);
     }
     return out;
   },
 
-  // Client calls this when it's ready to show the next prompt (starts the clock)
-  'POST /api/dive/next': (body) => {
-    const s = sessions.get(body.sessionId);
-    if (!s || s.i >= s.prompts.length) return { error: 'No next prompt' };
+  'POST /api/dive/next': (body, _q, ctx) => {
+    const s = dives.get(body.sessionId);
+    if (!s || s.playerId !== ctx.player?.id || s.i >= s.prompts.length) return { error: 'No next prompt' };
     s.askedAt = Date.now();
     return { prompt: publicPrompt(s) };
   },
 
-  // Every valid answer for a prompt, for the end-of-dive browser. Today's daily prompts
-  // are only revealed to someone who has already finished today's dive.
-  'GET /api/answers': (_b, q) => {
+  // Every valid answer for a prompt. Today's daily prompts only open up once you've finished today's dive.
+  'GET /api/answers': async (_b, q, ctx) => {
     const p = packs.getPrompt(q.get('id') || '');
     if (!p) return { error: 'Unknown prompt' };
     const today = packs.todayKey();
-    const inDaily = packs.dailyPrompts(today).some(x => x.id === p.id);
-    const name = cleanName(q.get('name'));
-    if (inDaily && !(name && store.getResult(today, name))) return { error: 'Finish today\'s dive first' };
+    if (packs.dailyPrompts(today).some(x => x.id === p.id) && !(ctx.player && await db.dailyResult(ctx.player.id, today))) {
+      return { error: 'Finish today’s dive first' };
+    }
     return {
       id: p.id, text: p.text, fact: p.fact || null,
-      answers: p.answers.map(a => ({ name: a.name, tier: a.tier, n: store.answerCount(p.id, a.name) }))
+      answers: p.answers.map(a => ({ name: a.name, tier: a.tier, n: db.answerCount(p.id, a.name) }))
         .sort((a, b) => b.tier - a.tier || b.n - a.n || a.name.localeCompare(b.name)),
     };
   },
 
-  'GET /api/me': (_b, q) => {
-    const name = cleanName(q.get('name'));
-    if (!name) return { error: 'No name' };
-    return { ...store.stats(name, packs.todayKey()), nextDiveAt: nextMidnight() };
+  'GET /api/me': async (_b, _q, ctx) => {
+    const player = needPlayer(ctx);
+    return { ...(await db.stats(player.id, packs.todayKey())), nextDiveAt: nextMidnight(), player: publicPlayer(player) };
   },
 
-  'GET /api/leaderboard': (_b, q) => {
-    const date = q.get('date') || packs.todayKey();
-    return { date, daily: store.leaderboard(date).map(r => ({ name: r.name, score: r.score, picks: r.picks.map(p => p.tier || 0) })), allTime: store.allTime() };
+  'GET /api/leaderboard': async (_b, q, ctx) => {
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(q.get('date') || '') ? q.get('date') : packs.todayKey();
+    const [daily, allTime] = await Promise.all([db.leaderboard(date), db.allTime()]);
+    return {
+      date,
+      daily: daily.map(r => ({ name: r.name, guest: r.guest, me: r.playerId === ctx.player?.id, score: r.score, picks: r.picks.map(p => p.tier || 0) })),
+      allTime,
+    };
   },
 
-  'GET /api/admin/rejected': (_b, q) => {
+  // ----- admin -----
+  'GET /api/admin/rejected': async (_b, q) => {
     if (!ADMIN_KEY || q.get('key') !== ADMIN_KEY) return { error: 'Set ADMIN_KEY and pass ?key=' };
     const counts = {};
-    for (const r of store.rejected()) {
+    for (const r of await db.rejected()) {
       const k = r.promptId + '||' + r.guess.toLowerCase();
       (counts[k] ||= { promptId: r.promptId, guess: r.guess, n: 0 }).n++;
     }
     return { rejected: Object.values(counts).sort((a, b) => b.n - a.n) };
   },
 
-  'POST /api/admin/accept': (body) => {
+  'POST /api/admin/accept': async (body) => {
     if (!ADMIN_KEY || body.key !== ADMIN_KEY) return { error: 'Bad key' };
     if (!packs.getPrompt(body.promptId)) return { error: 'Unknown prompt' };
-    packs.addAnswer(body.promptId, String(body.name).slice(0, 80), Math.min(5, Math.max(1, Number(body.tier) || 3)));
+    const name = String(body.name).slice(0, 80), tier = Math.min(5, Math.max(1, Number(body.tier) || 3));
+    await db.addAddition(body.promptId, name, tier);
+    packs.addAnswer(body.promptId, name, tier);
     return { ok: true };
   },
 
-  'POST /api/admin/reload': (body) => {
+  'POST /api/admin/reload': async (body) => {
     if (!ADMIN_KEY || body.key !== ADMIN_KEY) return { error: 'Bad key' };
+    packs.setAdditions(await db.additions());
     packs.load();
     return { ok: true, packs: packs.listPacks() };
   },
 };
-
-// ms timestamp of the next daily rollover in TZ_DAILY
-function nextMidnight() {
-  const tz = process.env.TZ_DAILY || 'Europe/London';
-  const now = Date.now();
-  const today = packs.todayKey(tz);
-  for (let t = now; t < now + 26 * 3600e3; t += 60e3) {
-    if (new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(t)) !== today) return t - (t % 60e3);
-  }
-  return now + 86400e3;
-}
-
-function cleanName(n) {
-  return String(n || '').replace(/[^\p{L}\p{N} _-]/gu, '').trim().slice(0, 20);
-}
 
 // ---------- http ----------
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.json': 'application/json', '.webmanifest': 'application/manifest+json' };
@@ -206,20 +296,32 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://x');
   const handler = api[`${req.method} ${url.pathname}`];
   if (handler) {
+    // cookies are SameSite=Lax; also refuse cross-site POSTs outright
+    if (req.method === 'POST' && req.headers.origin && new URL(req.headers.origin).host !== req.headers.host) {
+      res.writeHead(403, { 'content-type': 'application/json' }); return res.end('{"error":"Bad origin"}');
+    }
     let body = {};
     if (req.method === 'POST') {
       let raw = '';
       for await (const chunk of req) { raw += chunk; if (raw.length > 1e5) break; }
       try { body = JSON.parse(raw || '{}'); } catch {}
     }
-    let out;
-    try { out = handler(body, url.searchParams); } catch (e) { console.error(e); out = { error: 'Server error' }; }
-    res.writeHead(out?.error ? 400 : 200, { 'content-type': 'application/json', 'cache-control': 'no-store' });
+    let out, status = 200;
+    try {
+      const player = await currentPlayer(req);
+      out = await handler(body, url.searchParams, { req, res, player });
+      if (out?.error) status = 400;
+    } catch (e) {
+      status = e.status || 500;
+      if (status === 500) console.error(e);
+      out = { error: status === 500 ? 'Server error' : e.message };
+    }
+    res.writeHead(status, { 'content-type': 'application/json', 'cache-control': 'no-store' });
     return res.end(JSON.stringify(out));
   }
   if (url.pathname.startsWith('/api/')) { res.writeHead(404); return res.end('{}'); }
 
-  // static files; any unknown path falls back to index.html (so /room/ABCD works)
+  // static files; unknown paths fall back to index.html (so /room/ABCD works)
   let file = path.normalize(path.join(PUBLIC, decodeURIComponent(url.pathname)));
   if (!file.startsWith(PUBLIC)) { res.writeHead(403); return res.end(); }
   fs.stat(file, (err, st) => {
@@ -232,6 +334,11 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-party.attach(server, { cleanName, scoreGuess, store });
+party.attach(server, { cleanName, scoreGuess, currentPlayer, db });
 
-server.listen(PORT, () => console.log(`Abyss running on http://localhost:${PORT}`));
+(async () => {
+  await db.init();
+  packs.setAdditions(await db.additions());
+  packs.load();
+  server.listen(PORT, () => console.log(`abyss running on http://localhost:${PORT} (storage: ${db.kind})`));
+})().catch(e => { console.error('Failed to start:', e.message); process.exit(1); });

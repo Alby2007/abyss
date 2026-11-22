@@ -12,10 +12,25 @@ npm run dev          # same, restarts when you edit server files
 
 On Windows you can just double-click `start-abyss.bat`.
 
-Environment variables:
+## Accounts and Supabase
+
+Players can dive straight away under a one-time guest name, or create an account with just a username and password (no email). The pop-up shows on the first visit. A guest who later creates an account keeps their dives. Passwords are hashed with scrypt, sessions are HttpOnly cookies, and logins are rate limited.
+
+Stats live in Supabase when it's configured, otherwise in `data/db.json`.
+
+1. Create a Supabase project (any region). In Data access, keep the Data API on, untick "Grant API access to new tables automatically" and tick "Enable RLS".
+2. Create the tables: either connect the repo under Project Settings > Integrations > GitHub (working directory `.`, turn on "Deploy to production") and Supabase applies `supabase/migrations/` on every push to `main`, or paste `supabase/migrations/20261122190000_init.sql` into the SQL editor and run it.
+3. Copy `.env.example` to `.env` and fill in `SUPABASE_URL` and the service role key.
+4. `npm start`. The log line says `storage: supabase` when it's connected.
+
+Only the game server touches the database. RLS is on with no policies and the anon role has no grants, so the publishable key exposes nothing.
+
+Environment variables (or put them in `.env`):
 
 | Var | Default | What it does |
 |---|---|---|
+| `SUPABASE_URL` | (unset) | Your project URL. With the key below, switches storage to Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | (unset) | Service role / secret key. Server only, never commit it |
 | `PORT` | `3000` | Port to listen on |
 | `ADMIN_KEY` | (unset) | Turns on `/admin` and the admin API. Pick anything long. |
 | `ANSWER_SECONDS` | `25` | Seconds per prompt in dives |
@@ -44,14 +59,15 @@ Tiers and points live at the top of `lib/packs.js`.
 
 Prompts are plain text files in `packs/`. See `packs/README.md` for the format. It's quick to write: one line per tier, answers comma separated, aliases with `/`.
 
-When someone types an answer that isn't on the list it gets logged. Open `/admin` (with `ADMIN_KEY` set) to see the most common misses and accept them at whatever tier you like. Accepted answers land in `data/additions.json`, so the pack files stay clean. `POST /api/admin/reload` with `{ "key": "..." }` reloads packs without a restart.
+When someone types an answer that isn't on the list it gets logged. Open `/admin` (with `ADMIN_KEY` set) to see the most common misses and accept them at whatever tier you like. Accepted answers are stored in the database (the `accepted_answers` table, or `data/db.json`), so the pack files stay clean. `POST /api/admin/reload` with `{ "key": "..." }` reloads packs without a restart.
 
 ## Hosting it for your friends
 
 It's one Node process with a JSON file for storage, so anything that runs Node and keeps a disk works:
 
+- Set the Supabase env vars wherever you host it so stats survive redeploys.
 - **A spare PC / Pi on your network** plus a Cloudflare Tunnel or Tailscale Funnel to give it a public URL. Free and the data stays with you.
-- **Fly.io / Railway / Render** using the included `Dockerfile`. Mount a volume at `/app/data`, otherwise the leaderboard resets on every deploy.
+- **Fly.io / Railway / Render** using the included `Dockerfile`. With Supabase configured you don't need a volume; without it, mount one at `/app/data` or the leaderboard resets on every deploy.
 
 Websockets need to pass through whatever proxy you put in front (Cloudflare Tunnel and the platforms above all handle this).
 
@@ -61,7 +77,9 @@ Websockets need to pass through whatever proxy you put in front (Cloudflare Tunn
 server.js          HTTP + REST API for dives, static files
 lib/match.js       answer normalising + fuzzy matching (typo tolerance)
 lib/packs.js       pack parser, tiers, daily selection, additions
-lib/store.js       JSON-file store (results, answer counts, misses)
+lib/db.js          storage: Supabase, or a JSON file when Supabase isn't configured
+lib/auth.js        password hashing, sessions, cookies, rate limits
+supabase/          database migrations
 lib/party.js       Mine Party rooms over ws
 public/            the client: index.html, style.css, app.js (routing, home, board, party),
                    dive.js (the dive and end screen), scene.js (the ocean canvas), creatures.js

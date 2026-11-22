@@ -1,6 +1,7 @@
 // abyss. client
 import { createScene } from './scene.js';
 import { mountDive } from './dive.js';
+import { mountAccount } from './account.js';
 const $ = (s, el = document) => el.querySelector(s);
 const app = $('#app');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -75,7 +76,9 @@ function route() {
   return viewHome();
 }
 
-function myName() { return store.get('name', ''); }
+const account = mountAccount({ api, esc, toast });
+function myName() { return account.me?.name || ''; }
+const needPlayer = (reason) => account.require(reason);
 
 // ---------- home ----------
 async function viewHome() {
@@ -87,9 +90,6 @@ async function viewHome() {
       <p>Seven prompts. Twenty-five seconds each. Name something nobody else would think of and sink deeper.</p>
     </section>
     <div class="stack">
-      <label class="field">Your name (your friends see this)
-        <input type="text" id="name" maxlength="20" placeholder="e.g. Alby" value="${esc(name)}" autocomplete="nickname">
-      </label>
       <div class="modes">
         <button class="mode big" id="daily">
           <span class="tag" id="dailyTag">daily dive · ${META ? META.today : ''}</span>
@@ -127,18 +127,11 @@ async function viewHome() {
       </div>
       <div class="legend muted" id="legend"></div>
     </div>`;
-  const nameEl = $('#name');
-  nameEl.oninput = () => store.set('name', nameEl.value.trim());
-  const needName = () => {
-    if (nameEl.value.trim()) return false;
-    nameEl.focus(); nameEl.classList.add('shake'); setTimeout(() => nameEl.classList.remove('shake'), 400);
-    toast('Pick a name first', 'bad'); return true;
-  };
-  $('#daily').onclick = () => { if (!needName()) dive.start('daily'); };
+  $('#daily').onclick = async () => { if (await needPlayer('Pick a name or log in to start today\u2019s dive.')) dive.start('daily'); };
   $('#unlimited').onclick = () => { $('#unlimitedOpts').hidden = !$('#unlimitedOpts').hidden; };
-  $('#goFree').onclick = () => { if (!needName()) dive.start('unlimited', $('#pack').value); };
-  $('#create').onclick = () => { if (!needName()) go('/room/new'); };
-  const join = () => { const c = $('#code').value.trim().toUpperCase(); if (needName()) return; if (c.length !== 4) return toast('Room codes are 4 letters', 'bad'); go('/room/' + c); };
+  $('#goFree').onclick = async () => { if (await needPlayer()) dive.start('unlimited', $('#pack').value); };
+  $('#create').onclick = async () => { if (await needPlayer()) go('/room/new'); };
+  const join = async () => { const c = $('#code').value.trim().toUpperCase(); if (c.length !== 4) return toast('Room codes are 4 letters', 'bad'); if (await needPlayer()) go('/room/' + c); };
   $('#join').onclick = join;
   $('#code').onkeydown = (e) => { if (e.key === 'Enter') join(); };
 
@@ -148,7 +141,7 @@ async function viewHome() {
   $('#legend').innerHTML = META.tiers.map(t => `<span class="tier-${t.id}">${t.name} ${t.points}</span>`).join('');
   if (name) {
     const lb = await api('/api/leaderboard');
-    const mine = lb.daily.find(r => r.name.toLowerCase() === name.toLowerCase());
+    const mine = lb.daily.find(r => r.me);
     if (mine) {
       $('#daily').classList.add('done');
       $('#dailyTag').textContent = `done today · ${(mine.score * 10).toLocaleString()} m`;
@@ -165,8 +158,8 @@ async function viewBoard() {
   async function draw() {
     const lb = await api('/api/leaderboard?date=' + date);
     const rows = tab === 'daily'
-      ? lb.daily.map((r, i) => `<tr class="${r.name.toLowerCase() === me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}</td><td>${r.picks.map(t => EMOJI[t]).join('')}</td><td class="num">${(r.score * 10).toLocaleString()} m</td></tr>`).join('')
-      : lb.allTime.map((r, i) => `<tr class="${r.name.toLowerCase() === me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}</td><td class="num">${r.dives}</td><td class="num">${(r.best * 10).toLocaleString()} m</td><td class="num">${(r.total * 10).toLocaleString()} m</td></tr>`).join('');
+      ? lb.daily.map((r, i) => `<tr class="${r.me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}${r.guest ? ' <span class="muted small">guest</span>' : ''}</td><td>${r.picks.map(t => EMOJI[t]).join('')}</td><td class="num">${(r.score * 10).toLocaleString()} m</td></tr>`).join('')
+      : lb.allTime.map((r, i) => `<tr class="${r.name.toLowerCase() === me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}${r.guest ? ' <span class="muted small">guest</span>' : ''}</td><td class="num">${r.dives}</td><td class="num">${(r.best * 10).toLocaleString()} m</td><td class="num">${(r.total * 10).toLocaleString()} m</td></tr>`).join('');
     app.innerHTML = `
       <div class="stack">
         <div class="row spread">
@@ -205,11 +198,9 @@ function mineSvg() {
 function viewRoom(code) {
   ambient(140);
   if (!myName()) {
-    app.innerHTML = `<div class="panel stack"><h2>Who's diving?</h2>
-      <input type="text" id="name" maxlength="20" placeholder="Your name"><button class="btn primary" id="ok">Join room</button></div>`;
-    $('#name').focus();
-    const ok = () => { const v = $('#name').value.trim(); if (!v) return; store.set('name', v); viewRoom(code); };
-    $('#ok').onclick = ok; $('#name').onkeydown = (e) => e.key === 'Enter' && ok();
+    app.innerHTML = `<div class="panel stack"><h2>Joining room ${esc(code === 'NEW' ? '' : code)}</h2><p class="muted">Pick a name or log in first.</p><button class="btn primary" id="ok">Pick a name</button></div>`;
+    const ask = async () => { if (await needPlayer('Pick a name or log in to join the room.')) route(); };
+    $('#ok').onclick = ask; ask();
     return;
   }
   app.innerHTML = `<p class="muted">Connecting…</p>`;
@@ -439,4 +430,12 @@ async function viewAdmin() {
 
 const dive = mountDive({ app, api, esc, sfx, toast, scene, myName, go, store, onLeave: f => cleanup.push(f) });
 api('/api/meta').then(m => { META = m; });
-route();
+// re-render the current page when someone logs in or out (but not mid-dive)
+let ready = false;
+account.onChange(() => { if (ready && !document.body.classList.contains('diving')) route(); });
+account.init().then(me => {
+  ready = true;
+  route();
+  // first visit: say hello with the pop-up
+  if (!me && !location.pathname.startsWith('/room/')) account.open('guest');
+});

@@ -246,7 +246,7 @@ export function mountDive(ctx) {
     const name = myName();
     const [lb, me] = await Promise.all([
       f.mode === 'daily' ? api('/api/leaderboard?date=' + f.date) : Promise.resolve(null),
-      name ? api('/api/me?name=' + encodeURIComponent(name)) : Promise.resolve(null),
+      name ? api('/api/me') : Promise.resolve(null),
     ]);
     const scores = lb ? lb.daily.map(r => r.score) : [];
     const others = scores.length - 1;
@@ -328,7 +328,7 @@ export function mountDive(ctx) {
     body.hidden = false;
     if (body.dataset.loaded) return;
     body.innerHTML = '<p class="muted small">Loading…</p>';
-    const r = await api(`/api/answers?id=${encodeURIComponent(head.dataset.pid)}&name=${encodeURIComponent(myName())}`);
+    const r = await api(`/api/answers?id=${encodeURIComponent(head.dataset.pid)}`);
     if (r.error) { body.innerHTML = `<p class="muted small">${esc(r.error)}</p>`; return; }
     body.dataset.loaded = '1';
     const counts = {}; for (const a of r.answers) counts[a.tier] = (counts[a.tier] || 0) + 1;

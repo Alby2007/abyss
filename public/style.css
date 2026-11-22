@@ -305,3 +305,24 @@ svg.curve text.you { fill: var(--lume); font-weight: 700; font-size: 11px; }
 [hidden] { display: none !important; }
 .hud .pip[data-t="0"] { background: var(--coral); } .hud .pip[data-t="1"] { background: var(--t1); } .hud .pip[data-t="2"] { background: var(--t2); }
 .hud .pip[data-t="3"] { background: var(--t3); } .hud .pip[data-t="4"] { background: var(--t4); } .hud .pip[data-t="5"] { background: var(--t5); } .hud .pip[data-t="6"] { background: var(--t6); box-shadow: 0 0 8px var(--t6); }
+
+/* ======== accounts ======== */
+.top-right { display: flex; align-items: center; gap: 10px; }
+.acct { position: relative; }
+.acct-btn { font: inherit; font-size: 14px; color: var(--ink); background: rgba(4,16,26,.6); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(6px); }
+.acct-btn:hover { border-color: rgba(232,255,107,.45); }
+.acct-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lume); box-shadow: 0 0 8px var(--lume); }
+.acct-dot.guest { background: var(--muted); box-shadow: none; }
+.acct-menu { position: absolute; right: 0; top: calc(100% + 8px); width: 260px; z-index: 40; background: rgba(6,22,32,.97); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 8px; box-shadow: 0 20px 50px rgba(0,0,0,.4); }
+.acct-menu p { margin: 0 0 4px; }
+.modal-wrap { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; background: rgba(1,6,10,.62); backdrop-filter: blur(4px); animation: fade .2s ease-out; }
+@keyframes fade { from { opacity: 0; } }
+.modal { position: relative; width: min(420px, 100%); display: grid; gap: 14px; padding: 24px; background: rgba(6,22,32,.96); animation: rise .3s cubic-bezier(.2,.8,.2,1); }
+.modal h2 { font-size: 28px; }
+.modal-x { position: absolute; top: 12px; right: 12px; background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 6px; }
+.auth-tabs { flex-wrap: wrap; }
+.auth-tabs button { font-size: 14px; }
+input[type=password] { font: inherit; font-size: 17px; color: var(--ink); background: rgba(0,0,0,.28); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; outline: none; width: 100%; }
+input[type=password]:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(94,230,255,.15); }
+.form-err { margin: 0; min-height: 18px; color: var(--coral); font-size: 14px; }
+@media (max-width: 480px) { .acct-btn { padding: 6px 10px; font-size: 13px; } .acct-btn .muted { display: none; } }
