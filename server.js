@@ -191,9 +191,12 @@ const api = {
       if (done) return { already: done, date };
       list = packs.dailyPrompts(date);
     } else {
-      const seen = recentByPlayer.get(player.id) || [];
-      list = packs.randomPrompts(packs.PER_DIVE, body.pack || null, seen);
-      recentByPlayer.set(player.id, [...seen, ...list.map(p => p.id)].slice(-RECENT_CAP));
+      // remembered prompts: finished dives from the DB (survives restarts and
+      // works across devices) plus this session's in-flight list
+      const seenMem = recentByPlayer.get(player.id) || [];
+      const seen = await db.recentPromptIds(player.id);
+      list = packs.randomPrompts(packs.PER_DIVE, body.pack || null, [...seen, ...seenMem]);
+      recentByPlayer.set(player.id, [...seenMem, ...list.map(p => p.id)].slice(-RECENT_CAP));
     }
     if (!list.length) return { error: 'No prompts loaded' };
     const id = crypto.randomUUID();
