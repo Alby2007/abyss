@@ -87,3 +87,141 @@ fact: Einstein called Emmy Noether a creative mathematical genius; her theorem t
 3: Werner Heisenberg / Heisenberg, Erwin Schrodinger / Schrodinger, Paul Dirac / Dirac, Enrico Fermi / Fermi, James Clerk Maxwell / Maxwell, Robert Boyle / Boyle, Robert Hooke / Hooke, Edmund Halley / Halley, Antoine Lavoisier / Lavoisier, John Dalton / Dalton, Humphry Davy / Davy, Joseph Priestley / Priestley, Henry Cavendish / Cavendish, Lord Kelvin / Kelvin, James Joule / Joule, Andre-Marie Ampere / Ampere, Alessandro Volta / Volta, Georg Ohm / Ohm, Heinrich Hertz / Hertz, Wilhelm Rontgen / Rontgen, Henri Becquerel / Becquerel, Pierre Curie, Linus Pauling / Pauling, Francis Crick / Crick, James Watson, Maurice Wilkins / Wilkins, Dorothy Hodgkin / Hodgkin, Barbara McClintock / McClintock, Lise Meitner / Meitner, Grace Hopper / Hopper, Jocelyn Bell Burnell / Bell Burnell, Brian Cox, Peter Higgs / Higgs, Roger Penrose / Penrose, Edward Jenner / Jenner, Joseph Lister / Lister, Jonas Salk / Salk, Robert Koch / Koch, William Harvey, Andreas Vesalius / Vesalius, Tycho Brahe / Brahe, Ptolemy, Hypatia, Katherine Johnson
 4: Henrietta Leavitt / Leavitt, Cecilia Payne / Payne-Gaposchkin, Subrahmanyan Chandrasekhar / Chandrasekhar, Srinivasa Ramanujan / Ramanujan, Satyendra Nath Bose / Bose, C V Raman / Raman, Hideki Yukawa / Yukawa, Murray Gell-Mann / Gell-Mann, Freeman Dyson / Dyson, Lev Landau / Landau, Andrei Sakharov / Sakharov, Ludwig Boltzmann / Boltzmann, Josiah Willard Gibbs / Gibbs, Hendrik Lorentz / Lorentz, Pieter Zeeman / Zeeman, Heike Kamerlingh Onnes / Kamerlingh Onnes, Christiaan Huygens / Huygens, Antonie van Leeuwenhoek / Leeuwenhoek, Carl Linnaeus / Linnaeus, Georges Cuvier / Cuvier, Jean-Baptiste Lamarck / Lamarck, Alfred Russel Wallace / Wallace, Thomas Huxley / Huxley, Mary Anning / Anning, Charles Lyell / Lyell, James Hutton / Hutton, Alfred Wegener / Wegener, Inge Lehmann / Lehmann, Eratosthenes, Hipparchus, Aryabhata, Ibn al-Haytham / Alhazen, Al-Khwarizmi, Avicenna / Ibn Sina, Rachel Carson
 5: Eunice Foote, Nettie Stevens, Tu Youyou, Ruth Benerito, Ynes Mexia, Esther Lederberg, Chien-Shiung Wu, Gerty Cori, Cori, Lynn Margulis / Margulis, Annie Jump Cannon / Cannon, Williamina Fleming, Rosalyn Yalow / Yalow, Gertrude Elion / Elion, Marie Tharp / Tharp, H
+
+## organs | Name an organ, gland or part of the body's internal anatomy
+gem: Pineal gland
+fact: Descartes called the pineal gland the seat of the soul; it actually makes melatonin and sits deep in the middle of the brain.
+1: Heart, Brain, Lungs / Lung, Liver, Kidney / Kidneys, Stomach, Skin, Intestines
+2: Bladder, Pancreas, Spleen, Gallbladder, Small intestine, Large intestine / Colon, Appendix, Oesophagus, Tongue, Thyroid, Eye / Eyes, Ear, Uterus / Womb, Ovary, Testicle, Prostate, Diaphragm, Trachea
+3: Thymus, Adrenal gland, Pituitary gland, Pineal gland, Hypothalamus, Parathyroid, Cerebellum, Cerebrum, Duodenum, Jejunum, Ileum, Rectum, Caecum, Pharynx, Larynx, Bronchi, Spinal cord, Tonsils, Lymph node, Bone marrow, Fallopian tubes, Cervix, Placenta, Ureter, Urethra, Aorta, Amygdala, Hippocampus, Thalamus, Medulla
+4: Pons, Corpus callosum, Basal ganglia, Cerebral cortex, Brainstem, Pylorus, Ampulla of Vater, Vas deferens, Seminal vesicle, Epiglottis, Uvula, Cochlea, Retina, Cornea, Iris, Eardrum, Semicircular canals, Olfactory bulb, Epididymis
+5: Pacinian corpuscle, Meibomian gland, Lacrimal gland, Sublingual gland, Parotid gland, Submandibular gland, Bartholin's gland, Bulbourethral gland
+
+## muscles | Name a muscle in the human body
+gem: Stapedius
+fact: The stapedius, a tiny muscle in the middle ear, is the smallest skeletal muscle in the human body.
+1: Biceps, Triceps, Abs / Abdominals, Quads / Quadriceps, Hamstring / Hamstrings, Calf / Calves, Pecs / Pectorals, Glutes / Gluteus maximus
+2: Deltoid / Delts, Trapezius / Traps, Latissimus dorsi / Lats, Obliques, Hip flexors, Rotator cuff, Diaphragm, Masseter, Soleus, Gastrocnemius, Sartorius, Gracilis, Adductors, Abductors, Rhomboids, Cardiac muscle, Tibialis anterior
+3: Teres major, Teres minor, Infraspinatus, Supraspinatus, Subscapularis, Brachialis, Brachioradialis, Pronator teres, Supinator, Palmaris longus, Rectus abdominis, Transversus abdominis, Erector spinae, Multifidus, Psoas, Iliacus, Piriformis, Gluteus medius, Gluteus minimus, Tensor fasciae latae, Pectineus, Biceps femoris, Semitendinosus, Semimembranosus, Rectus femoris, Vastus lateralis, Vastus medialis, Vastus intermedius, Peroneus longus, Plantaris, Popliteus, Temporalis, Orbicularis oculi, Orbicularis oris, Zygomaticus, Buccinator, Platysma, Sternocleidomastoid
+4: Stapedius, Tensor tympani, Risorius, Procerus, Corrugator supercilii, Mentalis, Frontalis, Occipitalis, Scalenes, Serratus anterior, Levator scapulae, Coracobrachialis, Anconeus, Opponens pollicis, Lumbricals, Interossei, Flexor hallucis longus, Extensor digitorum, Obturator internus, Quadratus femoris, Quadratus lumborum, Cremaster
+5: Longus colli, Mylohyoid, Digastric, Genioglossus, Stylohyoid, Omohyoid, Sternohyoid, Thyrohyoid
+
+## diseases | Name a disease or illness
+gem: Kuru
+fact: Kuru, a prion disease, spread among the Fore people of Papua New Guinea through funeral practices and has all but vanished since those stopped.
+1: Flu / Influenza, Common cold / Cold, Cancer, Diabetes, Asthma, COVID-19 / Covid, Malaria, HIV / AIDS, Measles, Chickenpox
+2: Mumps, Rubella, Polio, Smallpox, Tuberculosis / TB, Cholera, Typhoid, Plague / Black Death, Ebola, Dengue, Yellow fever, Rabies, Tetanus, Whooping cough, Diphtheria, Scarlet fever, Pneumonia, Bronchitis, Meningitis, Hepatitis, Anthrax, Leprosy, Lyme disease, Salmonella, Glandular fever, Shingles, Gout, Arthritis, Alzheimers, Parkinsons, Epilepsy, Eczema, Psoriasis, Stroke, Appendicitis, Tonsillitis, Conjunctivitis
+3: Zika, Chikungunya, West Nile virus, Lassa fever, Marburg, MERS, SARS, Swine flu, Bird flu / Avian flu, Hantavirus, Legionnaires disease, Listeria, Botulism, Dysentery, Giardiasis, Toxoplasmosis, Leishmaniasis, Chagas disease, Sleeping sickness, River blindness, Elephantiasis, Bilharzia / Schistosomiasis, Trachoma, Typhus, Brucellosis, Q fever, Lupus, Crohns disease, Coeliac disease, Multiple sclerosis, Motor neurone disease, Huntingtons, Cystic fibrosis, Sickle cell, Haemophilia, Muscular dystrophy, Tourettes, Narcolepsy, Gangrene, Scurvy, Rickets, Beriberi, Pellagra, Kwashiorkor
+4: Kuru, Creutzfeldt-Jakob disease / CJD, Mad cow disease / BSE, Scrapie, Fatal familial insomnia, Progeria, Alkaptonuria, Porphyria, Marfan syndrome, Ehlers-Danlos syndrome, Guillain-Barre syndrome, Stiff-person syndrome, Alice in Wonderland syndrome, Stendhal syndrome, Jerusalem syndrome, Paris syndrome, Foreign accent syndrome, Locked-in syndrome, Moyamoya disease, Buruli ulcer, Yaws, Pinta, Bejel
+5: Sweating sickness, Ergotism, Milk sickness, Black lung, Brown lung
+
+## alloys | Name an alloy
+gem: Nitinol
+fact: Nitinol is a nickel-titanium alloy with shape memory: bend it out of shape, warm it up, and it springs back to its original form.
+1: Steel, Brass, Bronze, Stainless steel, Pewter, Solder
+2: Cast iron, Wrought iron, Sterling silver, White gold, Rose gold, Amalgam, Gunmetal, Bell metal, Duralumin, Electrum, Nichrome, Cupronickel, Damascus steel, Carbon steel, Tool steel, Spring steel
+3: Invar, Monel, Inconel, Hastelloy, Babbitt metal, Constantan, Mu-metal, Wood's metal, Field's metal, Galinstan, Kovar, Magnox, Zamak, Ormolu, Pinchbeck, Tombac, Britannia metal, Type metal, Wootz steel, Mild steel, Maraging steel, Chromoly, Ferrochrome, Ferrosilicon, Alnico, Permalloy, Sendust, Stellite, Nimonic, Cunife, Nibral
+4: Nitinol, Elinvar, Nickel silver / German silver, Billon, Nordic gold, Shakudo, Shibuichi, Tumbaga, Prince's metal, Muntz metal, Admiralty brass, Naval brass, Cartridge brass, Red brass, Manganin, Platinoid, Lewis metal, Rose's metal, Newton's metal
+5: Corinthian bronze, Orichalcum, Bidri, Panchaloha, Wootz, Hepatizon
+
+
+## chemical-compounds | Name a chemical compound
+gem: Tetrodotoxin
+fact: Tetrodotoxin, the toxin in pufferfish, blocks the sodium channels that nerves rely on, and there is no antidote.
+1: Water / H2O, Salt / Sodium chloride, Carbon dioxide / CO2, Sugar / Sucrose, Ammonia, Methane, Bleach, Baking soda / Sodium bicarbonate
+2: Ethanol / Alcohol, Glucose, Aspirin, Caffeine, Sulphuric acid / Sulfuric acid, Hydrochloric acid, Hydrogen peroxide, Carbon monoxide, Chalk / Calcium carbonate, Rust / Iron oxide, Nitroglycerin, TNT / Trinitrotoluene, Acetone, Benzene, Formaldehyde, Chloroform, Propane, Butane, Ethane, Ethylene, Acetylene, Vinegar / Acetic acid, Citric acid, Lactic acid, Nitric acid, Nitrous oxide / Laughing gas, Sulphur dioxide / Sulfur dioxide, Silicon dioxide / Silica, Methanol, Glycerol / Glycerine, Urea, Cellulose, Starch, Fructose, Lactose, Cholesterol, Paracetamol, Ibuprofen, Penicillin, Morphine, Nicotine, Cocaine, Dopamine, Serotonin, Adrenaline, Insulin
+3: Tetrodotoxin, Cyanide / Hydrogen cyanide, Arsenic trioxide, Strychnine, Ricin, Sarin, Chlorine gas, Mustard gas, Phosgene, Dioxin, DDT, Asbestos, PVC, Polyethylene, Polystyrene, Teflon / PTFE, Nylon, Kevlar, Acrylic, Epoxy, Silicone, Bakelite, Celluloid, Styrene, Toluene, Xylene, Phenol, Aniline, Naphthalene, Ethylene glycol, Propylene glycol, Isopropanol, Ethyl acetate, Calcium chloride, Magnesium sulphate / Epsom salt, Potassium nitrate / Saltpetre, Sodium hydroxide / Caustic soda, Potassium hydroxide, Sodium carbonate / Washing soda, Borax, Gypsum, Alum, Zinc oxide, Titanium dioxide, Copper sulphate, Potassium permanganate, Ammonium nitrate, Lithium carbonate, Vitamin C / Ascorbic acid, Retinol, Melatonin, Oxytocin, Testosterone, Oestrogen / Estrogen, Cortisol, Thyroxine, Histamine, Acetylcholine, GABA, Glutamate
+4: Dimethyl sulfoxide / DMSO, Dimethylmercury, Sodium azide, Thermite, Sulfur hexafluoride, Chlorine trifluoride, Hexafluorobenzene, Diazomethane, Hydrazine, Hydrofluoric acid, Piranha solution, Aqua regia, Fehling's solution, Tollens' reagent, Grignard reagent, Buckminsterfullerene / Buckyball, Graphene, Nanotubes, Zeolite, Perovskite, Spinel, Cryolite, Fluorite, Thiols, Mercaptan, Skatole, Putrescine, Cadaverine, Geosmin, Capsaicin, Piperine, Allicin, Curcumin, Menthol, Vanillin, Limonene, Linalool, Eugenol, Cinnamaldehyde
+5: Bitrex / Denatonium benzoate, Aerogel, Aspartame, Sucralose, Saccharin, Stevia, Monosodium glutamate / MSG, Tartrazine, Cochineal, Carmine, Indigo, Alizarin, Tyrian purple, Prussian blue
+
+## ologies | Name an -ology (a field of study ending in -ology)
+gem: Vexillology
+fact: Vexillology is the study of flags, and enthusiasts argue that a good flag should be simple enough for a child to draw from memory.
+1: Biology, Geology, Psychology, Zoology, Ecology, Sociology, Archaeology, Anthropology, Meteorology, Theology
+2: Physiology, Neurology, Cardiology, Oncology, Pathology, Immunology, Virology, Entomology, Ornithology, Seismology, Cosmology, Toxicology, Pharmacology, Epidemiology, Dermatology, Radiology, Urology, Haematology, Gynaecology, Rheumatology, Gastroenterology, Endocrinology, Nephrology, Ophthalmology, Audiology, Gerontology, Egyptology, Mythology, Etymology, Terminology, Methodology, Technology, Criminology, Graphology, Phrenology, Numerology, Astrology, Scientology, Hydrology
+3: Herpetology, Ichthyology, Mycology, Volcanology, Glaciology, Limnology, Speleology, Petrology, Pedology, Dendrology, Oology, Malacology, Arachnology, Myrmecology, Primatology, Mammalogy, Paleontology / Palaeontology, Ethology, Histology, Cytology, Embryology, Microbiology, Parasitology, Bacteriology, Serology, Teratology, Osteology, Ontology, Epistemology, Phenomenology, Sexology, Penology, Victimology, Musicology, Ethnology, Ethnomusicology, Sinology, Assyriology, Papyrology, Philology, Lexicology, Morphology, Phonology, Topology, Typology, Anthropology, Ufology, Cryptozoology, Campanology, Hippology, Cynology, Apiology
+4: Vexillology, Nephology, Lepidopterology, Pteridology, Bryology, Lichenology, Phycology, Algology, Carcinology, Conchology, Helminthology, Nematology, Acarology, Coleopterology, Dipterology, Hymenopterology, Odonatology, Orthopterology, Trichology, Odontology, Tribology, Oenology, Enology, Ampelology, Pomology, Agrostology, Palynology, Dendrochronology, Cetology, Mastology, Stomatology, Proctology, Otology, Rhinology, Laryngology, Cryptology, Gemology, Horology, Vulcanology, Selenology, Areology, Heliology, Exobiology, Xenobiology, Hagiology, Eschatology, Soteriology, Demonology, Angelology, Mariology, Christology
+5: Rhabdology, Oneirology, Myology, Syndesmology, Sphygmology, Cacology, Eccrinology, Hoplology, Kynology, Pogonology, Phytology, Zythology, Bibliology, Deltiology, Pseudology, Hydrogeology
+
+
+## clouds | Name a type of cloud
+gem: Noctilucent
+fact: Noctilucent clouds form about 80 km up, the highest clouds in the atmosphere, and glow electric blue after sunset.
+1: Cumulus, Cirrus, Stratus, Cumulonimbus, Nimbostratus, Altostratus, Altocumulus, Cirrostratus, Cirrocumulus, Stratocumulus
+2: Lenticular, Mammatus, Contrail, Fog, Mist, Thunderhead, Anvil cloud, Mackerel sky, Mares tails, Nimbus
+3: Noctilucent, Nacreous / Polar stratospheric, Pileus, Arcus / Shelf cloud, Roll cloud, Wall cloud, Funnel cloud, Virga, Castellanus, Fractus, Asperitas, Kelvin-Helmholtz, Fluctus, Pyrocumulus, Flammagenitus, Cumulus congestus, Cumulus humilis, Cumulus mediocris, Cirrus uncinus, Cirrus fibratus, Cirrus spissatus
+4: Volutus, Murus, Cauda, Velum, Tuba, Incus, Mamma, Pannus, Cataractagenitus, Homogenitus, Silvagenitus, Cavum, Hole-punch cloud, Fallstreak hole, Morning Glory cloud, Banner cloud, Cap cloud, Wave cloud, Billow cloud, Undulatus
+5: Stratus fractus, Cumulus fractus, Radiatus, Lacunosus, Duplicatus, Translucidus, Perlucidus, Opacus, Intortus, Vertebratus
+
+## rocks | Name a type of rock or stone
+gem: Pumice
+fact: Pumice is so full of gas bubbles that it can float on water, and rafts of it have drifted across oceans for years.
+1: Granite, Marble, Limestone, Sandstone, Slate, Chalk, Flint, Coal
+2: Basalt, Obsidian, Pumice, Quartzite, Shale, Gneiss, Schist, Conglomerate, Dolomite, Gabbro, Diorite, Andesite, Rhyolite, Tuff, Travertine, Soapstone, Gypsum, Rock salt, Jet, Peat, Clay
+3: Breccia, Siltstone, Mudstone, Marl, Chert, Oolite, Coquina, Tufa, Greywacke, Arkose, Phyllite, Hornfels, Serpentinite, Amphibolite, Eclogite, Migmatite, Mylonite, Skarn, Anorthosite, Peridotite, Dunite, Kimberlite, Komatiite, Pegmatite, Syenite, Granodiorite, Trachyte, Dacite, Phonolite, Scoria, Ignimbrite, Ironstone, Bauxite, Laterite, Evaporite, Lignite, Anthracite, Bituminous coal
+4: Banded iron formation, Stromatolite, Sarsen, Bluestone, Purbeck marble, Portland stone, Bath stone, York stone, Ham stone, Kentish ragstone, Millstone Grit, Old Red Sandstone, Torridonian sandstone, Lewisian gneiss, Whin Sill, Larvikite, Rapakivi granite, Pitchstone, Lapilli, Carbonatite
+5: Nepheline syenite, Lamproite, Lamprophyre, Charnockite, Rhomb porphyry, Tillite, Diamictite, Turbidite, Chalcedony, Novaculite, Lydite, Lapis
+
+## space-missions | Name a space mission, probe or spacecraft
+gem: Philae
+fact: Philae landed on comet 67P in 2014, bounced twice, and ended up in the shade of a cliff where its solar panels could barely charge.
+1: Apollo 11, Apollo 13, Voyager 1, Hubble, ISS / International Space Station, Sputnik, Challenger, Columbia, Space Shuttle, Curiosity, Perseverance
+2: Apollo, Gemini, Mercury, Voyager 2, Pioneer, Cassini, Galileo, Juno, New Horizons, Rosetta, Opportunity, Spirit, Sojourner, Viking, Mariner, Magellan, Venera, Luna, Vostok, Voskhod, Soyuz, Salyut, Mir, Skylab, James Webb / JWST, Kepler, Chandrayaan, Mangalyaan, Artemis, Starship, Dragon, Falcon 9, Ingenuity, Parker Solar Probe, DART, OSIRIS-REx, Hayabusa, Dawn, Messenger, Stardust, Giotto, Gaia, Spitzer, Chandra, TESS, Pathfinder, Discovery, Atlantis, Endeavour
+3: Zond, Lunokhod, Ranger, Surveyor, Lunar Orbiter, Clementine, Lunar Prospector, Chang'e, Yutu, Tianwen, Zhurong, Shenzhou, Tiangong, Beresheet, Akatsuki, IKAROS, BepiColombo, Huygens, Ulysses, Venus Express, Mars Express, Mars Odyssey, MAVEN, ExoMars, Phoenix, InSight, Lucy, Psyche, Europa Clipper, JUICE, Landsat, Telstar, Echo 1, Explorer 1, Vanguard, Laika, Philae, Compton, Hubble Space Telescope
+4: Deep Impact, Genesis, Hiten, Sakigake, Suisei, Vega, Phobos, Fobos-Grunt, Mars 96, Nozomi, Beagle 2, Hope probe / Al Amal, SMART-1, LADEE, LCROSS, GRAIL, Near Shoemaker, Contour, Cassini-Huygens, Solar Dynamics Observatory, SOHO, Wind, Polar, Ace, Dscovr, Swift, Fermi, Planck, Herschel, WMAP, COBE, IRAS, Hipparcos, Ariel 1, Tiros, Nimbus
+5: Ranger 7, Luna 9, Luna 2, Venera 7, Mariner 4, Pioneer 10, Pioneer 11, Helios, Galileo probe
+
+## astronauts | Name an astronaut or cosmonaut
+gem: Alexei Leonov
+fact: Alexei Leonov made the first spacewalk in 1965, and his suit ballooned so much he had to bleed off air just to fit back through the airlock.
+1: Neil Armstrong / Armstrong, Buzz Aldrin / Aldrin, Yuri Gagarin / Gagarin, Tim Peake / Peake, Chris Hadfield / Hadfield, Sally Ride, Valentina Tereshkova / Tereshkova, John Glenn / Glenn
+2: Michael Collins, Alan Shepard / Shepard, Gus Grissom / Grissom, Jim Lovell / Lovell, Eugene Cernan / Gene Cernan, Pete Conrad, Alan Bean, Charlie Duke, Harrison Schmitt, John Young, Scott Kelly, Mark Kelly, Peggy Whitson, Christina Koch, Jessica Meir, Mae Jemison, Kalpana Chawla, Eileen Collins, Helen Sharman, Mike Massimino, Story Musgrave, Svetlana Savitskaya, Gherman Titov, Vladimir Komarov, Alexei Leonov, Sergei Krikalev, Valeri Polyakov, Yang Liwei, Rakesh Sharma, Soichi Noguchi, Thomas Pesquet, Alexander Gerst, Samantha Cristoforetti, Luca Parmitano, Andre Kuipers, Ulf Merbold, Claude Nicollier
+3: Wally Schirra, Gordon Cooper, Deke Slayton, Scott Carpenter, Frank Borman, Bill Anders, Jack Swigert, Fred Haise, Ken Mattingly, Stuart Roosa, Edgar Mitchell, Dave Scott, James Irwin, Al Worden, Rusty Schweickart, Walt Cunningham, Tom Stafford, Ed White, Roger Chaffee, Jack Lousma, Owen Garriott, Joe Kerwin, Paul Weitz, Bruce McCandless, Guion Bluford, Judith Resnik, Christa McAuliffe, Ronald McNair, Ellison Onizuka, Dick Scobee, Michael Smith, Rick Husband, William McCool, Michael Anderson, Laurel Clark, David Brown, Ilan Ramon, Anna Fisher, Shannon Lucid, Kathryn Sullivan, Sunita Williams, Butch Wilmore, Bob Behnken, Doug Hurley, Victor Glover, Anne McClain, Nick Hague, Frank Rubio, Chris Cassidy, Kate Rubins, Mike Fincke, Don Pettit, Jeanette Epps
+4: Vladimir Dzhanibekov, Anatoly Berezovoy, Valentin Lebedev, Gennady Strekalov, Boris Yegorov, Konstantin Feoktistov, Pavel Belyayev, Valery Bykovsky, Andriyan Nikolayev, Pavel Popovich, Gennadi Padalka, Sergey Avdeyev, Yuri Malenchenko, Oleg Kononenko, Fyodor Yurchikhin, Mikhail Kornienko, Fei Junlong, Nie Haisheng, Liu Yang, Wang Yaping, Zhai Zhigang, Jing Haipeng, Chen Dong, Tang Hongbo, Sultan bin Salman Al Saud, Muhammed Faris, Abdul Ahad Mohmand, Sigmund Jahn, Pham Tuan, Arnaldo Tamayo Mendez, Bertalan Farkas, Dumitru Prunariu, Georgi Ivanov, Miroslaw Hermaszewski, Vladimir Remek, Marcos Pontes, Chiaki Mukai, Koichi Wakata, Toyohiro Akiyama, Mamoru Mohri, Takao Doi
+
+
+## stars | Name a star other than the Sun
+gem: Mira
+fact: Mira, the Wonderful, in the constellation Cetus was one of the first variable stars ever spotted, and it swells and fades over roughly 11 months.
+1: Polaris / North Star, Sirius, Betelgeuse, Proxima Centauri, Vega, Rigel, Alpha Centauri
+2: Arcturus, Aldebaran, Antares, Capella, Procyon, Altair, Deneb, Pollux, Castor, Spica, Regulus, Canopus, Achernar, Fomalhaut, Bellatrix, Mintaka, Alnilam, Alnitak, Dubhe, Merak, Mizar, Alcor, Thuban, Algol, Mira, Eta Carinae, Barnards Star, Tau Ceti, Wolf 359
+3: Alphard, Alphecca, Alpheratz, Alcyone, Electra, Maia, Merope, Taygeta, Pleione, Atlas, Celaeno, Sterope, Mirfak, Hamal, Menkar, Diphda, Schedar, Caph, Ruchbah, Navi, Tarazed, Albireo, Sadr, Rasalhague, Vindemiatrix, Zubenelgenubi, Zubeneschamali, Unukalhai, Shaula, Sargas, Kaus Australis, Nunki, Ascella, Peacock, Alnair, Enif, Scheat, Markab, Algenib, Sheratan, Mesarthim, Acrux, Gacrux, Mimosa, Hadar, Rigil Kentaurus, Miaplacidus, Avior, Suhail, Naos, Alhena, Wezen, Adhara, Mirzam, Furud, Saiph, Meissa, Sadalmelik, Sadalsuud, Skat, Deneb Kaitos, Denebola, Algieba, Zosma, Alioth, Megrez, Phecda, Alkaid, Kochab, Pherkad, Eltanin, Rastaban, Cor Caroli
+4: UY Scuti, VY Canis Majoris, Stephenson 2-18, R136a1, WOH G64, Tabbys Star / KIC 8462852, Przybylskis Star, Luytens Star, Ross 128, Gliese 581, Teegardens Star, Lalande 21185, Kapteyns Star, Groombridge 1830, Epsilon Eridani, 61 Cygni, Kruger 60, Van Maanens Star, V838 Monocerotis
+5: Vela Pulsar, Crab Pulsar, Geminga, PSR B1919+21, PSR J0348+0432, Cygnus X-1, Sagittarius A*, Eta Aquilae, Delta Cephei, RR Lyrae
+
+## mathematicians | Name a famous mathematician
+gem: Srinivasa Ramanujan
+fact: Srinivasa Ramanujan, a self-taught clerk from Madras, sent Hardy pages of astonishing results; Hardy recalled the number 1729 from visiting him in hospital.
+1: Pythagoras, Euclid, Archimedes, Isaac Newton / Newton, Alan Turing / Turing, Fibonacci, Descartes, Euler, Gauss, Pascal
+2: Leibniz, Fermat, Riemann, Hilbert, Ada Lovelace / Lovelace, Charles Babbage / Babbage, Galois, Cantor, Godel, Bernoulli, Napier, Fourier, Laplace, Lagrange, Hypatia, Ramanujan, G H Hardy / Hardy, Paul Erdos / Erdos, Emmy Noether / Noether, John Nash / Nash, Grigori Perelman / Perelman, Andrew Wiles / Wiles
+3: Cauchy, Poincare, Abel, Jacobi, Dedekind, Weierstrass, Kronecker, Felix Klein, Minkowski, Hausdorff, Banach, Kolmogorov, John von Neumann / Von Neumann, Tarski, Alonzo Church / Church, Bertrand Russell, Whitehead, George Boole / Boole, De Morgan, Cayley, Sylvester, William Rowan Hamilton, Mandelbrot, John Conway / Conway, Donald Knuth / Knuth, Claude Shannon / Shannon, Maryam Mirzakhani / Mirzakhani, Terence Tao / Tao, Grothendieck, Serre, Andre Weil, Michael Atiyah / Atiyah, Roger Penrose / Penrose, Thurston, Stephen Smale / Smale, John Milnor / Milnor, Eratosthenes, Diophantus, Apollonius, Hipparchus, Brahmagupta, Aryabhata, Bhaskara, Al-Khwarizmi, Omar Khayyam, Cardano, Tartaglia, Francois Viete / Viete, John Wallis / Wallis, Isaac Barrow, Brook Taylor, Colin Maclaurin / Maclaurin, De Moivre, Thomas Bayes / Bayes
+4: Sophie Germain, Mary Somerville, Maria Agnesi, Emilie du Chatelet, Sofia Kovalevskaya, Katherine Johnson, Dorothy Vaughan, Mary Jackson, Julia Robinson, Karen Uhlenbeck, Zu Chongzhi, Liu Hui, Qin Jiushao, Seki Takakazu, Madhava, Nilakantha, Mahavira, Pingala, Hemachandra, Thabit ibn Qurra, Al-Kindi, Ibn al-Haytham, Nasir al-Din al-Tusi, Jamshid al-Kashi, Abu Kamil, Al-Karaji
+5: Ptolemy, Pappus, Heron of Alexandria, Zeno of Elea, Thales, Anaxagoras, Hippocrates of Chios, Eudoxus, Menaechmus
+
+## tech-companies | Name a technology company
+gem: Acorn Computers / Acorn
+fact: Acorn Computers, from Cambridge, designed the ARM processor, which now sits inside most of the world's smartphones.
+1: Apple, Google, Microsoft, Amazon, Facebook / Meta, Samsung, Intel, Sony
+2: IBM, Tesla, Nvidia, AMD, Netflix, Twitter / X, Uber, Airbnb, Oracle, Cisco, HP / Hewlett-Packard, Dell, Nokia, Adobe, Spotify, PayPal, Huawei, Xiaomi, TikTok / ByteDance, Zoom, Slack, Dropbox, LinkedIn
+3: Salesforce, SAP, Qualcomm, ARM, Broadcom, Texas Instruments, Lenovo, Asus, Acer, Logitech, Garmin, GoPro, Fitbit, Sonos, Canon, Nikon, Panasonic, Sharp, Toshiba, Fujitsu, NEC, Hitachi, Alibaba, Tencent, Baidu, Rakuten, Shopify, Stripe, Twilio, Atlassian, GitHub, Mozilla, Reddit, Pinterest, Snapchat / Snap, Twitch, Discord, WhatsApp, Instagram, Yahoo, AOL, eBay, Etsy, Booking.com, Expedia, Palantir, Snowflake, Cloudflare, Akamai, VMware, Red Hat, Canonical, JetBrains, Unity, Epic Games, Valve, Nintendo, Sega, Atari, Commodore, Sinclair, Acorn Computers / Acorn, Amstrad, Psion
+4: Digital Equipment Corporation / DEC, Wang, Compaq, Gateway, Packard Bell, Palm, Handspring, BlackBerry / RIM, Sun Microsystems, Silicon Graphics / SGI, Netscape, Lycos, AltaVista, Excite, Ask Jeeves, MySpace, Friendster, Bebo, Napster, Kazaa, LimeWire, Be Inc, NeXT, Cray, Thinking Machines, Xerox PARC, Bell Labs, Fairchild Semiconductor
+5: Zilog, MOS Technology, Mostek, Cyrix, Transmeta, 3dfx, Matrox, S3 Graphics, Inmos, Elixir, Ferranti, Dragon Data, Oric, Jupiter Cantab, Memotech, Tangerine
+
+## operating-systems | Name an operating system
+gem: BeOS
+fact: In 1996 Apple nearly bought Be Inc and its BeOS, then picked NeXT instead, which brought Steve Jobs back to Apple.
+1: Windows, macOS / Mac OS, Linux, Android, iOS, Ubuntu
+2: Windows 95, Windows 98, Windows XP, Windows Vista, Windows 7, Windows 8, Windows 10, Windows 11, Windows ME, Windows NT, Windows 2000, Unix, MS-DOS / DOS, Chrome OS / ChromeOS, Debian, Fedora, Red Hat, Linux Mint / Mint, Arch Linux, Kali Linux, FreeBSD, Solaris, OS/2, Symbian, BlackBerry OS, Palm OS, Windows Phone, watchOS, tvOS, iPadOS, Raspberry Pi OS / Raspbian, Mac OS X, Windows Server
+3: CentOS, openSUSE / SUSE, Gentoo, Slackware, Manjaro, Elementary OS, Pop!_OS, Zorin OS, Tails, Qubes, NixOS, Alpine Linux, OpenBSD, NetBSD, Haiku, ReactOS, AmigaOS, Atari TOS, RISC OS, CP/M, VMS / OpenVMS, z/OS, AIX, HP-UX, IRIX, QNX, VxWorks, FreeRTOS, Fuchsia, HarmonyOS, Tizen, webOS, Firefox OS, Sailfish OS, Ubuntu Touch, KaiOS, Bada, MeeGo, Maemo
+4: BeOS, NeXTSTEP, Plan 9, Inferno, Minix, Multics, ITS, TOPS-10, TOPS-20, RSX-11, RT-11, GEOS, GEM, Contiki, Menuet, Syllable, SkyOS, AtheOS, Oberon, Singularity, Midori, Barrelfish, L4, Mach, Amoeba, Genode, SerenityOS, TempleOS
+5: Burroughs MCP, GCOS, George 3, EXEC 8, Atlas Supervisor, Michigan Terminal System, Unix System V, Sinclair QL OS, TRIPOS, Acorn MOS, MOS
+
+## units | Name a unit of measurement
+gem: Smoot
+fact: The smoot is a joke unit of length based on Oliver Smoot, who was laid end over end along the Harvard Bridge in 1958; the bridge is about 364.4 smoots long.
+1: Metre / Meter, Kilogram, Litre / Liter, Second, Mile, Inch, Foot / Feet, Pound, Ounce, Gallon, Celsius, Fahrenheit
+2: Yard, Centimetre, Millimetre, Kilometre, Gram, Tonne / Ton, Pint, Quart, Acre, Hectare, Watt, Volt, Amp / Ampere, Ohm, Hertz, Joule, Newton, Pascal, Kelvin, Calorie, Byte, Bit, Decibel, Minute, Hour, Stone, Fathom, Furlong
+3: Mole, Candela, Lumen, Lux, Coulomb, Farad, Henry, Tesla, Weber, Siemens, Becquerel, Gray, Sievert, Katal, Radian, Steradian, Angstrom, Parsec, Light year, Astronomical unit / AU, Nautical mile, Knot, Chain, Rod, Pole, Perch, Hand, Cubit, Span, Ell, Barleycorn, Gill, Peck, Bushel, Hogshead, Firkin, Kilderkin, Barrel, Carat, Grain, Dram, Hundredweight, Troy ounce, Pennyweight, Therm, BTU, Horsepower, Erg, Dyne, Gauss, Oersted, Maxwell, Curie, Roentgen, Rad, Rem, Torr, Bar, Atmosphere / Atm, Millibar
+4: Smoot, Barn, Shake, Jansky, Gal, Eotvos, Poise, Stokes, Rayleigh, Sverdrup, Dobson unit, Svedberg, Debye, Planck length, Planck time, Rydberg, Hartree, Fermi, Micron, Mil, Thou, Point, Pica, Em, En, Cicero, Didot, Twip, Attoparsec, Scoville, Sabin, Mach, Beaufort, Richter, Mercalli, Moment magnitude
+5: Shaku, Ken, Ri, Cho, Tsubo, Sho, Momme, Kan, Li, Jin, Liang, Qian, Fen, Zhang, Chi, Cun, Tola, Seer, Maund, Lakh, Crore
+
