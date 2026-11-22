@@ -56,6 +56,11 @@ async function startSession(req, res, player) {
 
 // ---------- dive sessions (daily + unlimited) ----------
 const dives = new Map();
+// Prompts served to each player in recent unlimited dives, so free dives
+// don't keep re-dealing the same questions. In-memory only; a restart just
+// forgets the history, which is harmless.
+const recentByPlayer = new Map();
+const RECENT_CAP = 84; // ~12 dives' worth
 setInterval(() => {
   const cutoff = Date.now() - 2 * 3600e3;
   for (const [id, s] of dives) if (s.createdAt < cutoff) dives.delete(id);
@@ -186,7 +191,9 @@ const api = {
       if (done) return { already: done, date };
       list = packs.dailyPrompts(date);
     } else {
-      list = packs.randomPrompts(packs.PER_DIVE, body.pack || null);
+      const seen = recentByPlayer.get(player.id) || [];
+      list = packs.randomPrompts(packs.PER_DIVE, body.pack || null, seen);
+      recentByPlayer.set(player.id, [...seen, ...list.map(p => p.id)].slice(-RECENT_CAP));
     }
     if (!list.length) return { error: 'No prompts loaded' };
     const id = crypto.randomUUID();
