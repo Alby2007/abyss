@@ -11,7 +11,7 @@ fact: Swindon's only Premier League season, 1993-94, ended with 100 goals conced
 ## olympic-sports | Name a sport at the Summer Olympics (past or present)
 gem: Tug of war
 fact: Tug of war was an Olympic sport from 1900 to 1920.
-1: Athletics / Track and field, Swimming, Gymnastics, Football / Soccer, Basketball, Tennis, Boxing, Cycling, Rowing
+1: Athletics / Track and field / Track, Swimming, Gymnastics, Football / Soccer, Basketball, Tennis, Boxing, Cycling, Rowing
 2: Diving, Hockey / Field hockey, Volleyball, Beach volleyball, Fencing, Judo, Taekwondo, Wrestling, Weightlifting, Sailing, Archery, Shooting, Equestrian / Show jumping / Dressage, Triathlon, Golf, Rugby sevens / Rugby, Handball, Table tennis / Ping pong, Badminton, Canoeing / Kayaking / Canoe, Water polo, Marathon
 3: Skateboarding, Surfing, Sport climbing / Climbing, Breaking / Breakdancing, BMX, Mountain biking, Modern pentathlon, Synchronised swimming / Artistic swimming, Trampoline, Rhythmic gymnastics, Karate, Baseball, Softball, Heptathlon, Decathlon, Pole vault, Javelin, Discus, Hammer throw, Shot put, Long jump, High jump, Triple jump, Hurdles, Steeplechase, Race walking, Marathon swimming, Keirin, Omnium, Kitesurfing, Windsurfing, Greco-Roman wrestling
 4: Tug of war, Cricket, Polo, Lacrosse, Croquet, Rackets, Jeu de paume / Real tennis, Pelota / Basque pelota, Motorboating / Powerboating, Rope climbing, Art competitions, Live pigeon shooting, Roque
@@ -19,8 +19,8 @@ fact: Tug of war was an Olympic sport from 1900 to 1920.
 ## english-counties | Name a county of England (ceremonial or historic)
 gem: Rutland
 fact: Rutland is England's smallest historic county.
-1: Essex, Kent, Yorkshire, Devon, Cornwall, Surrey, Greater London / London
-2: Sussex / East Sussex / West Sussex, Norfolk, Suffolk, Hampshire, Lancashire, Cheshire, Cumbria, Somerset, Dorset, Oxfordshire, Berkshire, Hertfordshire, Cambridgeshire, Lincolnshire, Nottinghamshire, Derbyshire, Leicestershire, Staffordshire, Warwickshire, Northumberland, Durham / County Durham, Gloucestershire, Wiltshire, Greater Manchester, Merseyside, West Midlands, Buckinghamshire, Bedfordshire
+1: Essex, Kent, Yorkshire / York, Devon, Cornwall, Surrey, Greater London / London
+2: Sussex / East Sussex / West Sussex, Norfolk, Suffolk, Hampshire, Lancashire, Cheshire, Cumbria, Somerset, Dorset, Oxfordshire, Berkshire, Hertfordshire, Cambridgeshire, Lincolnshire, Nottinghamshire, Derbyshire / Derby, Leicestershire, Staffordshire, Warwickshire, Northumberland, Durham / County Durham, Gloucestershire, Wiltshire, Greater Manchester, Merseyside, West Midlands, Buckinghamshire, Bedfordshire
 3: North Yorkshire, South Yorkshire, West Yorkshire, East Riding of Yorkshire, Tyne and Wear, Shropshire, Herefordshire, Worcestershire, Northamptonshire, Isle of Wight, Bristol, Middlesex
 4: Rutland, Huntingdonshire, Westmorland, Cumberland, City of London
 
@@ -100,6 +100,7 @@ fact: Nat Lofthouse, nicknamed the Lion of Vienna, scored twice for England in a
 3: Nat Lofthouse, Billy Wright, Stanley Matthews, Tom Finney, Duncan Edwards, Johnny Haynes, Jimmy Greaves, Ray Clemence, Emlyn Hughes, Mick Mills, Phil Thompson, Terry Butcher, Mark Wright, Des Walker, Gary Pallister, Paul Ince, David Platt, Neil Webb, Steve McMahon, Peter Reid, Trevor Steven, Steve Bull, Mark Hateley, Tony Cottee, Alan Smith, Dennis Wise, Nick Barmby, Darren Anderton, Steve McManaman, Robbie Fowler, Jamie Redknapp, Andy Cole, Jamie Carragher, Gareth Southgate, Rob Lee, Ray Parlour, Martin Keown, Lee Dixon, Nigel Winterburn, Steve Bould, Paul Merson, Matthew Le Tissier, Lee Bowyer, Scott Parker, Michael Carrick, Danny Welbeck, Daniel Sturridge, Jack Wilshere, Luke Shaw, Jesse Lingard, Dele Alli, Eric Dier, Kieran Trippier, James Maddison, Ollie Watkins, Cole Palmer, Ivan Toney, Eberechi Eze, Anthony Gordon, Conor Gallagher, Ben White, Marc Guehi, Aaron Ramsdale, Nick Pope
 4: Wilf Mannion, Raich Carter, Eddie Hapgood, Stan Mortensen, Roy Bentley, Tommy Lawton, Dixie Dean, Cliff Bastin, Alex James, Ted Drake, Jimmy Hogan, Harold Hardman, Billy Meredith, Steve Bloomer, Vivian Woodward, Fred Spiksley, Charlie Roberts, Herbert Chapman, Bill Foulke, Jack Hunt, Jimmy Dickinson, Bill Slater, Johnny Carey, Neil Franklin, Alf Ramsey, Bert Williams, Jackie Milburn, Wilf Copping, Tom Cooper
 5: Alf Common, Fred Geary, John Goodall, Jimmy Crabtree, Howard Spencer, Ernest Needham, Bob Crompton, Billy Gillespie, Charlie Athersmith, George Raikes, Ernest Hine
+5: Julian Dicks
 
 ## efl-clubs | Name an English Football League club outside the Premier League
 gem: Accrington Stanley

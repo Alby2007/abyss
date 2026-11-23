@@ -15,6 +15,8 @@ fact: Strozzapreti translates as 'priest stranglers'.
 2: Linguine, Farfalle / Bow ties, Rigatoni, Tortellini, Fettuccine, Cannelloni, Conchiglie / Shells, Gnocchi, Orzo, Pappardelle, Vermicelli
 3: Orecchiette, Ziti, Bucatini, Capellini / Angel hair, Tortelloni, Ditalini, Cavatappi, Gemelli, Rotini, Radiatori, Campanelle, Paccheri, Casarecce, Mafaldine, Agnolotti, Cappelletti, Manicotti, Stelline, Anelli, Lumache, Trofie, Strozzapreti, Tagliolini, Spaghettini, Mezzi rigatoni, Fregola / Fregula, Pici, Cavatelli, Garganelli, Malloreddus, Bigoli, Tortiglioni, Calamarata, Alfabeto / Alphabet pasta, Lanterne
 4: Anellini, Bavette, Busiate, Corzetti, Culurgiones, Fileja, Lorighittas, Mezzelune, Pansotti, Pizzoccheri, Sagnarelli, Scialatielli, Stringozzi, Testaroli, Tortelli, Trenette, Umbricelli, Zitoni, Ruote / Rotelle, Gigli, Gramigna, Fusilli lunghi, Reginette, Candele, Maltagliati, Passatelli, Sorpresine, Quadretti, Orecchie di elefante, Lagane, Cencioni, Mezze maniche, Tubetti, Pastina, Acini di pepe, Grattini, Spätzle / Spaetzle, Kluski
+4: Strozzapretri, Rotelle / Ruote / Wagon wheels, Torchietti
+5: Su Filindeu, Conchigliette, Pipe rigate, Lumaconi, Creste di gallo, Strangozzi, Ciriole, Schiaffoni, Vesuvio
 
 ## cheese | Name a type of cheese
 gem: Stinking Bishop
@@ -38,6 +40,7 @@ fact: Asafoetida smells so strong it has been nicknamed 'devil's dung'.
 2: Cumin, Turmeric, Coriander / Cilantro, Nutmeg, Sage, Bay leaf / Bay, Cloves / Clove, Chives, Dill, Curry powder, Cayenne / Cayenne pepper, Saffron, Vanilla, Chilli flakes, Mustard / Mustard seed, Garam masala, Allspice, Cardamom
 3: Tarragon, Fennel / Fennel seed, Star anise, Anise / Aniseed, Caraway, Marjoram, Lemongrass, Fenugreek, Sumac, Za'atar, Five spice / Chinese five spice, Mace, Juniper / Juniper berries, Lavender, Chervil, Sorrel, Lovage, Celery seed, Smoked paprika, Ras el hanout, Herbes de Provence, Sichuan pepper / Szechuan pepper, Kaffir lime leaves / Lime leaves, Curry leaves, Nigella / Black seed / Kalonji, Poppy seed, Sesame / Sesame seeds, White pepper, Pink peppercorns, Horseradish, Wasabi, Galangal, Tamarind, Ajwain / Carom, Borage, Savory, Lemon balm, Chamomile, Tajin, Old Bay, Cajun spice, Jerk seasoning, Harissa, Berbere, Dukkah, Baharat, Shichimi
 4: Asafoetida / Hing, Mahlab, Grains of paradise, Long pepper, Cubeb, Amchur / Mango powder, Annatto / Achiote, Epazote, Hyssop, Rue, Angelica, Costmary, Woodruff, Mugwort, Perilla / Shiso, Culantro, Vietnamese coriander / Rau ram, Thai basil, Holy basil / Tulsi, Pandan, Kokum, Black cardamom, Black lime / Loomi, Sansho, Sassafras / File, Wattleseed, Lemon myrtle, Pepperberry, Saltbush, Golpar, Barberry, Sweet cicely, Spikenard, Orris root, Zedoary, Tonka bean, Kencur, Calamus
+5: Bergamot
 
 ## sandwich-fillings | Name something you'd put in a sandwich
 daily: no
@@ -47,6 +50,9 @@ fact: Coronation chicken was created for Elizabeth II's coronation banquet in 19
 2: Turkey, Salami, Cucumber, Mayonnaise / Mayo, Crisps, Avocado, Prawns / Prawn, Beef / Roast beef, Pickle / Branston, Hummus, Sausage, Onion, Nutella, Chips / Chip butty, Egg mayo, BLT, Cheese and onion, Pastrami, Brie
 3: Coronation chicken, Marmite, Fish fingers, Coleslaw, Rocket, Spinach, Jalapenos, Mustard, Ketchup, Brown sauce, Pesto, Mozzarella, Falafel, Halloumi, Chorizo, Pepperoni, Smoked salmon, Cream cheese, Corned beef, Sardines, Banana, Honey, Sun-dried tomatoes, Gherkins, Beetroot, Sweetcorn, Pulled pork, Meatballs, Stuffing, Cranberry sauce, Mushrooms, Peppers, Olives, Watercress, Cress, Sprouts / Alfalfa
 4: Fluff / Marshmallow fluff, Spam, Haggis, Black pudding, Bubble and squeak, Pate, Liver, Tongue, Brawn, Anchovies, Kimchi, Sauerkraut, Piccalilli, Chutney, Mango chutney, Salad cream, Beans / Baked beans, Spaghetti hoops, Crispy duck, Katsu, Tofu, Tempeh, Seitan, Jackfruit, Pineapple, Strawberries, Apple, Dates, Lemon curd, Golden syrup, Condensed milk, Sugar, Hundreds and thousands, Fairy bread, Mars bar, Bovril, Vegemite, Dripping, Lard
+4: Gammon
+4: Salt beef / Corned beef, Pork, Salmon, Egg mayonnaise / Egg mayo, Tuna mayo / Tuna sweetcorn, Chicken mayo / Chicken tikka, Cheese and pickle, Ploughmans / Ploughman's, Ham and cheese, Cheese and ham, Club sandwich
+5: Reuben, Monte Cristo, Croque monsieur / Croque madame, Po boy / Po'boy, Muffuletta, Banh mi, Chip butty, Crisp sandwich, Fish finger sandwich, Bacon butty / Bacon bap / Bacon sarnie, Sausage butty, Chip sandwich, Meatball sub, Brisket, Philly cheesesteak / Cheesesteak, Cuban sandwich / Cubano, French dip, Italian beef, Sloppy joe, Patty melt, Tuna melt, Chicken salad, Egg salad, Curried chicken, Cheeseburger, Burger
 
 ## breads | Name a type of bread
 gem: Injera
@@ -74,6 +80,8 @@ fact: The Abernethy biscuit is named after Dr John Abernethy, who recommended a 
 3: Brandy snap, Ginger snap, Langue de chat, Tuile, Lebkuchen, Speculoos, Amaretti, Savoiardi / Ladyfingers / Sponge finger, Florentine, Macaroon, Macaron, Eccles cake, Chorley cake, Banbury cake, Dundee cake, Parkin, Biscotti, Petticoat tails, Bath Oliver, Shortcake, Rocky, Blue Riband, Breakaway, Taxi, Trio, Gold bar, Caramel digestive, Bath bun
 4: Abernethy, Marie, Morning coffee, Osborne, Lincoln, Reading biscuit, Shrewsbury biscuit, Fly cemetery / Garibaldi, Gingerbread man, Iced gem, Iced ring, Empire biscuit, German biscuit, Cornish fairing, Fairings, Goosnargh cake, Kendal mint cake, Penny bun, Anzac biscuit, Tim Tam, Monte Carlo, Iced VoVo, Scotch finger, Arrowroot, Mikado
 5: Cheese straws, Cheese footballs, Twiglets, Lees Macaroon Bar, Lees Snowballs, Caramel Log, Tunnocks Teacake, Burtons Fish Shapes, Wagon Wheel Jammie, Club Orange, Club Mint, Fox's Viennese
+4: Party Ring, Foxs / Fox's Biscuits, Nice biscuit, Lincoln biscuit, Abbey Crunch, Chocolate Teacake, Caramel Wafer, Wagon Wheels, Jammie Dodgers
+5: Tunnocks / Tunnock's, Club biscuit / Club, Drifter, Echo, Penguin biscuit, Club Penguin, United biscuit, Chocolate Homewheat, Lemon Puff, Coconut Ring, Gypsy Cream, Gingernut / Ginger snap
 
 ## desserts | Name a dessert or pudding
 gem: Clootie dumpling
@@ -92,6 +100,7 @@ fact: Da Hong Pao is a rock oolong from China's Wuyi Mountains, and tiny lots of
 3: Pu-erh, Keemun, Nilgiri, Yunnan, Russian Caravan, Gyokuro, Genmaicha, Hojicha, Bancha, Kukicha, Tieguanyin, Dong Ding, Longjing / Dragon Well, Bi Luo Chun, Silver Needle, White Peony, Yerba mate / Mate, Honeybush, Lemon verbena, Lemongrass, Rosehip, Elderflower, Lime blossom / Linden, Valerian, Lemon balm, Liquorice tea, Masala chai, Kashmiri chai, Butter tea, Thai tea, Teh tarik, Kombucha, Sweet tea, Sun tea
 4: Da Hong Pao, Oriental Beauty, Dian Hong, Jin Jun Mei, Lu An Gua Pian, Huangshan Maofeng, Taiping Houkui, Junshan Yinzhen, Mengding Ganlu, Phoenix Dancong / Dancong, Rou Gui, Tie Luo Han, Shui Jin Gui, Bai Ji Guan, Guayusa
 5: Liu Bao, Fu brick tea, Hei Cha, Anhua dark tea, Qingzhuan, Tibetan brick tea, Tuocha, Lao Cha Tou
+5: Gunpowder tea, Chun Mee, Dianhong, Dancong, Shoumei, Gongmei, Puerh / Pu-erh, Yellow tea / Junshan Yinzhen, Biluochun, Maofeng, Anji Bai Cha, Zhengshan Xiaozhong
 
 ## coffees | Name a type of coffee drink
 gem: Cafe bombon
@@ -153,7 +162,7 @@ fact: Natto is sticky, stringy fermented soybeans, an acquired taste even in Jap
 1: Sushi, Ramen, Tempura, Teriyaki, Sashimi, Miso soup, Udon, Gyoza, Katsu / Tonkatsu, Yakitori
 2: Soba, Okonomiyaki, Takoyaki, Teppanyaki, Sukiyaki, Shabu-shabu, Tonkotsu ramen, Katsu curry, Onigiri, Bento, Edamame, Mochi, Dorayaki, Matcha, Wagyu, Yakiniku, Karaage, Donburi / Rice bowl, Gyudon, Oyakodon, Katsudon, Unadon, Chawanmushi, Tamagoyaki, Nigiri, Maki, Temaki, Sake, Wasabi, Nori
 3: Natto, Tsukemono, Umeboshi, Furikake, Miso, Dashi, Mirin, Kombu, Wakame, Hijiki, Konnyaku, Shirataki, Tofu, Aburaage, Kamaboko, Narutomaki, Chikuwa, Hanpen, Oden, Nabe, Chanko nabe, Mizutaki, Motsunabe, Yudofu, Tonjiru, Kenchinjiru, Zosui, Ochazuke, Hitsumabushi, Kabayaki, Torikatsu, Menchi-katsu, Korokke, Ebi fry, Hamburg steak / Hambagu, Omurice, Naporitan, Yakisoba, Hiyashi chuka, Zaru soba, Kitsune udon, Tanuki soba, Tempura soba, Curry udon, Champon, Sara udon, Hoto, Inaniwa udon, Sanuki udon, Hakata ramen, Sapporo ramen, Kitakata ramen, Tsukemen, Abura soba, Mazesoba, Tantanmen, Chashu, Ajitama, Menma, Negi
-4: Fugu, Shirako, Uni, Ikura, Tobiko, Masago, Ankimo, Karasumi, Konowata, Shiokara, Sazae, Kusaya, Funazushi, Narezushi, Kiritanpo, Inagoyaki, Basashi, Sakuraniku, Torisashi, Jingisukan, Genghis Khan, Hōtō, Wanko soba, Fuki, Zenmai, Warabimochi, Kuzumochi, Anmitsu, Mitarashi dango, Dango, Daifuku, Taiyaki, Imagawayaki, Senbei, Arare, Yokan, Manju, Monaka, Castella, Kakigori, Parfait, Shokupan
+4: Fugu, Shirako, Uni, Ikura, Tobiko, Masago, Ankimo, Karasumi, Konowata, Shiokara, Sazae, Kusaya, Funazushi, Narezushi, Kiritanpo, Inagoyaki, Basashi, Sakuraniku, Torisashi, Jingisukan, Genghis Khan, Wanko soba, Fuki, Zenmai, Warabimochi, Kuzumochi, Anmitsu, Mitarashi dango, Dango, Daifuku, Taiyaki, Imagawayaki, Senbei, Arare, Yokan, Manju, Monaka, Castella, Kakigori, Parfait, Shokupan
 5: Ayu, Shirauo, Odori ebi, Namerou, Takowasa, Jibuni, Kani miso, Ankou nabe, Chirimen, Shirasu, Tobiuo, Shimaaji, Karei, Hirame engawa, Kinmedai
 
 ## mexican-dishes | Name a Mexican dish
@@ -201,6 +210,8 @@ fact: The kola nut is chewed across West Africa and was the original source of c
 3: Kola nut / Cola nut, Pili nut, Candlenut, Ginkgo nut, Shea nut, Marula nut, Mongongo nut, Baru nut, Sacha inchi, Paradise nut, Sapucaia nut, Butternut, Black walnut, Heartnut, Areca nut, Cacao bean / Cocoa bean, Nutmeg, Lotus seed, Fox nut / Makhana, Chinquapin, Jackfruit seed, Breadnut, Malabar chestnut, Kukui nut, Kemiri, Bunya nut, Quandong nut, Bush nut, Wattleseed, Bambara groundnut, Groundnut, Earthnut, Pignut, Sunflower kernel
 4: Cashew apple seed, Ramon nut, Buartnut, Mamoncillo seed, Yeheb nut, Bitter almond, Apricot kernel, Peach kernel, Plum kernel, Cherry stone, Date stone, Olive stone, Carob seed, Tamarind seed, Mustard seed, Caraway seed, Cumin seed, Fennel seed, Coriander seed, Fenugreek seed, Nigella seed, Celery seed, Dill seed, Anise seed
 5: Gevuina, Chilean hazel, Avellano, Sacred lotus seed, Lotus nut, Perilla seed, Camelina, Safflower seed, Niger seed, Quinoa, Amaranth, Teff, Psyllium, Basil seed
+4: Flaxseed / Linseed, Marcona almond
+5: Karuka, Souari nut, Pignolia / Pinyon, Chufa, Job's tears, Egusi, Buchanania / Chironji
 
 ## berries | Name a berry
 gem: Cloudberry
@@ -210,6 +221,9 @@ fact: Cloudberries grow in arctic bogs and are so prized in Finland that they ap
 3: Whitecurrant, Pinkcurrant, Clove currant, Buffaloberry, Goumi, Autumn olive, Wolfberry, Maqui, Calafate, Camu camu, Mortino, Cape gooseberry / Physalis / Goldenberry, Miracle berry, Jabuticaba, Pitanga, Surinam cherry, Acerola, Bramble, Bullace, Hackberry, Barbados cherry, Salal, Oregon grape, Chilean guava, Ugni, Silverberry, Seaberry, Yumberry, Bayberry, Lowbush blueberry, Highbush blueberry, Rabbiteye blueberry, Muscadine, Fox grape
 4: Tutsan, Bog bilberry, Arctic bramble, Stone bramble
 5: Strawberry tree fruit, Arbutus berry, Madrono, Manzanita berry, Toyon berry, Pyracantha berry, Cotoneaster berry, Snowberry, Coralberry, Pokeberry, Dogwood berry, Spicebush berry, Sumac berry, Wintergreen berry, Checkerberry, Teaberry
+4: Guava
+4: Aronia / Chokeberry, Serviceberry / Juneberry, Haskap / Honeyberry
+5: Beautyberry, Medlar, Nannyberry, Ohelo berry, Maqui berry, Miracle fruit
 
 ## breakfast-cereals | Name a breakfast cereal
 gem: Ricicles

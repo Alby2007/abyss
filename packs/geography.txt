@@ -56,7 +56,7 @@ fact: Liechtenstein is doubly landlocked: every country around it is landlocked 
 gem: Sargasso Sea
 fact: The Sargasso Sea is the only sea with no coastline at all.
 1: Atlantic Ocean / Atlantic, Pacific Ocean / Pacific, Indian Ocean, Arctic Ocean / Arctic, Mediterranean Sea / Mediterranean, North Sea, Red Sea, Dead Sea
-2: Southern Ocean / Antarctic Ocean, Caribbean Sea / Caribbean, Black Sea, Baltic Sea, Irish Sea, Caspian Sea, Arabian Sea, South China Sea
+2: Southern Ocean / Antarctic Ocean, Caribbean Sea / Caribbean, Black Sea, Baltic Sea, Irish Sea, Caspian Sea / Caspian, Arabian Sea, South China Sea
 3: Adriatic Sea, Aegean Sea, Tyrrhenian Sea, Ionian Sea, Celtic Sea, Norwegian Sea, Barents Sea, Bering Sea, Sea of Japan / East Sea, Yellow Sea, East China Sea, Coral Sea, Tasman Sea, Philippine Sea, Sea of Okhotsk, Arafura Sea, Timor Sea, Andaman Sea, Ligurian Sea, Sea of Marmara, Sea of Azov, Aral Sea, White Sea, Labrador Sea, Greenland Sea
 4: Kara Sea, Laptev Sea, East Siberian Sea, Chukchi Sea, Beaufort Sea, Weddell Sea, Ross Sea, Amundsen Sea, Bellingshausen Sea, Scotia Sea, Sulu Sea, Celebes Sea, Java Sea, Banda Sea, Molucca Sea, Flores Sea, Bismarck Sea, Solomon Sea, Balearic Sea, Alboran Sea, Wadden Sea, Sea of the Hebrides, Salish Sea, Salton Sea, Sargasso Sea, Lakshadweep Sea, Levantine Sea, Libyan Sea, Sea of Crete, Thracian Sea, Inland Sea / Seto Inland Sea
 
@@ -71,11 +71,12 @@ hint: Overseas territories count
 ## rivers | Name a river
 gem: Okavango
 fact: The Okavango never reaches the sea. It spills into an inland delta in Botswana and disappears into the Kalahari.
-1: Thames, Nile, Amazon, Mississippi
+1: Thames, Nile, Amazon, Mississippi / Missisippi / Missipi
 2: Danube, Rhine, Seine, Yangtze / Chang Jiang, Ganges, Volga, Severn, Mersey, Tyne, Clyde, Tigris, Euphrates, Congo, Colorado, Hudson, Jordan, Mekong, Murray, Loire, Tiber, Rhone, Missouri, Orinoco, Zambezi, Niger, Indus
-3: Elbe, Oder, Vistula, Dnieper, Don, Ural, Ebro, Tagus, Douro, Po, Arno, Garonne, Dordogne, Shannon, Liffey, Trent, Avon, Wye, Tay, Tweed, Dee, Humber, Ouse, Cam, Limpopo, Orange, Brahmaputra, Irrawaddy, Salween, Amur, Lena, Yenisei, Ob, Yellow River / Huang He, Pearl River, Darling, Rio Grande, Yukon, Columbia, Ohio, St Lawrence / Saint Lawrence, Potomac, Delaware, Parana, Seine
+3: Elbe, Oder, Vistula, Dnieper, Don, Ural, Ebro, Tagus, Douro, Po, Arno, Garonne, Dordogne, Shannon, Liffey, Trent, Avon, Wye, Tay, Tweed, Dee, Humber, Ouse, Cam, Limpopo, Orange, Brahmaputra, Irrawaddy, Salween, Amur, Lena, Yenisei, Ob, Yellow River / Huang He, Pearl River, Darling, Rio Grande, Yukon, Columbia, Ohio, St Lawrence / Saint Lawrence, Potomac, Delaware, Parana
 4: Neva, Vltava, Moselle, Meuse, Scheldt, Saone, Marne, Somme, Oise, Isere, Inn, Drava, Sava, Tisza, Prut, Dniester, Daugava, Neman / Nemunas, Kama, Oka, Irtysh, Syr Darya, Amu Darya, Helmand, Kabul, Chenab, Sutlej, Jhelum, Yamuna, Godavari, Krishna, Kaveri, Narmada, Chao Phraya, Red River, Han, Yalu, Songhua, Senegal, Gambia, Volta, Benue, Kasai, Ubangi, Blue Nile, White Nile, Atbara, Rufiji, Cunene, Waikato, Clutha, Yarra, Torrens, Snake, Platte, Arkansas, Susquehanna, Connecticut, Mackenzie, Fraser, Magdalena, Madeira, Xingu, Tapajos, Purus, Pilcomayo, Essequibo
 5: Pripyat, Mur, Isonzo / Soca, Aare, Reuss, Ticino, Tagliamento, Piave, Adige, Rubicon, Kolyma, Indigirka, Lempa, Usumacinta, Motagua
+4: Allegheny
 
 ## islands | Name an island
 gem: Socotra
@@ -103,6 +104,8 @@ fact: The Drakensberg in southern Africa gets its name from the Afrikaans for Dr
 3: Tatras, Sudetes, Vosges, Jura, Massif Central, Harz, Ore Mountains, Julian Alps, Dinaric Alps, Rila, Pindus, Rhodope, Cantabrian Mountains, Sierra Morena, Picos de Europa, Sierra Madre, Coast Mountains, Brooks Range, Alaska Range, Wasatch Range, Sawtooth Range, Adirondacks, Catskills, Green Mountains, White Mountains, Cordillera Blanca, Western Ghats, Eastern Ghats, Aravalli Range, Vindhya Range, Kunlun, Qinling, Annamite Range, Barisan Mountains, Snowy Mountains, Flinders Ranges, MacDonnell Ranges, Transantarctic Mountains, Hoggar / Ahaggar, Tibesti, Simien Mountains, Virunga Mountains
 4: Alborz / Elburz, Kopet Dag, Sulaiman Range, Sayan Mountains, Stanovoy Range, Verkhoyansk Range, Chersky Range, Sikhote-Alin, Japanese Alps, Taebaek Mountains, Cederberg, Magaliesberg, Maloti Mountains, Usambara Mountains, Bale Mountains, Ennedi Plateau
 5: Vitosha, Fagaras Mountains, Bucegi Mountains, Prokletije / Accursed Mountains, Shar Mountains, Pir Panjal, Zanskar
+4: Pamir, Tien Shan / Tian Shan, Sayan, Stanovoy, Verkhoyansk, Chersky, Kolyma, Elburz / Alborz, Taurus, Pontic, Sulaiman, Aravalli, Vindhya, Satpura
+5: Annamite / Truong Son, Cardamom / Kravanh, Tenasserim, Dawna, Shan Hills, Arakan Yoma, Chin Hills, Naga Hills, Patkai, Barisan, Crocker / Banjaran Crocker, Titiwangsa, Maoke / Sudirman, Jayawijaya, Muller, Schwaner, Star Mountains / Pegunungan Bintang, Finisterre, Bismarck Range, Owen Stanley, Central Range New Guinea, Apolobamba, Cordillera Real, Cordillera Occidental, Cordillera Oriental, Cordillera Central, Cordillera de Talamanca, Sierra Madre Occidental, Sierra Madre Oriental, Sierra Madre del Sur, Sierra Madre de Chiapas, Sierra de los Cuchumatanes, Sierra de Bahoruco, Cordillera Septentrional, Massif du Nord, Blue Mountains Jamaica, Australian Alps, Blue Mountains NSW, Musgrave Ranges, Kimberley Plateau, Hamersley Range, Darling Range, Stirling Range, Kaikoura Ranges, Tararua, Ruahine, Kaimanawa, Kaweka, Richmond Range, Spenser Mountains, Ka Tiritiri o te Moana / Southern Alps, Admiralty Mountains, Ellsworth Mountains, Shackleton Range, Pensacola Mountains, Queen Maud Mountains
 
 ## deserts | Name a desert
 gem: Atacama
@@ -112,6 +115,8 @@ fact: Parts of the Atacama in Chile have gone years without recorded rain, makin
 3: Tabernas, Bardenas Reales, Karoo, Tanezrouft, Tenere, Erg Chebbi, Grand Erg Oriental, Western Desert, Eastern Desert, Ennedi, Bayuda, Chalbi Desert, Strzelecki Desert, Sturt Stony Desert, Little Sandy Desert, Pinnacles Desert, Cholistan Desert, Registan, Badain Jaran, Tengger, Ordos Desert, Gurbantunggut, Ustyurt Plateau, Rann of Kutch, Vizcaino Desert, Monte Desert, Sechura Desert, Guajira Desert, Colorado Desert, Black Rock Desert
 4: Nafud, Dasht-e Kavir, Dasht-e Lut / Lut Desert, Ogaden, Kumtag, Betpak-Dala, Gran Desierto de Altar, Thal Desert, Kharan Desert, Mu Us, Djurab, Succulent Karoo, Grand Erg Occidental
 5: Tatacoa Desert, Lencois Maranhenses, Cuatro Cienegas, Aralkum
+4: Ordos, Cholistan, Nefud, Danakil, Tanami
+5: Al-Dahna, Chalbi, Tirari, Strzelecki, Tatacoa, Erg Iguidi, Kaokoveld, McMurdo Dry Valleys
 
 ## lakes | Name a lake
 gem: Lake Baikal
@@ -121,6 +126,7 @@ fact: Lake Baikal in Siberia is the deepest lake on Earth and holds roughly a fi
 3: Lake Nasser, Lake Kariba, Lake Volta, Lake Turkana, Lake Albert, Lake Edward, Lake Kivu, Lake Natron, Lake Nakuru, Lake Naivasha, Lake Bogoria, Lake Retba, Lake Assal, Lake Van, Lake Sevan, Lake Urmia, Lake Tonle Sap, Lake Toba, Lake Poyang, Lake Dongting, Lake Qinghai, Issyk-Kul, Lake Balkhash, Lake Peipus, Lake Saimaa, Lake Inari, Lake Malaren, Lake Vattern, Lake Ohrid, Lake Prespa, Lake Skadar, Lake Bled, Lake Bohinj, Lake Annecy, Lake Bourget, Lake Neuchatel, Lake Lugano, Lake Thun, Lake Brienz, Lake Neusiedl, Chiemsee, Starnberger See, Loch Katrine, Loch Leven, Loch Tay, Loch Maree, Loch Shiel, Loch Morar, Haweswater, Wastwater, Buttermere, Grasmere, Thirlmere, Rydal Water, Llyn Padarn, Llyn Tegid, Lake Vyrnwy, Rutland Water, Kielder Water, Lake Pontchartrain, Lake Champlain, Lake Winnipesaukee, Crater Lake, Mono Lake, Lake Powell, Lake Mead, Lake Havasu, Lake Winnipeg, Lake Athabasca, Great Slave Lake, Great Bear Lake, Lake Maracaibo, Lake Poopo, Lake Llanquihue, Lake Argentino, Lake Nahuel Huapi, Lake Wanaka, Lake Rotorua, Lake Burley Griffin
 4: Lake Vostok, Lake Mweru, Lake Bangweulu, Lake Tana, Lake Abaya, Lake Ziway, Lake Victoria Nyanza, Lake Rukwa, Lake Eyasi, Lake Manyara, Lake Kyoga, Lake Nyasa, Lake Chilwa, Lake Ngami, Etosha Pan, Lake Fitri, Lake Tai, Lake Taihu, Lake Khanka, Lake Hovsgol, Lake Uvs, Lake Teletskoye, Lake Telmen, Lake Kolleru, Lake Chilika, Lake Wular, Lake Dal, Lake Pichola, Lake Pangong, Lake Manasarovar, Lake Rakshastal, Lake Inle, Lake Songkhla, Lake Laguna de Bay, Lake Taal, Lake Lanao, Lake Towuti
 5: Lake Muritz
+5: Jordan Lake
 
 
 ## volcanoes | Name a volcano
@@ -131,6 +137,8 @@ fact: Nyiragongo in the Democratic Republic of the Congo holds one of the larges
 3: Mount Ruapehu, Mount Ngauruhoe, Mount Taranaki, White Island / Whakaari, Mount Aso, Sakurajima, Mount Ontake, Mount Unzen, Mount Agung, Mount Sinabung, Mount Rinjani, Mount Semeru, Taal, Soufriere Hills, La Soufriere, Arenal, Poas, Irazu, Masaya, Pacaya, Fuego, Colima, Paricutin, Pico de Orizaba, Nevado del Ruiz, Tungurahua, Sangay, Villarrica, Osorno, Calbuco, Mount Katmai, Novarupta, Mount Redoubt, Mount Baker, Lassen Peak, Mount Adams, Crater Lake, Mount Meru, Ol Doinyo Lengai, Mount Cameroon, Nyamuragira, Erta Ale, Piton de la Fournaise, Mount Teide, Cumbre Vieja, Campi Flegrei
 4: Nyiragongo, Mount Kelud, Mount Galunggung, Mount Lamington, Mount Pago, Rabaul, Tavurvur, Manam, Ulawun, Bagana, Yasur, Ambrym, Mount Marum, Lopevi, Mount Nyiragongo, Kick-em-Jenny
 5: Mount Veniaminof, Shishaldin, Mount Pavlof, Mount Cleveland, Klyuchevskaya Sopka, Bezymianny, Tolbachik, Karymsky, Shiveluch
+4: Taal Volcano, Mount Bulusan
+5: Mount Kirishima, Mount Bandai, Mount Tarumae, Mount Usu, Mount Asama, Mount Iwate, Mount Chokai, Mount Zaō / Zao, Kavachi, El Hierro, Barren Island, Dallol, Mount Karthala, Mount Fako, Nabro, Dubbi, Puyehue, Hudson Volcano, Chaiten, Llaima, Ubinas, Sabancaya, Reventador, Galeras, Turrialba, Rincon de la Vieja, San Miguel, Santiaguito, El Chichon, Methana, Nisyros, Vulcano, Mount Vesuvius, Mount Karisimbi, Mount Visoke
 
 ## waterfalls | Name a waterfall
 gem: Angel Falls
@@ -139,6 +147,8 @@ fact: Angel Falls in Venezuela is the tallest uninterrupted waterfall in the wor
 2: Horseshoe Falls, Yosemite Falls, Multnomah Falls, Kaieteur Falls, Gullfoss, Skogafoss, Seljalandsfoss, Dettifoss, Reichenbach Falls, High Force, Aysgarth Falls, Pistyll Rhaeadr, Swallow Falls, Hardraw Force, Gaping Gill, Rhine Falls, Plitvice Lakes, Krka Falls, Jog Falls, Dudhsagar Falls, Havasu Falls, Bridalveil Fall, Shoshone Falls, Bow Falls, Sutherland Falls, Huka Falls, Blue Nile Falls, Tugela Falls, Ruacana Falls
 3: Wallaman Falls, Jim Jim Falls, Twin Falls, Katoomba Falls, Kjeragfossen, Voringsfossen, Vettisfossen, Mardalsfossen, Trummelbach Falls, Giessbach Falls, Staubbach Falls, Cascade de Gavarnie / Gavarnie Falls, Cascata delle Marmore / Marmore Falls, Cascate del Mulino, Cascate del Toce, Krimml Falls, Kuang Si Falls, Erawan Falls, Ban Gioc Falls, Detian Falls, Huangguoshu Falls, Hukou Falls, Kegon Falls, Nachi Falls, Fukuroda Falls, Shiraito Falls, Gocta Falls, Gocta Cataracts, Salto del Laja, Salto Angel, Salto Grande, Tequendama Falls, Tamul Falls, Basaseachic Falls, Cascada de Basaseachi
 4: Livingstone Falls, Boyoma Falls / Stanley Falls, Murchison Falls, Ouzoud Falls, Kalambo Falls, Aberdare Falls, Sipi Falls, Rusumo Falls, Epupa Falls, Augrabies Falls, Howick Falls, Mac-Mac Falls, Berlin Falls, Lisbon Falls, Debengeni Falls, Bridal Veil Falls
+4: Godafoss, Svartifoss, Haifoss, Dynjandi, Kirkjufellsfoss, Maletsunyane Falls, Krimml, Voringfossen, Palouse Falls, Takakkaw Falls, Dudhsagar, Athirappilly
+5: Aldeyjarfoss, Hraunfossar, Augrabies, Tis Issat, Ouzoud, Epupa, Staubbach, Trummelbach, Langfoss, Latefossen, Cautley Spout, Eas a Chual Aluinn, Falls of Glomach, Steall Falls, Falls of Foyers, Grey Mares Tail, Gordale Scar, Aira Force, Cauldron Snout, Taughannock, Amicalola, Tallulah, Whitewater Falls, Kaaterskill, Helmcken Falls, Athabasca Falls, Montmorency Falls, Shivanasamudra, Chitrakote, Barehipani, Nohkalikai, Kynrem, Ban Gioc Detian, Huangguoshu, Kuang Si, Tad Fane, Thi Lo Su, Kukenan, Yumbilla, Gocta, La Fortuna, Nauyaca, Petrohue, Tequendama, San Rafael Falls Ecuador, Agua Azul, Misol-Ha, Tamul, Basaseachic, Piedra Volada
 
 
 ## bridges | Name a famous bridge
@@ -149,6 +159,8 @@ fact: The Pont du Gard in southern France is a Roman aqueduct bridge that was bu
 3: Albert Bridge, Waterloo Bridge, Westminster Bridge, Lambeth Bridge, Blackfriars Bridge, Southwark Bridge, Hammersmith Bridge, Chelsea Bridge, Vauxhall Bridge, Putney Bridge, Kew Bridge, Richmond Bridge, Clifton Bridge, Royal Albert Bridge, Tay Bridge, Kingston Bridge, Skye Bridge, Queensferry Crossing, Forth Road Bridge, Erskine Bridge, Gateshead Millennium Bridge, Infinity Bridge, Swing Bridge, Tees Transporter Bridge, Newport Transporter Bridge, Pontcysyllte Aqueduct, Barmouth Bridge
 4: Stari Most, Pont du Gard, Alcantara Bridge, Puente Nuevo, Ponte Sant'Angelo, Ponte Milvio, Ponte Pietra, Ponte Scaligero, Ponte della Maddalena, Pont Valentre, Pont Saint-Benezet, Pont d'Avignon, Pont de Normandie, Pont de Tancarville, Vasco da Gama Bridge, 25 de Abril Bridge, Dom Luis I Bridge, Rio-Antirrio Bridge, Galata Bridge, Bosphorus Bridge, Golden Horn Bridge, Mostar Bridge
 5: Puente de Occidente, Kapellbrucke, Chapel Bridge, Glienicke Bridge, Oberbaum Bridge, Rakotzbrucke, Devil's Bridge, Teufelsbrucke, Pont du Diable
+4: Rio-Niteroi Bridge, Great Belt Bridge, Lake Pontchartrain Causeway, Chesapeake Bay Bridge-Tunnel, Seven Mile Bridge, Huey P Long Bridge, Atchafalaya Basin Bridge, I-10 Bonnet Carre
+5: Hartland Covered Bridge, Chain Bridge Budapest, Szechenyi Bridge, Liberty Bridge Budapest, Margit Bridge, Elisabeth Bridge Budapest, Jiaozhou Bay Bridge, Hangzhou Bay Bridge, Sidu River Bridge, Duge Bridge / Beipanjiang Bridge, Garabit Viaduct, Russky Bridge, Great Seto Bridge, Tatara Bridge, Kessock Bridge, Menai Suspension Bridge, Britannia Bridge, Conwy Suspension Bridge, Albert Bridge London, Hungerford Bridge
 
 
 ## world-landmarks | Name a famous landmark or monument
@@ -203,6 +215,8 @@ fact: Bab-el-Mandeb, whose name is Arabic for the Gate of Tears, connects the Re
 2: Kiel Canal, Dover Strait / Strait of Dover, North Channel, Irish Sea, Solent, Menai Strait, Skagerrak, Kattegat, Oresund, Dardanelles, Strait of Magellan, Drake Passage, Cook Strait, Bass Strait, Torres Strait, Taiwan Strait, Palk Strait, Mozambique Channel, Bab-el-Mandeb, Strait of Messina, Strait of Bonifacio, Gulf of Bothnia, Corinth Canal, Grand Union Canal, Manchester Ship Canal, Caledonian Canal, Regent's Canal, Erie Canal, Rhine-Main-Danube Canal, Grand Canal, Canal du Midi, Gota Canal, Welland Canal, Beagle Channel
 3: Menai Straits, Pentland Firth, Minch, Little Minch, Sound of Mull, Sound of Sleat, Kyle of Lochalsh, Sound of Jura, Corryvreckan, Strangford Lough, Straits of Dover, Bristol Channel, Severn Estuary, Thames Estuary, Wash, Humber Estuary, Morecambe Bay, Solway Firth, Firth of Forth, Firth of Clyde, Moray Firth, Cromarty Firth, Dornoch Firth, Firth of Tay, Leeds and Liverpool Canal, Kennet and Avon Canal, Oxford Canal, Llangollen Canal, Rochdale Canal, Bridgewater Canal, Forth and Clyde Canal, Union Canal, Crinan Canal, Gloucester and Sharpness Canal, Basingstoke Canal, Grand Western Canal, Trent and Mersey Canal, Shropshire Union Canal
 4: Palk Bay, Gulf of Mannar, Strait of Kerch, Kerch Strait, Strait of Otranto, Strait of Sicily, Strait of Tiran, Strait of Juan de Fuca, Straits of Florida, Strait of Georgia, Johnstone Strait, Hecate Strait, Davis Strait, Denmark Strait, Hudson Strait, Foxe Basin, Lancaster Sound, Northwest Passage, Northeast Passage, Strait of Belle Isle, Cabot Strait, Northumberland Strait, Strait of Canso, Chesapeake and Delaware Canal, Cape Cod Canal, Houston Ship Channel, Intracoastal Waterway, Rideau Canal, Trent-Severn Waterway, Soo Locks, Sault Ste Marie Canal
+4: Grand Canal China, Beijing-Hangzhou Grand Canal, Bude Canal
+5: Strait of Dover / Dover Strait, Korea Strait / Tsushima Strait, Foveaux Strait, Lombok Strait, Sunda Strait, Makassar Strait, Karimata Strait, Gaspar Strait, Bangka Strait, Mindoro Strait, Balabac Strait, San Bernardino Strait, Surigao Strait, Verde Island Passage, Sibutu Passage, Florida Strait, Yucatan Channel, Windward Passage, Mona Passage, Anegada Passage, Guadeloupe Passage, Martinique Channel, Saint Lucia Channel, Saint Vincent Channel, Grenadines Passage
 
 
 ## australian-places | Name a city, town or famous place in Australia
