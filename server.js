@@ -8,6 +8,7 @@ const packs = require('./lib/packs');
 const db = require('./lib/db');
 const auth = require('./lib/auth');
 const { matchDetail } = require('./lib/match');
+const { judge } = require('./lib/judge');
 const party = require('./lib/party');
 
 const PORT = Number(process.env.PORT || 3000);
@@ -197,6 +198,7 @@ const api = {
       const seen = await db.recentPromptIds(player.id);
       list = packs.randomPrompts(packs.PER_DIVE, body.pack || null, [...seen, ...seenMem]);
       recentByPlayer.set(player.id, [...seenMem, ...list.map(p => p.id)].slice(-RECENT_CAP));
+      db.markSeen(player.id, list.map(p => p.id)).catch(e => console.error(e.message));
     }
     if (!list.length) return { error: 'No prompts loaded' };
     const id = crypto.randomUUID();
@@ -217,8 +219,25 @@ const api = {
     if (!giveUp) {
       // still on the clock: misses and typo-corrections don't end the prompt
       if (!result.ok) {
-        if (guess) db.logRejected(p.id, guess, s.playerId).catch(e => console.error(e.message));
-        return { retry: true, guess };
+        if (guess) {
+          // the AI judge gets a say before a guess is refused for real
+          const t0 = Date.now();
+          const verdict = await judge(p, guess);
+          s.askedAt += Date.now() - t0; // judging time is on us, not the player
+          if (verdict?.valid) {
+            const listed = matchDetail(p.index, verdict.name);
+            if (!listed) {
+              packs.addAnswer(p.id, verdict.name, verdict.tier);
+              db.addAddition(p.id, verdict.name, verdict.tier).catch(e => console.error(e.message));
+            }
+            result = scoreGuess(p, listed ? listed.answer.name : verdict.name);
+            if (result.ok) { result.judged = true; result.guess = guess; }
+          }
+        }
+        if (!result.ok) {
+          if (guess) db.logRejected(p.id, guess, s.playerId).catch(e => console.error(e.message));
+          return { retry: true, guess };
+        }
       }
       if (!result.exact) return { confirm: { from: guess, to: result.answer } };
     } else if (!result.ok) {

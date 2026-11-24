@@ -33,6 +33,8 @@ Environment variables (or put them in `.env`):
 | `SUPABASE_SERVICE_ROLE_KEY` | (unset) | Service role / secret key. Server only, never commit it |
 | `PORT` | `3000` | Port to listen on |
 | `ADMIN_KEY` | (unset) | Turns on `/admin` and the admin API. Pick anything long. |
+| `CF_ACCOUNT_ID` | (unset) | Cloudflare account id. With the token below, refused guesses get a second opinion from a Workers AI model (free tier) |
+| `CF_AI_TOKEN` | (unset) | API token with the Workers AI permission. Server only, never commit it |
 | `ANSWER_SECONDS` | `25` | Seconds per prompt in dives |
 | `TZ_DAILY` | `Europe/London` | Timezone the daily dive rolls over in |
 
@@ -60,6 +62,8 @@ Tiers and points live at the top of `lib/packs.js`.
 Prompts are plain text files in `packs/`. See `packs/README.md` for the format. It's quick to write: one line per tier, answers comma separated, aliases with `/`.
 
 When someone types an answer that isn't on the list it gets logged. Open `/admin` (with `ADMIN_KEY` set) to see the most common misses and accept them at whatever tier you like. Accepted answers are stored in the database (the `accepted_answers` table, or `data/db.json`), so the pack files stay clean. `POST /api/admin/reload` with `{ "key": "..." }` reloads packs without a restart.
+
+If the AI judge is configured (`CF_ACCOUNT_ID` + `CF_AI_TOKEN`), refused guesses get a second opinion first: a small Workers AI model decides whether the guess is valid, mapping it to a listed answer or accepting it as a new answer at a tier it assigns. Judged accepts land in the same `accepted_answers` table, so they stay editable in `/admin`.
 
 ## Hosting it for your friends
 
@@ -90,6 +94,5 @@ data/              created at runtime, gitignored
 ## Ideas for next iterations
 
 - Score rarity off what your group actually answers: `store.counts` already tracks it, so tiers could blend the hand-set tier with "how many friends said this".
-- LLM fallback validation for misses ("is X a valid answer to Y?") before marking them wrong.
 - Friend groups/leagues, streaks, and an archive of past dailies.
 - Swap the JSON store for SQLite once there's real history.
