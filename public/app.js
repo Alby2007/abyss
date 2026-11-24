@@ -607,6 +607,19 @@ async function viewAdmin() {
     const out = await api('/api/admin/accept', { key: k, promptId: x.promptId, name: x.guess, tier });
     if (out.ok) { b.closest('tr').style.opacity = .35; b.disabled = true; toast('Added', 'good'); } else toast(esc(out.error), 'bad');
   });
+
+  // what the AI judge decided, newest first — verify "was that really refused?"
+  const j = await api('/api/admin/judged?key=' + encodeURIComponent(k));
+  if (j.judged?.length) {
+    const tag = { valid: 'accepted', invalid: 'refused', error: 'no verdict' };
+    app.querySelector('.stack').innerHTML += `<h2>AI judge log</h2><p class="muted">Every call to the judge, newest first. "no verdict" means the model call failed and the guess fell back to a normal refusal.</p>
+      <div class="panel"><table class="board"><thead><tr><th>When</th><th>Who</th><th>Prompt</th><th>Guess</th><th>Judge</th><th>Credited as</th></tr></thead><tbody>
+      ${j.judged.slice(0, 200).map(x => `<tr><td class="small num">${new Date(x.at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</td>
+        <td class="small">${esc(x.playerName)}</td><td class="small">${esc(x.promptId)}</td><td>${esc(x.guess)}</td>
+        <td class="small">${tag[x.outcome] || x.outcome}${x.source === 'party' ? ' · party' : ''}${x.ms ? ` · ${x.ms}ms` : ''}</td>
+        <td class="small">${x.outcome === 'valid' ? `${esc(x.name)} (tier ${x.tier})` : ''}</td></tr>`).join('')}
+      </tbody></table></div>`;
+  }
 }
 
 const dive = mountDive({ app, api, esc, sfx, toast, scene, myName, go, store, onLeave: f => cleanup.push(f) });

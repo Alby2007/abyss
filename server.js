@@ -222,7 +222,7 @@ const api = {
         if (guess) {
           // the AI judge gets a say before a guess is refused for real
           const t0 = Date.now();
-          const verdict = await judge(p, guess);
+          const verdict = await judge(p, guess, { playerId: s.playerId, source: 'dive' });
           s.askedAt += Date.now() - t0; // judging time is on us, not the player
           if (verdict?.valid) {
             const listed = matchDetail(p.index, verdict.name);
@@ -239,11 +239,14 @@ const api = {
           return { retry: true, guess };
         }
       }
-      if (!result.exact) return { confirm: { from: guess, to: result.answer } };
+      if (!result.exact) { s.fromGuess = guess; return { confirm: { from: guess, to: result.answer } }; }
     } else if (!result.ok) {
       result = { ok: false, guess, points: 0 };
     }
     result.flavour = pick(FLAVOUR[result.ok ? result.tier : 0]);
+    // keep the first thing they typed (before a typo-confirm resubmits the canonical name)
+    if (s.fromGuess && s.fromGuess !== result.guess) result.typed = s.fromGuess;
+    s.fromGuess = null;
     if (result.ok) {
       result.friendsSaid = db.answerCount(p.id, result.answer);
       if (s.mode === 'daily') db.bump(p.id, result.answer).catch(e => console.error(e.message));
@@ -369,6 +372,12 @@ const api = {
     await db.addAddition(body.promptId, name, tier);
     packs.addAnswer(body.promptId, name, tier);
     return { ok: true };
+  },
+
+  'GET /api/admin/judged': async (_b, q) => {
+    if (!ADMIN_KEY || q.get('key') !== ADMIN_KEY) return { error: 'Bad key' };
+    try { return { judged: await db.judged() }; }
+    catch (e) { return { judged: [], note: e.message }; }
   },
 
   'POST /api/admin/reload': async (body) => {
