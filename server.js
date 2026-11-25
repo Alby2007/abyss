@@ -430,13 +430,19 @@ const server = http.createServer(async (req, res) => {
   if (url.pathname.startsWith('/api/')) { res.writeHead(404); return res.end('{}'); }
 
   // static files; unknown paths fall back to index.html (so /room/ABCD works)
-  let file = path.normalize(path.join(PUBLIC, decodeURIComponent(url.pathname)));
-  if (!file.startsWith(PUBLIC)) { res.writeHead(403); return res.end(); }
+  let pathname;
+  try { pathname = decodeURIComponent(url.pathname); } catch {
+    res.writeHead(400); return res.end('Bad request');
+  }
+  const file = path.normalize(path.join(PUBLIC, pathname));
+  // real containment check: rel escapes PUBLIC if it climbs out or lands on another drive
+  const rel = path.relative(PUBLIC, file);
+  if (file.includes('\0') || rel.startsWith('..') || path.isAbsolute(rel)) { res.writeHead(403); return res.end(); }
   fs.stat(file, (err, st) => {
-    if (err || st.isDirectory()) file = path.join(PUBLIC, 'index.html');
-    fs.readFile(file, (err2, data) => {
+    const target = (err || st.isDirectory()) ? path.join(PUBLIC, 'index.html') : file;
+    fs.readFile(target, (err2, data) => {
       if (err2) { res.writeHead(404); return res.end('Not found'); }
-      res.writeHead(200, { 'content-type': MIME[path.extname(file)] || 'application/octet-stream' });
+      res.writeHead(200, { 'content-type': MIME[path.extname(target)] || 'application/octet-stream' });
       res.end(data);
     });
   });
