@@ -36,16 +36,23 @@ function nextMidnight() {
   return Date.now() + 86400e3;
 }
 
-// Short-lived cache of session token -> player so every request isn't a DB round trip
+// Short-lived cache of session token -> player so every request isn't a DB round trip.
+// Capped so a spray of unique bogus cookies can't grow memory without bound; misses
+// (invalid tokens) are cached too but expire fast since they're the abuse vector.
 const playerCache = new Map();
+const PLAYER_CACHE_MAX = 5000;
 async function currentPlayer(req) {
   const token = auth.tokenFrom(req);
   if (!token) return null;
   const hash = auth.tokenHash(token);
   const hit = playerCache.get(hash);
-  if (hit && hit.t > Date.now() - 60e3) return hit.p;
+  if (hit && hit.t > Date.now() - (hit.p ? 60e3 : 10e3)) return hit.p;
   const p = await db.sessionPlayer(hash);
   playerCache.set(hash, { p, t: Date.now() });
+  if (playerCache.size > PLAYER_CACHE_MAX) {
+    let drop = playerCache.size - PLAYER_CACHE_MAX; // Map iterates oldest-first
+    for (const k of playerCache.keys()) { playerCache.delete(k); if (!--drop) break; }
+  }
   if (p) db.touch(p.id).catch(() => {});
   return p;
 }
@@ -102,6 +109,13 @@ const FLAVOUR = {
   6: ['The Leviathan. That was the one we were hiding.', 'You found the monster.'],
 };
 
+// Rejected guesses feed answer curation, but each one is a DB write — cap how
+// many one player can log so a flood can't fill the table with junk.
+function logRejected(promptId, guess, playerId) {
+  if (auth.tooMany('rej:' + playerId, 30, 600e3)) return;
+  db.logRejected(promptId, guess, playerId).catch(e => console.error(e.message));
+}
+
 function needPlayer(ctx) {
   if (!ctx.player) { const e = new Error('Log in or pick a guest name first'); e.status = 401; throw e; }
   return ctx.player;
@@ -133,6 +147,8 @@ const api = {
   'POST /api/auth/guest': async (body, _q, ctx) => {
     const name = cleanName(body.name);
     if (!name) return { error: 'Pick a name to play under' };
+    // guests are throwaway rows, so cap how many one address can mint
+    if (auth.tooMany('guest:' + auth.clientIp(ctx.req), 10, 3600e3)) return { error: 'Too many attempts. Try again in a few minutes.' };
     if (auth.USERNAME_RE.test(name) && await db.playerByUsername(name)) return { error: 'That name belongs to an account. Log in, or pick another name.' };
     const p = await db.createPlayer({ displayName: name, isGuest: true });
     await startSession(ctx.req, ctx.res, p);
@@ -211,6 +227,8 @@ const api = {
     const s = dives.get(body.sessionId);
     if (!s || s.playerId !== ctx.player?.id) return { error: 'Session expired' };
     if (s.i >= s.prompts.length) return { error: 'Dive already finished' };
+    // every wrong guess can trigger an AI judge call and a rejected-guess row
+    if (auth.tooMany('ans:' + s.playerId, 30, 60e3)) return { error: 'Slow down a little' };
     const p = packs.getPrompt(s.prompts[s.i]);
     const late = Date.now() - s.askedAt > (ANSWER_SECONDS + COUNTDOWN) * 1000 + GRACE_MS;
     const giveUp = late || body.giveUp;
@@ -235,7 +253,7 @@ const api = {
           }
         }
         if (!result.ok) {
-          if (guess) db.logRejected(p.id, guess, s.playerId).catch(e => console.error(e.message));
+          if (guess) logRejected(p.id, guess, s.playerId);
           return { retry: true, guess };
         }
       }
@@ -448,7 +466,7 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-party.attach(server, { cleanName, scoreGuess, currentPlayer, db });
+party.attach(server, { cleanName, scoreGuess, currentPlayer, db, logRejected });
 
 (async () => {
   await db.init();
