@@ -595,7 +595,7 @@ async function viewAdmin() {
   store.set('adminKey', k);
   const r = await api('/api/admin/rejected?key=' + encodeURIComponent(k));
   if (r.error) { store.set('adminKey', ''); app.innerHTML = `<div class="panel">${esc(r.error)}</div>`; return; }
-  app.innerHTML = `<div class="stack"><h2>Rejected guesses</h2><p class="muted">Accept the ones that should have counted. They're saved to data/additions.json.</p>
+  app.innerHTML = `<div class="stack"><h2>Rejected guesses</h2><p class="muted">Accept the ones that should have counted. They're saved in the database's accepted_answers table (or data/db.json for local storage).</p>
     <div class="panel"><table class="board"><thead><tr><th>Prompt</th><th>Guess</th><th>×</th><th></th></tr></thead><tbody>
     ${r.rejected.slice(0, 300).map((x, i) => `<tr><td class="small">${esc(x.promptId)}</td><td>${esc(x.guess)}</td><td class="num">${x.n}</td>
       <td><select data-i="${i}" class="tierSel" style="width:auto;padding:4px"><option value="1">Surface</option><option value="2">Shallows</option><option value="3" selected>Twilight</option><option value="4">Midnight</option><option value="5">Abyss</option></select>

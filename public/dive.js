@@ -117,8 +117,15 @@ export function mountDive(ctx) {
 
     async function submit(text, giveUp) {
       if (busy) return; busy = true;
-      const r = await api('/api/dive/answer', { sessionId: sid, guess: text, giveUp });
-      busy = false;
+      let r;
+      try {
+        r = await api('/api/dive/answer', { sessionId: sid, guess: text, giveUp });
+      } catch {
+        toast('Connection hiccup — your answer didn’t reach the server. Try again.', 'bad');
+        return;
+      } finally {
+        busy = false; // never wedge the input, whatever happens above
+      }
       if (r.error) { toast(esc(r.error), 'bad'); return go('/'); }
       if (r.retry) {
         sfx.bad();

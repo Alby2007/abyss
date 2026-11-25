@@ -31,7 +31,7 @@ Tiers, from most obvious to most obscure:
 
 - Entries are comma separated. Use `/` for aliases: `United Kingdom / UK / Britain / Great Britain`.
 - If a name has a comma in it, wrap it in brackets: `[Paris, Texas]`.
-- Matching ignores case, accents, punctuation, spaces and a leading "the", and forgives 1 typo on 5 to 8 letter answers and 2 typos on longer ones. Short answers (4 letters or fewer) must be exact, so add short aliases deliberately.
+- Matching ignores case, accents, punctuation, spaces and a leading "the", and forgives 1 typo on 5-letter answers, 2 up to 9 letters and 3 on longer ones (counting letters with spaces removed). Short answers (4 letters or fewer) must be exact, so add short aliases deliberately.
 - You can repeat a tier number on several lines; they just add up.
 - Answers the host accepts in Mine Party, or that you accept through the admin API, are saved in the database and merged in automatically.
 

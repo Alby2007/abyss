@@ -65,7 +65,7 @@ Prompts are plain text files in `packs/`. See `packs/README.md` for the format. 
 
 When someone types an answer that isn't on the list it gets logged. Open `/admin` (with `ADMIN_KEY` set) to see the most common misses and accept them at whatever tier you like. Accepted answers are stored in the database (the `accepted_answers` table, or `data/db.json`), so the pack files stay clean. `POST /api/admin/reload` with `{ "key": "..." }` reloads packs without a restart.
 
-If the AI judge is configured (`CF_ACCOUNT_ID` + `CF_AI_TOKEN`), refused guesses get a second opinion first: a small Workers AI model decides whether the guess is valid, mapping it to a listed answer or accepting it as a new answer at a tier it assigns. Judged accepts land in the same `accepted_answers` table, so they stay editable in `/admin`.
+If the AI judge is configured (`CF_ACCOUNT_ID` + `CF_AI_TOKEN`), refused guesses get a second opinion first: a small Workers AI model decides whether the guess is valid, mapping it to a listed answer or accepting it as a new answer at a tier it assigns. Judged accepts land in the same `accepted_answers` table.
 
 ## Hosting it for your friends
 
