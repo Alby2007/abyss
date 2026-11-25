@@ -1,0 +1,229 @@
+# The daily dive schedule: one prompt id per line, in the order they run.
+# Each day serves the next 7 ids; when the list runs out it loops from the top.
+# Everyone gets the same 7 on the same date. Edit after midnight, not mid-day,
+# or late divers can see a different set than early ones. See packs/README.md.
+
+# day 1
+countries
+beers
+sea-creatures
+us-sitcoms
+livestock-breeds
+solo-artists
+world-leaders
+# day 2
+units
+golfers
+world-landmarks
+desserts
+languages
+actors
+birds-of-prey
+# day 3
+biblical-figures
+wars
+space-missions
+tennis-players
+us-cities
+sauces
+fast-food
+# day 4
+musicals
+marsupials
+music-genres
+psychologists
+planets-moons
+british-bands
+islands
+# day 5
+curries
+jobs
+actresses
+birds
+operas
+battles
+tech-companies
+# day 6
+boxers
+mountain-ranges
+spirits
+video-games
+uk-dramas
+trees
+card-games
+# day 7
+gods-goddesses
+astronauts
+f1-drivers
+lakes
+cheese
+fashion-brands
+film-directors
+# day 8
+lizards
+poets
+treaties
+stars
+f1-teams
+rivers
+mexican-dishes
+# day 9
+dog-breeds
+horror-films
+crustaceans
+novelists
+inventions
+scientists
+olympic-sports
+# day 10
+world-capitals
+italian-dishes
+car-brands
+cartoons
+insects
+american-bands
+philosophers
+# day 11
+diseases
+premier-league
+australian-places
+wine-grapes
+airlines
+kids-tv
+butterflies-moths
+# day 12
+fonts
+generals
+elements
+olympic-hosts
+waterfalls
+japanese-dishes
+social-media
+# day 13
+harry-potter-characters
+spiders
+childrens-authors
+pharaohs
+dinosaurs
+canals-straits
+breads
+# day 14
+boats
+movie-villains
+waterfowl
+painters
+composers
+rocks
+volcanoes
+# day 15
+vegetables
+tools
+reality-tv
+horse-breeds
+dances
+dictators
+muscles
+# day 16
+bridges
+fruits
+martial-arts
+superheroes
+rays-skates
+architects
+famous-ships
+# day 17
+organs
+canadian-places
+soups
+furniture
+star-wars-characters
+amphibians
+festivals
+# day 18
+revolutions
+constellations
+mountains
+cocktails
+aircraft
+sci-fi-films
+freshwater-fish
+# day 19
+ballets
+gangsters
+alloys
+deserts
+breakfast-cereals
+fabrics
+uk-sitcoms
+# day 20
+deer
+phobias
+outlaws
+sharks
+seas
+biscuits
+hats
+# day 21
+fictional-detectives
+rodents
+colours
+roman-emperors
+clouds
+us-national-parks
+herbs-spices
+# day 22
+shoes
+film-franchises
+fungi
+instruments
+explorers
+bones
+us-states
+# day 23
+pies
+flowers
+game-shows
+primates
+art-movements
+empires
+euro-capitals
+# day 24
+nuts-seeds
+toys
+soaps
+turtles-tortoises
+dickens
+spies
+landlocked
+# day 25
+berries
+vehicles
+christmas-films
+cat-breeds
+board-games
+british-monarchs
+eu-members
+# day 26
+teas
+newspapers
+disney-films
+snakes
+greek-gods
+pirates
+bordering-france
+# day 27
+pasta
+consoles
+marvel-films
+bears
+nursery-rhymes
+us-presidents
+coffees
+# day 28
+currencies
+pixar-films
+whales-dolphins
+fairy-tales
+bond-films
+wild-cats
+shakespeare

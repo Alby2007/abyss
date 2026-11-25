@@ -34,3 +34,13 @@ Tiers, from most obvious to most obscure:
 - Matching ignores case, accents, punctuation, spaces and a leading "the", and forgives 1 typo on 5 to 8 letter answers and 2 typos on longer ones. Short answers (4 letters or fewer) must be exact, so add short aliases deliberately.
 - You can repeat a tier number on several lines; they just add up.
 - Answers the host accepts in Mine Party, or that you accept through the admin API, are saved in the database and merged in automatically.
+
+## The daily schedule: daily.txt
+
+`daily.txt` in this folder is not a pack — it's the daily dive schedule. One prompt id per line, in the order they run. Each day serves the next 7 ids; when the list runs out it loops from the top. Everyone gets the same 7 on the same date.
+
+- `#` lines are comments, blank lines are ignored.
+- Unknown ids and prompts marked `daily: no` are skipped with a startup warning.
+- Missing or shorter than 14 entries: the daily falls back to a seeded shuffle of every daily-eligible prompt.
+- Edit after midnight, not mid-day, or late divers can see a different set than early ones.
+- Nothing enters the daily unless it's in this file, so niche packs you add never dilute it — they're still in free dives and Mine Party.
