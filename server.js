@@ -200,6 +200,8 @@ const api = {
   // ----- dives -----
   'POST /api/dive/start': async (body, _q, ctx) => {
     const player = needPlayer(ctx);
+    // each start writes seen_prompts rows and costs memory; 20/hr is beyond any human pace
+    if (auth.tooMany('dive:' + player.id, 20, 3600e3)) return { error: 'Too many dives. Take a breath.' };
     const mode = body.mode === 'daily' ? 'daily' : 'unlimited';
     const date = packs.todayKey();
     let list;
@@ -418,6 +420,14 @@ function sameSite(req) {
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.json': 'application/json', '.webmanifest': 'application/manifest+json' };
 
+// baseline hardening; style needs 'unsafe-inline' because the UI sets style attributes
+const SEC_HEADERS = {
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'same-origin',
+  'x-frame-options': 'DENY',
+  'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ws: wss:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'",
+};
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://x');
   const handler = api[`${req.method} ${url.pathname}`];
@@ -442,7 +452,7 @@ const server = http.createServer(async (req, res) => {
       if (status === 500) console.error(e);
       out = { error: status === 500 ? 'Server error' : e.message };
     }
-    res.writeHead(status, { 'content-type': 'application/json', 'cache-control': 'no-store' });
+    res.writeHead(status, { ...SEC_HEADERS, 'content-type': 'application/json', 'cache-control': 'no-store' });
     return res.end(JSON.stringify(out));
   }
   if (url.pathname.startsWith('/api/')) { res.writeHead(404); return res.end('{}'); }
@@ -460,7 +470,7 @@ const server = http.createServer(async (req, res) => {
     const target = (err || st.isDirectory()) ? path.join(PUBLIC, 'index.html') : file;
     fs.readFile(target, (err2, data) => {
       if (err2) { res.writeHead(404); return res.end('Not found'); }
-      res.writeHead(200, { 'content-type': MIME[path.extname(target)] || 'application/octet-stream' });
+      res.writeHead(200, { ...SEC_HEADERS, 'content-type': MIME[path.extname(target)] || 'application/octet-stream' });
       res.end(data);
     });
   });
