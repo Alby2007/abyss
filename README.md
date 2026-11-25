@@ -19,7 +19,7 @@ Players can dive straight away under a one-time guest name, or create an account
 Stats live in Supabase when it's configured, otherwise in `data/db.json`.
 
 1. Create a Supabase project (any region). In Data access, keep the Data API on, untick "Grant API access to new tables automatically" and tick "Enable RLS".
-2. Create the tables: either connect the repo under Project Settings > Integrations > GitHub (working directory `.`, turn on "Deploy to production") and Supabase applies `supabase/migrations/` on every push to `main`, or paste `supabase/migrations/20261122190000_init.sql` into the SQL editor and run it.
+2. Create the tables: either connect the repo under Project Settings > Integrations > GitHub (working directory `.`, turn on "Deploy to production") and Supabase applies `supabase/migrations/` on every push to `main`, or paste each file in `supabase/migrations/` into the SQL editor and run it, oldest filename first. All of them are needed — the later ones add crews, prompt memory and the AI judge log, and the game fails or silently loses data without them.
 3. Copy `.env.example` to `.env` and fill in `SUPABASE_URL` and the service role key.
 4. `npm start`. The log line says `storage: supabase` when it's connected.
 
