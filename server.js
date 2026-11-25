@@ -466,7 +466,7 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-party.attach(server, { cleanName, scoreGuess, currentPlayer, db, logRejected });
+party.attach(server, { cleanName, scoreGuess, currentPlayer, db, logRejected, sameSite });
 
 (async () => {
   await db.init();
