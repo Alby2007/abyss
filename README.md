@@ -4,6 +4,8 @@ A private rare-answer trivia game for you and your mates, inspired by krillion.i
 
 ## Run it
 
+Needs Node.js 22 or newer (the Supabase client requires it).
+
 ```bash
 npm install
 npm start            # http://localhost:3000
