@@ -63,6 +63,10 @@ async function startSession(req, res, player) {
 }
 
 // ---------- dive sessions (daily + unlimited) ----------
+// A dive is committed to the database the moment it starts (finished=false), so
+// daily dives are genuinely one-go: closing the tab, crashing or restarting the
+// server never re-deals the prompts — you resume where you left off. Progress is
+// persisted after every answer, and unfinished rows are reloaded into memory at boot.
 const dives = new Map();
 // Prompts served to each player in recent unlimited dives, so free dives
 // don't keep re-dealing the same questions. In-memory only; a restart just
@@ -73,6 +77,28 @@ setInterval(() => {
   const cutoff = Date.now() - 2 * 3600e3;
   for (const [id, s] of dives) if (s.createdAt < cutoff) dives.delete(id);
 }, 600e3).unref();
+
+// rebuild a live session from a persisted unfinished row — the current prompt
+// restarts with a fresh clock, everything already answered is preserved
+function reconstruct(row, playerId, mode, date) {
+  const picks = row.picks || [];
+  let prompts = row.promptIds || [];
+  if (!prompts.length && mode === 'daily') prompts = packs.dailyPrompts(date).map(p => p.id);
+  return {
+    id: row.sessionId || crypto.randomUUID(),
+    rowId: row.id ?? row.rowId ?? null,
+    playerId, mode, date,
+    prompts, i: picks.length, picks,
+    createdAt: row.createdAt || Date.now(), askedAt: Date.now(),
+  };
+}
+
+function findLiveSession(playerId, mode, date) {
+  for (const s of dives.values()) {
+    if (s.playerId === playerId && s.mode === mode && (!date || s.date === date) && s.i < s.prompts.length) return s;
+  }
+  return null;
+}
 
 function publicPrompt(s) {
   const p = packs.getPrompt(s.prompts[s.i]);
@@ -204,10 +230,31 @@ const api = {
     if (auth.tooMany('dive:' + player.id, 20, 3600e3)) return { error: 'Too many dives. Take a breath.' };
     const mode = body.mode === 'daily' ? 'daily' : 'unlimited';
     const date = packs.todayKey();
+
+    if (mode === 'daily') {
+      // one go, committed at start: a live session resumes in place, a finished
+      // row means the dive is done, an unfinished row means you come back to
+      // exactly where you left off — there is no way to re-deal the prompts
+      const live = findLiveSession(player.id, 'daily', date);
+      if (live) return { sessionId: live.id, mode, date, prompt: publicPrompt(live), picks: live.picks, resumed: true };
+      const row = await db.dailyResult(player.id, date);
+      if (row?.finished) return { already: row, date };
+      if (row) {
+        if ((row.picks?.length || 0) >= (row.promptIds?.length || 0) && row.promptIds?.length) {
+          // fully answered but never marked finished (crashed mid-write): finish it now
+          const score = row.picks.reduce((t, x) => t + x.points, 0);
+          db.updateDiveRow(row.id, { score, finished: true }).catch(e => console.error(e.message));
+          return { already: { ...row, score }, date };
+        }
+        const s = reconstruct(row, player.id, 'daily', date);
+        if (!s.prompts.length) return { error: 'No prompts loaded' };
+        dives.set(s.id, s);
+        return { sessionId: s.id, mode, date, prompt: publicPrompt(s), picks: s.picks, resumed: true };
+      }
+    }
+
     let list;
     if (mode === 'daily') {
-      const done = await db.dailyResult(player.id, date);
-      if (done) return { already: done, date };
       list = packs.dailyPrompts(date);
     } else {
       // remembered prompts: finished dives from the DB (survives restarts and
@@ -220,7 +267,25 @@ const api = {
     }
     if (!list.length) return { error: 'No prompts loaded' };
     const id = crypto.randomUUID();
-    const s = { id, playerId: player.id, mode, date, prompts: list.map(p => p.id), i: 0, picks: [], createdAt: Date.now(), askedAt: Date.now() };
+    const s = { id, rowId: null, playerId: player.id, mode, date, prompts: list.map(p => p.id), i: 0, picks: [], createdAt: Date.now(), askedAt: Date.now() };
+    // commit the dive before dealing it. Persistence trouble must not stop the
+    // game — worst case a restart loses this dive, like before.
+    try {
+      const created = await db.createDiveRow({ playerId: player.id, mode, date, promptIds: s.prompts, sessionId: id });
+      s.rowId = created.id;
+    } catch (e) {
+      if (e.code === '23505' && mode === 'daily') {
+        // lost a race with a concurrent start — join the winner instead of dealing a second dive
+        const row = await db.dailyResult(player.id, date);
+        if (row && !row.finished) {
+          const r = reconstruct(row, player.id, 'daily', date);
+          dives.set(r.id, r);
+          return { sessionId: r.id, mode, date, prompt: publicPrompt(r), picks: r.picks, resumed: true };
+        }
+        if (row?.finished) return { already: row, date };
+      }
+      console.error('dive row insert: ' + e.message);
+    }
     dives.set(id, s);
     return { sessionId: id, mode, date, prompt: publicPrompt(s) };
   },
@@ -274,16 +339,30 @@ const api = {
     s.picks.push({ prompt: p.text, promptId: p.id, ...result });
     s.i++;
     const out = { result, reveal: reveal(p) };
+    const score = s.picks.reduce((t, x) => t + x.points, 0);
     if (s.i < s.prompts.length) {
       s.askedAt = Date.now();
       out.next = true;
+      // progress lands after every answer, so a crash mid-dive loses nothing
+      if (s.rowId) db.updateDiveRow(s.rowId, { picks: s.picks, score }).catch(e => console.error('dive progress write: ' + e.message));
     } else {
-      const score = s.picks.reduce((t, x) => t + x.points, 0);
       out.final = { score, depth: score * 10, picks: s.picks, mode: s.mode, date: s.date };
-      await db.saveDive({ playerId: s.playerId, mode: s.mode, date: s.date, score, picks: s.picks });
+      if (s.rowId) {
+        try { await db.updateDiveRow(s.rowId, { picks: s.picks, score, finished: true }); }
+        catch (e) { console.error('dive finish write: ' + e.message); }
+      }
       dives.delete(s.id);
     }
     return out;
+  },
+
+  // reattach a client to its live session — the dive continues exactly where it
+  // was, with a fresh clock on the current prompt
+  'POST /api/dive/resume': (body, _q, ctx) => {
+    const s = dives.get(body.sessionId);
+    if (!s || s.playerId !== ctx.player?.id || s.i >= s.prompts.length) return { error: 'Session expired' };
+    s.askedAt = Date.now();
+    return { sessionId: s.id, mode: s.mode, date: s.date, prompt: publicPrompt(s), picks: s.picks, resumed: true };
   },
 
   'POST /api/dive/next': (body, _q, ctx) => {
@@ -482,5 +561,16 @@ party.attach(server, { cleanName, scoreGuess, currentPlayer, db, logRejected, sa
   await db.init();
   packs.setAdditions(await db.additions());
   packs.load();
+  // pick up dives that were in progress when the process last stopped
+  try {
+    const since = new Date(Date.now() - 24 * 3600e3).toISOString();
+    let recovered = 0;
+    for (const row of await db.unfinishedDives(since)) {
+      const s = reconstruct(row, row.playerId, row.mode, row.date);
+      if (!s.prompts.length || s.i >= s.prompts.length) continue;
+      if (!dives.has(s.id)) { dives.set(s.id, s); recovered++; }
+    }
+    if (recovered) console.log(`recovered ${recovered} unfinished dive${recovered === 1 ? '' : 's'}`);
+  } catch (e) { console.error('dive recovery: ' + e.message); }
   server.listen(PORT, () => console.log(`abyss running on http://localhost:${PORT} (storage: ${db.kind})`));
 })().catch(e => { console.error('Failed to start:', e.message); process.exit(1); });

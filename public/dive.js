@@ -30,6 +30,11 @@ export function mountDive(ctx) {
   function run(startRes) {
     const sid = startRes.sessionId, mode = startRes.mode;
     let score = 0, tiers = [], busy = false, timerRaf = null, deadline = 0, answering = false;
+    // resumed dives come back with the answers already given — restore the pips
+    if (startRes.picks?.length) {
+      tiers = startRes.picks.map(p => (p.ok ? p.tier : 0));
+      score = startRes.picks.reduce((t, p) => t + (p.points || 0), 0);
+    }
     ctx.onLeave(() => cancelAnimationFrame(timerRaf));
     document.body.classList.add('diving');
     ctx.onLeave(() => document.body.classList.remove('diving'));
@@ -126,7 +131,15 @@ export function mountDive(ctx) {
       } finally {
         busy = false; // never wedge the input, whatever happens above
       }
-      if (r.error) { toast(esc(r.error), 'bad'); return go('/'); }
+      if (r.error) {
+        // a server restart forgets nothing anymore, but this tab's answer may not
+        // have landed — reattach to the live session instead of losing the dive
+        if (/expired/i.test(r.error)) {
+          const rr = await api('/api/dive/resume', { sessionId: sid }).catch(() => null);
+          if (rr && !rr.error) { toast('Reconnected — pick up where you left off', 'good'); return run(rr); }
+        }
+        toast(esc(r.error), 'bad'); return go('/');
+      }
       if (r.retry) {
         sfx.bad();
         msg.className = 'dock-msg bad'; msg.innerHTML = `“${esc(r.guess)}” isn’t on the list. Try another.`;
@@ -197,7 +210,13 @@ export function mountDive(ctx) {
           return results(r.final);
         }
         const n = await api('/api/dive/next', { sessionId: sid });
-        if (n.error) return toast(esc(n.error), 'bad');
+        if (n.error) {
+          if (/expired/i.test(n.error)) {
+            const rr = await api('/api/dive/resume', { sessionId: sid }).catch(() => null);
+            if (rr && !rr.error) { toast('Reconnected — pick up where you left off', 'good'); return run(rr); }
+          }
+          return toast(esc(n.error), 'bad');
+        }
         showPrompt(n.prompt);
       };
     }
