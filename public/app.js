@@ -12,6 +12,7 @@ const store = {
 };
 let META = null;
 let cleanup = []; // functions to run when leaving a view
+let viewGen = 0; // bumped on every route() — async continuations from an older view must not touch the DOM
 const EMOJI = ['💨', '🫧', '🐟', '🪼', '🦑', '🐡', '🐉'];
 
 async function api(path, body) {
@@ -84,6 +85,7 @@ document.addEventListener('click', (e) => {
 function route() {
   if (!document.body.classList.contains('diving')) scrollTo(0, 0);
   cleanup.forEach(f => f()); cleanup = [];
+  viewGen++;
   const p = location.pathname;
   let m;
   if (p === '/board') return viewBoard();
@@ -221,9 +223,11 @@ async function viewHome() {
   $('#join').onclick = join;
   $('#code').onkeydown = (e) => { if (e.key === 'Enter') join(); };
 
+  const gen = viewGen;
   const drawCrews = async () => {
     if (!account.me || account.me.guest) { $('#crewList').innerHTML = ''; return; }
     const r = await api('/api/crews').catch(() => ({}));
+    if (gen !== viewGen) return;
     $('#crewList').innerHTML = (r.crews || []).map(c => `<button class="crew-chip" data-nav="/crew/${c.code}"><b>${esc(c.name)}</b><span class="muted">${c.members} diver${c.members === 1 ? '' : 's'}</span></button>`).join('');
     layout();
   };
@@ -243,6 +247,7 @@ async function viewHome() {
   drawCrews();
 
   META ||= await api('/api/meta');
+  if (gen !== viewGen) return;
   $('#pack').innerHTML += META.packs.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
   $('#tiers').innerHTML = META.tiers.slice().reverse().map(t => `
     <div class="tier-row tier-${t.id}">
@@ -253,6 +258,7 @@ async function viewHome() {
     </div>`).join('');
 
   const lb = await api('/api/leaderboard').catch(() => null);
+  if (gen !== viewGen) return;
   if (lb?.daily?.length) {
     $('#miniBoard').innerHTML = lb.daily.slice(0, 5).map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="num">${i + 1}</span><span class="nm">${esc(r.name)}${r.guest ? ' <span class="muted">(guest)</span>' : ''}</span><span class="num">${(r.score * 10).toLocaleString()} m</span></li>`).join('');
     const mine = name && lb.daily.find(r => r.me);
@@ -268,11 +274,14 @@ async function viewHome() {
 // ---------- leaderboard ----------
 async function viewBoard() {
   ambient(320);
+  const gen = viewGen;
   META ||= await api('/api/meta');
+  if (gen !== viewGen) return;
   let date = META.today, tab = 'daily';
   const me = myName().toLowerCase();
   async function draw() {
     const lb = await api('/api/leaderboard?date=' + date);
+    if (gen !== viewGen) return;
     const rows = tab === 'daily'
       ? lb.daily.map((r, i) => `<tr class="${r.me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}${r.guest ? ' <span class="muted small">guest</span>' : ''}</td><td>${r.picks.map(t => EMOJI[t]).join('')}</td><td class="num">${(r.score * 10).toLocaleString()} m</td></tr>`).join('')
       : lb.allTime.map((r, i) => `<tr class="${r.name.toLowerCase() === me ? 'me' : ''}"><td class="num">${i + 1}</td><td>${esc(r.name)}${r.guest ? ' <span class="muted small">guest</span>' : ''}</td><td class="num">${r.dives}</td><td class="num">${(r.best * 10).toLocaleString()} m</td><td class="num">${(r.total * 10).toLocaleString()} m</td></tr>`).join('');
@@ -302,8 +311,11 @@ async function viewBoard() {
 // ---------- crews: private leaderboards ----------
 async function viewCrew(code) {
   ambient(320);
+  const gen = viewGen;
   META ||= await api('/api/meta');
+  if (gen !== viewGen) return;
   if (!(await needAccount('Log in or create an account to open this crew.'))) {
+    if (gen !== viewGen) return;
     app.innerHTML = `<div class="panel stack"><h2>Crew ${esc(code)}</h2><p class="muted">Crews are for accounts only.</p><div class="row"><button class="btn primary" id="again">Log in</button><button class="btn" data-nav="home">Home</button></div></div>`;
     $('#again').onclick = () => route();
     return;
@@ -311,6 +323,7 @@ async function viewCrew(code) {
   let date = META.today, tab = 'daily';
   async function draw() {
     const lb = await api(`/api/crews/board?code=${code}&date=${date}`);
+    if (gen !== viewGen) return;
     if (lb.notMember) {
       app.innerHTML = `<div class="panel stack"><h2>${esc(lb.name)}</h2><p class="muted">You’ve been invited to this private crew.</p><div class="row"><button class="btn primary" id="joinIt">Join crew</button><button class="btn" data-nav="home">Not now</button></div></div>`;
       $('#joinIt').onclick = async () => {
@@ -387,8 +400,10 @@ function viewRoom(code) {
   app.innerHTML = `<p class="muted">Connecting…</p>`;
   let ws, you = null, room = null, key = '', closedByUs = false, retry = 0, beatTimer = null;
   const tokens = store.get('tokens', {});
+  const gen = viewGen;
 
   function connect() {
+    if (gen !== viewGen) return; // navigated away before a scheduled reconnect fired
     ws = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/ws');
     ws.onopen = () => {
       retry = 0;
@@ -397,7 +412,7 @@ function viewRoom(code) {
     };
     ws.onmessage = (e) => onMsg(JSON.parse(e.data));
     ws.onclose = () => {
-      if (closedByUs) return;
+      if (closedByUs || gen !== viewGen) return;
       if (retry++ < 8) { toast('Connection dropped, reconnecting…', 'bad'); setTimeout(connect, 600 * retry); }
       else app.innerHTML = `<div class="panel stack"><h2>Lost the connection</h2><button class="btn" data-nav="home">Home</button></div>`;
     };
@@ -407,6 +422,7 @@ function viewRoom(code) {
   connect();
 
   function onMsg(m) {
+    if (gen !== viewGen) return;
     switch (m.t) {
       case 'error':
         closedByUs = true; ws.close();
@@ -591,10 +607,17 @@ function viewRoom(code) {
 // ---------- admin: review answers people tried that weren't accepted ----------
 async function viewAdmin() {
   ambient(400);
-  const k = store.get('adminKey', '') || prompt('Admin key (ADMIN_KEY env var on the server)') || '';
-  store.set('adminKey', k);
-  const r = await api('/api/admin/rejected?key=' + encodeURIComponent(k));
-  if (r.error) { store.set('adminKey', ''); app.innerHTML = `<div class="panel">${esc(r.error)}</div>`; return; }
+  const gen = viewGen;
+  // the key lives in sessionStorage only — never localStorage, never in URLs
+  // (URLs end up in browser history and proxy logs)
+  const sget = () => { try { return sessionStorage.getItem('abyss.adminKey') || ''; } catch { return ''; } };
+  const sset = (v) => { try { v ? sessionStorage.setItem('abyss.adminKey', v) : sessionStorage.removeItem('abyss.adminKey'); } catch {} };
+  try { localStorage.removeItem('abyss.adminKey'); } catch {} // scrub keys persisted by older versions
+  const k = sget() || prompt('Admin key (ADMIN_KEY env var on the server)') || '';
+  sset(k);
+  const r = await api('/api/admin/rejected', { key: k });
+  if (gen !== viewGen) return;
+  if (r.error) { sset(''); app.innerHTML = `<div class="panel">${esc(r.error)}</div>`; return; }
   app.innerHTML = `<div class="stack"><h2>Rejected guesses</h2><p class="muted">Accept the ones that should have counted. They're saved in the database's accepted_answers table (or data/db.json for local storage).</p>
     <div class="panel"><table class="board"><thead><tr><th>Prompt</th><th>Guess</th><th>×</th><th></th></tr></thead><tbody>
     ${r.rejected.slice(0, 300).map((x, i) => `<tr><td class="small">${esc(x.promptId)}</td><td>${esc(x.guess)}</td><td class="num">${x.n}</td>
@@ -609,7 +632,8 @@ async function viewAdmin() {
   });
 
   // what the AI judge decided, newest first — verify "was that really refused?"
-  const j = await api('/api/admin/judged?key=' + encodeURIComponent(k));
+  const j = await api('/api/admin/judged', { key: k });
+  if (gen !== viewGen) return;
   if (j.judged?.length) {
     const tag = { valid: 'accepted', invalid: 'refused', error: 'no verdict' };
     app.querySelector('.stack').innerHTML += `<h2>AI judge log</h2><p class="muted">Every call to the judge, newest first. "no verdict" means the model call failed and the guess fell back to a normal refusal.</p>

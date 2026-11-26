@@ -375,8 +375,8 @@ const api = {
   },
 
   // ----- admin -----
-  'GET /api/admin/rejected': async (_b, q) => {
-    if (!ADMIN_KEY || q.get('key') !== ADMIN_KEY) return { error: 'Set ADMIN_KEY and pass ?key=' };
+  'POST /api/admin/rejected': async (body) => {
+    if (!ADMIN_KEY || body.key !== ADMIN_KEY) return { error: 'Set ADMIN_KEY on the server and enter it here' };
     const counts = {};
     for (const r of await db.rejected()) {
       const k = r.promptId + '||' + r.guess.toLowerCase();
@@ -394,8 +394,8 @@ const api = {
     return { ok: true };
   },
 
-  'GET /api/admin/judged': async (_b, q) => {
-    if (!ADMIN_KEY || q.get('key') !== ADMIN_KEY) return { error: 'Bad key' };
+  'POST /api/admin/judged': async (body) => {
+    if (!ADMIN_KEY || body.key !== ADMIN_KEY) return { error: 'Bad key' };
     try { return { judged: await db.judged() }; }
     catch (e) { return { judged: [], note: e.message }; }
   },
